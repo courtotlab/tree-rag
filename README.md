@@ -13,6 +13,7 @@ This Github repository includes the most updated versions of three scripts centr
 2. Run the following commands: 
 
 export OLLAMA_HOST=localhost:11528
+
 ollama pull gpt-oss:120b      
 ollama pull gemma3:27b         
 ollama pull nomic-embed-text  
