@@ -1,0 +1,730 @@
+[
+  {
+    "config": {
+      "strategy": "cluster",
+      "thinking": true,
+      "group_summary": "heuristic",
+      "max_branch": 8,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 67.1,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "**The College of American Pathologists (CAP) outlines a ten\u2011step process for a laboratory to become accredited.**  \nThe steps are taken in order, from the initial request for an application through ongoing self\u2011inspection after the laboratory receives its certificate.\n\n| Step | What the laboratory does |\n|------|---------------------------|\n| **1\u202f\u2013\u202fRequest Application** | Fill out and submit the *Request for Application* form (available at\u202fcap.org). International labs must have been enrolled in CAP proficiency testing/EQA for at least six\u202fmonths before requesting an application. [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n| **2\u202f\u2013\u202fReview Welcome Kit** | Check the email that contains the link to the online application (\u201cCAP Accreditation Application Available\u201d). Review the additional information that comes with the link and, if desired, schedule an optional onboarding call with CAP staff. [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n| **3\u202f\u2013\u202fComplete Application** | Log in to the e\u2011LAB Solutions Suite, complete the accreditation application within three\u202fmonths of its availability, watch for email reminders, and work with CAP staff on any follow\u2011up questions. [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n| **4\u202f\u2013\u202fReceive Customized Checklists** | Receive (by mail or download) the CAP\u2011generated checklists that are specific to the laboratory and begin inspection preparation. [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n| **5\u202f\u2013\u202fSchedule Inspection Date** | Arrange a date for the peer\u2011based inspection (the guide instructs laboratories to look for the scheduling information after the checklists are received). [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n| **6\u202f\u2013\u202fInspection Preparation & Conduct** | Using the customized checklists, prepare for and undergo the on\u2011site CAP inspection. (Steps\u202f4\u20116 are described collectively as \u201cinspection prep and conduct\u201d in the guide.) [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n| **7\u202f\u2013\u202fRespond to Deficiencies (within\u202f30\u202fdays)** | After the inspection, review any deficiency letters, compile all responses, and submit them within 30\u202fcalendar days of the inspection date. [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n| **8\u202f\u2013\u202fSupport CAP Review of Responses** | Work with the CAP technical specialist to answer follow\u2011up questions, provide any additional documentation requested, and await the accreditation decision (typically within 75\u202fdays of the inspection). [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n| **9\u202f\u2013\u202fReceive Certificate of Accreditation** | The laboratory\u2019s Certificate of Accreditation is mailed to the laboratory director; the initial inspection date becomes the laboratory\u2019s accreditation anniversary. [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n| **10\u202f\u2013\u202fPerform Self\u2011Inspection & Maintain Continuous Compliance** | On the anniversary date, conduct a self\u2011inspection using CAP\u2011provided materials, update any changes (directorship, location, test menu, personnel, etc.) in the e\u2011LAB Solutions Suite, and enroll or discontinue PT/EQA products as needed. [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n\nThese ten steps constitute the complete CAP laboratory accreditation pathway as described in the **2018 Guide to CAP Accreditation**.",
+        "steps": 40,
+        "calls": 41
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The assay was validated down to the lowest input tested \u2013\u202f1\u202fng of cfDNA.  In the input\u2011quantity experiments the library\u2011preparation metrics (mapped reads, insert size, duplicate rate, coverage per\u202fGb, tumour\u2011fraction estimate) were all acceptable at the 1\u202fng level, and the validation report states that the assay \u201cwas validated with inputs as low as\u202f1\u202fng of cfDNA\u201d\u3010folders/Assay_Validation/Approved Validation Reports/Plasma Whole Genome Sequencing Validation Report v3.0.pdf\u3011.  \n\nThus, the minimum amount of cfDNA required for plasma whole\u2011genome sequencing (pWGS) is **1\u202fng** (the corresponding concentration would depend on the volume of the aliquot, but the required input mass is 1\u202fng).",
+        "steps": 13,
+        "calls": 14
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "The Illumina\u202fNextSeq\u202f2000 workflow requires the following reagents (and consumables)\u202f[folders/Technical SOPs and Worksheets/NextSeq 2000 Operation and Maintenance.docx]:\n\n- **P1 kit** \u2013 primary reagent cartridge for the run  \n- **P2 v3 kit** \u2013 secondary reagent cartridge (v3 version)  \n- **P3 kit** \u2013 tertiary reagent cartridge  \n- **PhiX control** \u2013 sequencing control library  \n- **RSB/Tween\u202f20** \u2013 rinse\u2011stop buffer with surfactant for cleaning steps  \n- **Lens paper** \u2013 for wiping optical surfaces  \n- **Ethanol** \u2013 for cleaning and decontamination  \n\nThese items are listed in the SOP as the complete set of reagents and consumables needed to operate the NextSeq\u202f2000.",
+        "steps": 9,
+        "calls": 10
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "none",
+      "thinking": true,
+      "group_summary": "n/a",
+      "max_branch": "n/a",
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 68.59,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "**Ten Steps to CAP Laboratory Accreditation (as described in the 2018\u202fGuide to CAP Accreditation \u2013 version\u202f12.05.2018)**  \n\n| Step | Action (what you do) | Source |\n|------|----------------------|--------|\n| **1\u202f\u2013 Request Application** | Fill out and submit the *Request for Application* form at\u202fcap.org.  (International labs must have been enrolled in CAP PT/EQA for at\u202fleast\u202f6\u202fmonths before requesting an application.) | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **2\u202f\u2013 Review Welcome Kit** | Check your email for the \u201cCAP Accreditation Application Available\u201d link, review the additional information that comes with the link, and (optionally) schedule an onboarding call with CAP staff to walk through the next steps. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **3\u202f\u2013 Complete Application** | Complete the online accreditation application within\u202f3\u202fmonths of its availability, watch the homepage due\u2011date, respond to email reminders, and work with CAP staff on any follow\u2011up questions. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **4\u202f\u2013 Receive Customized Checklists** | Receive (by mail or download) the CAP\u2011customized checklists for your lab and begin inspection preparation. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **5\u202f\u2013 Schedule Inspection Date** | Locate the scheduling information (the guide says \u201cLook for a let \u2026\u201d) and set the date for the CAP inspection. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **6\u202f\u2013 *Missing from the extracted material*** | The guide\u2019s list includes a sixth step, but the specific wording is not present in the excerpts provided. | \u2014 |\n| **7\u202f\u2013 Respond to Deficiencies Within\u202f30\u202fDays** | Review the instructions for responding to any deficiencies noted by the inspection team, submit all responses together, and do so within\u202f30\u202fcalendar days of the inspection date. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **8\u202f\u2013 Support CAP Review of Responses** | Work with the CAP technical specialist on any follow\u2011up questions, await the specialist\u2019s request for additional documentation, and expect an accreditation decision within\u202f75\u202fdays of the inspection. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **9\u202f\u2013 Receive Certificate of Accreditation** | The laboratory\u2019s Certificate of Accreditation is mailed to the laboratory director; the initial inspection date becomes the lab\u2019s accreditation anniversary. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **10\u202f\u2013 Perform Self\u2011Inspection & Maintain Continuous Compliance** | On the anniversary date, conduct a self\u2011inspection using CAP\u2011provided materials, update any changes (director, location, test menu, personnel, PT/EQA enrollment, etc.) via the e\u2011Lab Solutions Suite, and continue ongoing compliance activities. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n\n**What is missing?**  \nThe exact description of **Step\u202f6** is not included in the excerpts you have supplied. To provide the complete ten\u2011step list, the text for that step would need to be retrieved from the full 2018 Guide to CAP Accreditation.",
+        "steps": 40,
+        "calls": 41
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The plasma whole\u2011genome sequencing (pWGS) assay was validated down to the lowest input tested of **1\u202fng of cfDNA**. This amount was established as the minimum cfDNA required to generate a productive library and was used in the validation studies that evaluated inputs from 1\u202fng to 50\u202fng\u3010folders/Assay_Validation/Approved Validation Reports/Plasma Whole Genome Sequencing Validation Report v3.0.pdf\u3011.",
+        "steps": 10,
+        "calls": 11
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "**Reagents required for Illumina\u202fNextSeq\u202f2000 sequencing**\n\n| Reagent type | Cycle options (catalogue numbers) |\n|--------------|-----------------------------------|\n| **NextSeq\u202f2000\u202fP1 reagent kits** | 100\u202fcycles\u202f\u2013\u202f20074933; 300\u202fcycles\u202f\u2013\u202f20050264; 600\u202fcycles\u202f\u2013\u202f20075294 |\n| **NextSeq\u202f2000\u202fP2 reagent kits (v3)** | 100\u202fcycles\u202f\u2013\u202f20046811; 200\u202fcycles\u202f\u2013\u202f20046812; 300\u202fcycles\u202f\u2013\u202f20046813; 600\u202fcycles\u202f\u2013\u202f20075295 |\n| **NextSeq\u202f2000\u202fP3 reagent kits** | 50\u202fcycles\u202f\u2013\u202f20046810; 100\u202fcycles\u202f\u2013\u202f20040559; 200\u202fcycles\u202f\u2013\u202f20040560; 300\u202fcycles\u202f\u2013\u202f20040561 |\n| **PhiX Control v3 (sequencing control)** | Catalogue\u202fFC\u2011110\u20113001 |\n| **NextSeq\u202f1000/2000 RSB (contains Tween\u202f20)** | Supplied with the above reagent kits (except the P2\u202fv2 kit) |\n\nThese are the Illumina\u2011provided reagents listed in the \u201cReagents and Consumables\u201d section for the NextSeq\u202f2000 operation and maintenance SOP\u202f[folders/Technical SOPs and Worksheets/NextSeq\u202f2000\u202fOperation and Maintenance.docx]\u3010folders/Technical SOPs and Worksheets/NextSeq 2000 Operation and Maintenance.docx\u3011.  \n\n*Note:* General laboratory consumables (e.g., VWR lens paper, 70\u202f% ethanol, molecular\u2011grade water, pipette filter tips) are also used during the run, but they are not classified as sequencing reagents.",
+        "steps": 6,
+        "calls": 7
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "cluster",
+      "thinking": false,
+      "group_summary": "heuristic",
+      "max_branch": 8,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 70.05,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "**Ten Steps to CAP Laboratory Accreditation (as described in the 2018 CAP Accreditation Guide)**  \n\n| Step | Action | What you do |\n|------|--------|-------------|\n| **1\u202f\u2013\u202fRequest Application** | Fill out and submit the *Request for Application* form at **cap.org**. International labs must have been enrolled in CAP Proficiency\u2011Testing/External Quality Assurance for at least six\u202fmonths before requesting an application. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **2\u202f\u2013\u202fReview Welcome Kit** | Check your email for the \u201cCAP Accreditation Application Available\u201d link, read the accompanying information, and (optionally) schedule an onboarding call with CAP staff. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **3\u202f\u2013\u202fComplete Application** | Submit the accreditation application within\u202f3\u202fmonths of its online availability, watch for deadline reminders, and work with CAP staff on any questions. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **4\u202f\u2013\u202fReceive Customized Checklists** | CAP sends you laboratory\u2011specific checklists (by mail or downloadable online) that you use to prepare for inspection. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **5\u202f\u2013\u202fSchedule Inspection Date** | Use the information in the welcome kit/application portal to select a date for the on\u2011site inspection. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **6\u202f\u2013\u202fConduct Inspection** | The CAP inspection team visits your lab on the scheduled date and evaluates you against the customized checklists. (The guide groups \u201cschedule\u201d and \u201cconduct\u201d together as the inspection step.) | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 (summary: \u201cStep\u202f5: schedule/conduct inspection\u201d) |\n| **7\u202f\u2013\u202fRespond to Deficiencies (within\u202f30\u202fdays)** | Review any deficiency report, prepare a single, comprehensive response, and submit it within\u202f30\u202fcalendar days of the inspection. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **8\u202f\u2013\u202fSupport CAP Review of Responses** | Work with the CAP technical specialist on any follow\u2011up questions, provide additional documentation if requested, and await the accreditation decision (typically within\u202f75\u202fdays). | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **9\u202f\u2013\u202fReceive Certificate of Accreditation** | CAP mails the official Certificate of Accreditation to the laboratory director; the initial inspection date becomes the lab\u2019s accreditation anniversary. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **10\u202f\u2013\u202fPerform Self\u2011Inspection & Maintain Continuous Compliance** | On the anniversary date, conduct a self\u2011inspection using CAP materials, update any changes (directorship, test menu, personnel, etc.) in the e\u2011Lab Solutions Suite, and keep PT/EQA enrollment current. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n\nThese ten steps constitute the complete CAP laboratory accreditation pathway outlined in the 2018 guide.",
+        "steps": 40,
+        "calls": 41
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The assay determined that **10\u202fng of cfDNA is the minimum input amount required for plasma whole\u2011genome sequencing (pWGS)**. Inputs lower than this (e.g., 1\u202fng) showed markedly poorer library\u2011quality metrics, while amounts \u226510\u202fng gave consistent, robust performance across all measured parameters\u3010folders/Assay_Validation/Approved Validation Reports/Plasma Whole Genome Sequencing Validation Report v3.0.pdf\u3011.",
+        "steps": 14,
+        "calls": 15
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "The Illumina\u202fNextSeq\u202f2000 is run with the instrument\u2011specific reagent kits **P1, P2 (v3) or P3**. These are the only reagent kits referenced for loading the NextSeq\u202f2000 in the SOP for shallow whole\u2011genome sequencing\u202f[Shallow Whole Genome Sequencing for Copy Number and Ploidy Determination.docx].",
+        "steps": 8,
+        "calls": 9
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "chunk",
+      "thinking": true,
+      "group_summary": "heuristic",
+      "max_branch": 8,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 88.19,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "The documents you have provided (e.g., **MAS_COM_12262024_1738777131928.pdf**) contain sections such as \u201cSUMMARY OF CHANGES,\u201d \u201cUNDERSTANDING THE CAP ACCREDITATION CHECKLIST COMPONENTS,\u201d and various checklist topics (e.g., \u201cPROFICIENCY TESTING,\u201d \u201cQUALITY MANAGEMENT,\u201d \u201cSPECIMEN COLLECTION AND HANDLING,\u201d etc.)\u202f[folders/Lab_Quality_Documents/Checklists/CAP/MAS_COM_12262024_1738777131928.pdf]. However, none of the excerpts shown include a distinct list titled **\u201cTen Steps to CAP Laboratory Accreditation.\u201d**  \n\n**What is missing:**  \n- The actual enumerated \u201cTen Steps\u201d list (e.g., Step\u202f1, Step\u202f2, \u2026 Step\u202f10) that outlines the roadmap for achieving CAP accreditation.  \n\nWithout that specific list in the provided material, I cannot supply the Ten Steps. If you can locate a section of the document (or another source) that contains the numbered steps, please share it, and I\u2019ll be able to extract and present the list for you.",
+        "steps": 40,
+        "calls": 41
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The assay determined that **10\u202fng of cfDNA is the minimum input amount required for plasma whole\u2011genome sequencing (pWGS)**. Inputs lower than this (e.g., 1\u202fng) showed markedly poorer library\u2011quality metrics, while amounts \u226510\u202fng gave consistent, robust performance across all measured parameters\u3010folders/Assay_Validation/Approved Validation Reports/Plasma Whole Genome Sequencing Validation Report v3.0.pdf\u3011.",
+        "steps": 13,
+        "calls": 14
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "The information provided only states that pools are created and sequenced on the Illumina NextSeq\u202f550 or NextSeq\u202f2000 according to the relevant operation and maintenance SOPs, but it does **not** list any specific reagents used with the NextSeq\u202f2000.  \n\n**Missing information:** a description of the reagents (e.g., library preparation kits, sequencing kits, flow cells, buffers, etc.) required for running the Illumina NextSeq\u202f2000. Without that detail, the question cannot be answered.",
+        "steps": 40,
+        "calls": 41
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "chunk",
+      "thinking": false,
+      "group_summary": "heuristic",
+      "max_branch": 8,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 88.63,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "The documents you have provided (e.g., **MAS_COM_12262024_1738777131928.pdf**) contain sections such as \u201cSUMMARY OF CHANGES,\u201d \u201cUNDERSTANDING THE CAP ACCREDITATION CHECKLIST COMPONENTS,\u201d and various checklist topics (e.g., \u201cPROFICIENCY TESTING,\u201d \u201cQUALITY MANAGEMENT,\u201d \u201cSPECIMEN COLLECTION AND HANDLING,\u201d etc.)\u202f[folders/Lab_Quality_Documents/Checklists/CAP/MAS_COM_12262024_1738777131928.pdf]. However, none of the excerpts shown include a distinct list titled **\u201cTen Steps to CAP Laboratory Accreditation.\u201d**  \n\n**What is missing:**  \n- The actual enumerated \u201cTen Steps\u201d list (e.g., Step\u202f1, Step\u202f2, \u2026 Step\u202f10) that outlines the roadmap for achieving CAP accreditation.  \n\nWithout that specific list in the provided material, I cannot supply the Ten Steps. If you can locate a section of the document (or another source) that contains the numbered steps, please share it, and I\u2019ll be able to extract and present the list for you.",
+        "steps": 40,
+        "calls": 41
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The assay determined that **10\u202fng of cfDNA is the minimum input amount required for plasma whole\u2011genome sequencing (pWGS)**. Inputs lower than this (e.g., 1\u202fng) showed markedly poorer library\u2011quality metrics, while amounts \u226510\u202fng gave consistent, robust performance across all measured parameters\u3010folders/Assay_Validation/Approved Validation Reports/Plasma Whole Genome Sequencing Validation Report v3.0.pdf\u3011.",
+        "steps": 13,
+        "calls": 14
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "The information provided only states that pools are created and sequenced on the Illumina NextSeq\u202f550 or NextSeq\u202f2000 according to the relevant operation and maintenance SOPs, but it does **not** list any specific reagents used with the NextSeq\u202f2000.  \n\n**Missing information:** a description of the reagents (e.g., library preparation kits, sequencing kits, flow cells, buffers, etc.) required for running the Illumina NextSeq\u202f2000. Without that detail, the question cannot be answered.",
+        "steps": 40,
+        "calls": 41
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "none",
+      "thinking": false,
+      "group_summary": "n/a",
+      "max_branch": "n/a",
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 93.13,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "**Ten Steps to CAP Laboratory Accreditation (as described in the 2018\u202fGuide to CAP Accreditation)**  \n\n| Step | What you do | Where the step is described |\n|------|-------------|-----------------------------|\n| **1\u202f\u2013\u202fRequest Application** | Fill out and submit the *Request for Application* form at\u202fcap.org (international labs must have 6\u202fmonths of CAP PT/EQA participation first). | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 (page\u202f4) |\n| **2\u202f\u2013\u202fReview Welcome Kit** | Check your email for the \u201cCAP Accreditation Application Available\u201d link, read the accompanying information, and (optionally) schedule an onboarding call with CAP staff. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 (page\u202f4) |\n| **3\u202f\u2013\u202fComplete Application** | Log in, complete the online accreditation application within\u202f3\u202fmonths, watch for due\u2011date reminders and work with CAP staff on any questions. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 (page\u202f4) |\n| **4\u202f\u2013\u202fReceive Customized Checklists** | CAP sends you checklists that are tailored to your test menu; you can receive them by mail or download them from your account. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 (page\u202f4) |\n| **5\u202f\u2013\u202fSchedule Inspection Date** | After reviewing the checklists, arrange a date for the on\u2011site inspection (CAP will provide instructions on how to schedule). | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 (page\u202f4) |\n| **6\u202f\u2013\u202fUndergo the Inspection** | A peer\u2011based CAP inspection team visits the laboratory (on\u2011site inspection occurs every\u202f2\u202fyears; in off\u2011years you perform a self\u2011inspection). | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 (page\u202f3) |\n| **7\u202f\u2013\u202fRespond to Deficiencies (\u2264\u202f30\u202fdays)** | Review any deficiency report, prepare a single, complete response package, and submit it within\u202f30\u202fcalendar days of the inspection. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 (page\u202f4) |\n| **8\u202f\u2013\u202fCAP Review of Responses** | Work with the CAP technical specialist on any follow\u2011up questions, provide any additional documentation, and await the accreditation decision (typically within\u202f75\u202fdays of inspection). | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 (page\u202f4) |\n| **9\u202f\u2013\u202fReceive Certificate of Accreditation** | CAP mails the official Certificate of Accreditation to the laboratory director; the inspection date becomes the laboratory\u2019s accreditation anniversary. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 (page\u202f4) |\n| **10\u202f\u2013\u202fPerform Self\u2011Inspection & Maintain Continuous Compliance** | On the anniversary date, conduct a CAP\u2011provided self\u2011inspection, update any changes (director, location, test menu, personnel, PT/EQA enrollment, etc.) in the e\u2011Lab Solutions Suite, and continue meeting all checklist requirements. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 (page\u202f4) |\n\nThese ten steps constitute the complete CAP laboratory accreditation pathway, moving from the initial request through ongoing compliance.",
+        "steps": 40,
+        "calls": 41
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The assay requires at least **10\u202fng of cfDNA** in the aliquot to generate a productive library and pass the quality\u2011control gates for plasma whole\u2011genome sequencing (pWGS). This amount was identified as the lowest input that consistently yielded acceptable library\u2011preparation metrics and sequencing quality, and therefore is taken as the minimum cfDNA concentration needed for the pWGS workflow\u3010folders/Assay_Validation/Approved Validation Reports/Plasma Whole Genome Sequencing Validation Report v3.0.pdf\u3011.",
+        "steps": 30,
+        "calls": 31
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "**Reagents required for Illumina\u202fNextSeq\u202f2000 sequencing**\n\n| Reagent type | Cycle options (catalogue numbers) |\n|--------------|-----------------------------------|\n| **NextSeq\u202f2000\u202fP1 reagent kits** | 100\u202fcycles\u202f\u2013\u202f20074933; 300\u202fcycles\u202f\u2013\u202f20050264; 600\u202fcycles\u202f\u2013\u202f20075294 |\n| **NextSeq\u202f2000\u202fP2 reagent kits (v3)** | 100\u202fcycles\u202f\u2013\u202f20046811; 200\u202fcycles\u202f\u2013\u202f20046812; 300\u202fcycles\u202f\u2013\u202f20046813; 600\u202fcycles\u202f\u2013\u202f20075295 |\n| **NextSeq\u202f2000\u202fP3 reagent kits** | 50\u202fcycles\u202f\u2013\u202f20046810; 100\u202fcycles\u202f\u2013\u202f20040559; 200\u202fcycles\u202f\u2013\u202f20040560; 300\u202fcycles\u202f\u2013\u202f20040561 |\n| **PhiX Control v3 (sequencing control)** | Catalogue\u202fFC\u2011110\u20113001 |\n| **NextSeq\u202f1000/2000 RSB (contains Tween\u202f20)** | Supplied with the above reagent kits (except the P2\u202fv2 kit) |\n\nThese are the Illumina\u2011provided reagents listed in the \u201cReagents and Consumables\u201d section for the NextSeq\u202f2000 operation and maintenance SOP\u202f[folders/Technical SOPs and Worksheets/NextSeq\u202f2000\u202fOperation and Maintenance.docx]\u3010folders/Technical SOPs and Worksheets/NextSeq 2000 Operation and Maintenance.docx\u3011.  \n\n*Note:* General laboratory consumables (e.g., VWR lens paper, 70\u202f% ethanol, molecular\u2011grade water, pipette filter tips) are also used during the run, but they are not classified as sequencing reagents.",
+        "steps": 6,
+        "calls": 7
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "cluster",
+      "thinking": false,
+      "group_summary": "heuristic",
+      "max_branch": 5,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 99.69,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "**Ten Steps to CAP Laboratory Accreditation (as described in the 2018 CAP guide)**  \n\n| Step | Action (what you do) | Source |\n|------|----------------------|--------|\n| **1\u202f\u2013\u202fRequest Application** | Fill out and submit the *Request for Application* form at **cap.org**.  International labs must have been enrolled in CAP Proficiency\u2011Testing/EQA for at least six\u202fmonths before requesting an application. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **2\u202f\u2013\u202fReview Welcome Kit** | Check your email for the \u201cCAP Accreditation Application Available\u201d link, review the additional information that comes with the link, and (optionally) schedule an onboarding call with CAP staff for guidance. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **3\u202f\u2013\u202fComplete Application** | Complete the online accreditation application within\u202f3\u202fmonths of its availability, watch the homepage due\u2011date, respond to email reminders, and work with CAP staff on any follow\u2011up questions. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **4\u202f\u2013\u202fReceive Customized Checklists** | Receive (by mail or download) the CAP\u2011generated checklists that are specific to your laboratory and begin inspection preparation. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **5\u202f\u2013\u202fSchedule Inspection Date** | Choose a date for the peer\u2011based CAP inspection and confirm it with CAP. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **6\u202f\u2013\u202f(Inspection)** | *The guide references a \u201cschedule/conduct inspection\u201d step, but the detailed description of the actual inspection conduct is not included in the extracted text.* |\n| **7\u202f\u2013\u202fRespond to Deficiencies (within\u202f30\u202fdays)** | Review the inspection team\u2019s deficiency instructions, submit all responses at once, and ensure they are received within\u202f30\u202fcalendar days of the inspection. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **8\u202f\u2013\u202fSupport CAP Review of Responses** | Work with the CAP technical specialist on any follow\u2011up questions, provide any additional documentation requested, and await the accreditation decision (typically within\u202f75\u202fdays of inspection). | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **9\u202f\u2013\u202fReceive Certificate of Accreditation** | The laboratory\u2019s Certificate of Accreditation is mailed to the laboratory director; note the initial inspection date as the laboratory\u2019s accreditation anniversary. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **10\u202f\u2013\u202fPerform Self\u2011Inspection & Maintain Continuous Compliance** | On the anniversary date, conduct a self\u2011inspection using CAP\u2011provided materials, update any changes (directorship, location, test menu, personnel) via the e\u2011Lab Solutions Suite, and adjust PT/EQA enrollment as needed. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n\n**Summary** \u2013 The ten\u2011step pathway is:  \n\n1. Request application  \n2. Review the welcome kit  \n3. Complete the application  \n4. Receive customized checklists  \n5. Schedule the inspection date  \n6. *(Conduct the inspection \u2013 not detailed in the extracted text)*  \n7. Respond to any deficiencies within 30\u202fdays  \n8. Work with CAP to review those responses  \n9. Receive the accreditation certificate  \n10. Perform annual self\u2011inspection and keep the laboratory in continuous compliance.  \n\nAll steps are taken directly from the CAP \u201cTen Steps to CAP Laboratory Accreditation\u201d guide; the only missing detail is the explicit description of step\u202f6 (the actual inspection conduct).",
+        "steps": 40,
+        "calls": 41
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The SOP specifies that for the\u202fpWGS\u202fassay the cfDNA aliquot must have a **desired minimum concentration of\u202f0.2\u202fng/\u00b5L**\u3010folders/Technical SOPs and Worksheets/Nucleic Acid Aliquotting Procedure.docx\u3011. This is the concentration threshold that must be met when preparing the cfDNA aliquot for pWGS.",
+        "steps": 37,
+        "calls": 38
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "The Illumina\u202fNextSeq\u202f2000 workflow requires the following reagents (and consumables)\u202f[folders/Technical SOPs and Worksheets/NextSeq 2000 Operation and Maintenance.docx]:\n\n- **P1 kit** \u2013 primary reagent cartridge for the run  \n- **P2 v3 kit** \u2013 secondary reagent cartridge (v3 version)  \n- **P3 kit** \u2013 tertiary reagent cartridge  \n- **PhiX control** \u2013 sequencing control library  \n- **RSB/Tween\u202f20** \u2013 rinse\u2011stop buffer with surfactant for cleaning steps  \n- **Lens paper** \u2013 for wiping optical surfaces  \n- **Ethanol** \u2013 for cleaning and decontamination  \n\nThese items are listed in the SOP as the complete set of reagents and consumables needed to operate the NextSeq\u202f2000.",
+        "steps": 18,
+        "calls": 19
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "chunk",
+      "thinking": false,
+      "group_summary": "heuristic",
+      "max_branch": 12,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 100.89,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "**The Ten\u2011Step CAP Laboratory Accreditation Process (as described in the 2018\u202fGuide to CAP Accreditation)**  \n\n| Step | Action (as written in the guide) | Source |\n|------|-----------------------------------|--------|\n| **1\u202f\u2013\u202fRequest Application** | Fill out and submit the *Request for Application* form at\u202fcap.org. (International labs must be enrolled in CAP PT/EQA for \u2265\u202f6\u202fmonths before requesting.) | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011\u202fPAGE\u202f6 |\n| **2\u202f\u2013\u202fReview Welcome Kit** | Check your email for the link to the online application, review the accompanying information, and (optionally) schedule an onboarding call with CAP staff. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011\u202fPAGE\u202f6 |\n| **3\u202f\u2013\u202fComplete Application** | Complete the accreditation application within\u202f3\u202fmonths of its availability, monitor email reminders, and work with CAP staff on any follow\u2011up questions. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011\u202fPAGE\u202f6 |\n| **4\u202f\u2013\u202fReceive Customized Checklists** | Receive customized checklists by mail (or download them online) and begin inspection preparation. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011\u202fPAGE\u202f6 |\n| **5\u202f\u2013\u202fSchedule Inspection Date** | Arrange the date for the CAP inspection (details of the scheduling process are provided in the kit). | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011\u202fPAGE\u202f6 |\n| **6\u202f\u2013\u202f*Missing from the extracted material*** | The guide lists a sixth step (typically the on\u2011site inspection itself), but the exact wording is not present in the provided excerpts. | \u2014 |\n| **7\u202f\u2013\u202fRespond to Deficiencies Within\u202f30\u202fDays** | Review the instructions for responding to inspection deficiencies, submit all responses together, and do so within\u202f30\u202fcalendar days of the inspection. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011\u202fPAGE\u202f5 |\n| **8\u202f\u2013\u202fSupport CAP Review of Responses** | Work with the CAP technical specialist on any follow\u2011up questions, await the specialist\u2019s request for additional documentation, and expect an accreditation decision within\u202f75\u202fdays of the inspection. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011\u202fPAGE\u202f5 |\n| **9\u202f\u2013\u202fReceive Certificate of Accreditation** | The laboratory\u2019s Certificate of Accreditation is mailed to the laboratory director; the initial inspection date becomes the laboratory\u2019s accreditation anniversary. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011\u202fPAGE\u202f5 |\n| **10\u202f\u2013\u202fPerform Self\u2011Inspection and Maintain Continuous Compliance** | On the anniversary date, conduct a self\u2011inspection using CAP\u2011provided materials, update any changes (directorship, location, test menu, personnel, PT/EQA enrollment, etc.) via e\u2011Lab Solutions Suite, and continue ongoing compliance. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011\u202fPAGE\u202f5 |\n\n**What is missing?**  \nThe specific description of **Step\u202f6** (the step that follows \u201cSchedule Inspection Date\u201d and precedes \u201cRespond to Deficiencies\u201d) is not included in the excerpts you provided. To list the complete ten steps verbatim, the exact wording for Step\u202f6 would be needed.",
+        "steps": 40,
+        "calls": 41
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The assay requires **at least\u202f5\u202fng of cfDNA per aliquot** to generate reliable plasma whole\u2011genome sequencing (pWGS) data. Inputs\u202f\u2265\u202f5\u202fng consistently give adequate coverage and low duplicate rates, whereas the 1\u202fng input fails to meet performance criteria\u3010folders/Assay_Validation/Approved Validation Reports/Plasma Whole Genome Sequencing Validation Report v3.0.pdf\u3011.",
+        "steps": 13,
+        "calls": 14
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "**Reagents required for runs on the Illumina\u202fNextSeq\u202f2000**\n\n| Reagent (or consumable) | Typical catalogue numbers / notes |\n|--------------------------|-----------------------------------|\n| **NextSeq\u202f2000\u202fP1 reagent kits** \u2013 provide the sequencing chemistry for the first read | 20074933 (100\u202fcycles), 20050264 (300\u202fcycles), 20075294 (600\u202fcycles) |\n| **NextSeq\u202f2000\u202fP2 reagent kits (v3)** \u2013 provide the chemistry for the second read | 20046811 (100\u202fcycles), 20046812 (200\u202fcycles), 20046813 (300\u202fcycles), 20075295 (600\u202fcycles) |\n| **NextSeq\u202f2000\u202fP3 reagent kits** \u2013 provide the chemistry for the index reads | 20046810 (50\u202fcycles), 20040559 (100\u202fcycles), 20040560 (200\u202fcycles), 20040561 (300\u202fcycles) |\n| **PhiX Control v3** (sequencing quality control spike\u2011in) | FC\u2011110\u20113001 |\n| **NextSeq\u202f1000/2000 RSB with Tween\u202f20** (run\u2011stop buffer) \u2013 supplied with the reagent kits | (included with kits) |\n| **VWR Lens Paper (cleaning tissues, 4\u202f\u00d7\u202f6\u202fin.)** | 52846\u2011001 |\n| **70\u202f% Ethanol** (for instrument cleaning) | \u2013 |\n| **Molecular\u2011grade H\u2082O** (for dilution/cleaning) | \u2013 |\n| **Pipette filter tips** (any compatible brand) | \u2013 |\n\n*Plastic consumables (e.g., tubes, plates) may be substituted with an approved equivalent product.*  \n\nThese items are listed in the \u201cNextSeq\u202f2000 Operation and Maintenance\u201d SOP table for the instrument\u202f[folders/Technical SOPs and Worksheets/NextSeq\u202f2000\u202fOperation\u202fand\u202fMaintenance.docx]\u200b.",
+        "steps": 40,
+        "calls": 41
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "chunk",
+      "thinking": true,
+      "group_summary": "heuristic",
+      "max_branch": 12,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 101.31,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "**The Ten\u2011Step CAP Laboratory Accreditation Process (as described in the 2018\u202fGuide to CAP Accreditation)**  \n\n| Step | Action (as written in the guide) | Source |\n|------|-----------------------------------|--------|\n| **1\u202f\u2013\u202fRequest Application** | Fill out and submit the *Request for Application* form at\u202fcap.org. (International labs must be enrolled in CAP PT/EQA for \u2265\u202f6\u202fmonths before requesting.) | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011\u202fPAGE\u202f6 |\n| **2\u202f\u2013\u202fReview Welcome Kit** | Check your email for the link to the online application, review the accompanying information, and (optionally) schedule an onboarding call with CAP staff. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011\u202fPAGE\u202f6 |\n| **3\u202f\u2013\u202fComplete Application** | Complete the accreditation application within\u202f3\u202fmonths of its availability, monitor email reminders, and work with CAP staff on any follow\u2011up questions. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011\u202fPAGE\u202f6 |\n| **4\u202f\u2013\u202fReceive Customized Checklists** | Receive customized checklists by mail (or download them online) and begin inspection preparation. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011\u202fPAGE\u202f6 |\n| **5\u202f\u2013\u202fSchedule Inspection Date** | Arrange the date for the CAP inspection (details of the scheduling process are provided in the kit). | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011\u202fPAGE\u202f6 |\n| **6\u202f\u2013\u202f*Missing from the extracted material*** | The guide lists a sixth step (typically the on\u2011site inspection itself), but the exact wording is not present in the provided excerpts. | \u2014 |\n| **7\u202f\u2013\u202fRespond to Deficiencies Within\u202f30\u202fDays** | Review the instructions for responding to inspection deficiencies, submit all responses together, and do so within\u202f30\u202fcalendar days of the inspection. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011\u202fPAGE\u202f5 |\n| **8\u202f\u2013\u202fSupport CAP Review of Responses** | Work with the CAP technical specialist on any follow\u2011up questions, await the specialist\u2019s request for additional documentation, and expect an accreditation decision within\u202f75\u202fdays of the inspection. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011\u202fPAGE\u202f5 |\n| **9\u202f\u2013\u202fReceive Certificate of Accreditation** | The laboratory\u2019s Certificate of Accreditation is mailed to the laboratory director; the initial inspection date becomes the laboratory\u2019s accreditation anniversary. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011\u202fPAGE\u202f5 |\n| **10\u202f\u2013\u202fPerform Self\u2011Inspection and Maintain Continuous Compliance** | On the anniversary date, conduct a self\u2011inspection using CAP\u2011provided materials, update any changes (directorship, location, test menu, personnel, PT/EQA enrollment, etc.) via e\u2011Lab Solutions Suite, and continue ongoing compliance. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011\u202fPAGE\u202f5 |\n\n**What is missing?**  \nThe specific description of **Step\u202f6** (the step that follows \u201cSchedule Inspection Date\u201d and precedes \u201cRespond to Deficiencies\u201d) is not included in the excerpts you provided. To list the complete ten steps verbatim, the exact wording for Step\u202f6 would be needed.",
+        "steps": 40,
+        "calls": 41
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The assay requires **at least\u202f5\u202fng of cfDNA per aliquot** to generate reliable plasma whole\u2011genome sequencing (pWGS) data. Inputs\u202f\u2265\u202f5\u202fng consistently give adequate coverage and low duplicate rates, whereas the 1\u202fng input fails to meet performance criteria\u3010folders/Assay_Validation/Approved Validation Reports/Plasma Whole Genome Sequencing Validation Report v3.0.pdf\u3011.",
+        "steps": 13,
+        "calls": 14
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "**Reagents required for runs on the Illumina\u202fNextSeq\u202f2000**\n\n| Reagent (or consumable) | Typical catalogue numbers / notes |\n|--------------------------|-----------------------------------|\n| **NextSeq\u202f2000\u202fP1 reagent kits** \u2013 provide the sequencing chemistry for the first read | 20074933 (100\u202fcycles), 20050264 (300\u202fcycles), 20075294 (600\u202fcycles) |\n| **NextSeq\u202f2000\u202fP2 reagent kits (v3)** \u2013 provide the chemistry for the second read | 20046811 (100\u202fcycles), 20046812 (200\u202fcycles), 20046813 (300\u202fcycles), 20075295 (600\u202fcycles) |\n| **NextSeq\u202f2000\u202fP3 reagent kits** \u2013 provide the chemistry for the index reads | 20046810 (50\u202fcycles), 20040559 (100\u202fcycles), 20040560 (200\u202fcycles), 20040561 (300\u202fcycles) |\n| **PhiX Control v3** (sequencing quality control spike\u2011in) | FC\u2011110\u20113001 |\n| **NextSeq\u202f1000/2000 RSB with Tween\u202f20** (run\u2011stop buffer) \u2013 supplied with the reagent kits | (included with kits) |\n| **VWR Lens Paper (cleaning tissues, 4\u202f\u00d7\u202f6\u202fin.)** | 52846\u2011001 |\n| **70\u202f% Ethanol** (for instrument cleaning) | \u2013 |\n| **Molecular\u2011grade H\u2082O** (for dilution/cleaning) | \u2013 |\n| **Pipette filter tips** (any compatible brand) | \u2013 |\n\n*Plastic consumables (e.g., tubes, plates) may be substituted with an approved equivalent product.*  \n\nThese items are listed in the \u201cNextSeq\u202f2000 Operation and Maintenance\u201d SOP table for the instrument\u202f[folders/Technical SOPs and Worksheets/NextSeq\u202f2000\u202fOperation\u202fand\u202fMaintenance.docx]\u200b.",
+        "steps": 40,
+        "calls": 41
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "cluster",
+      "thinking": true,
+      "group_summary": "heuristic",
+      "max_branch": 12,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 103.25,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "**Ten Steps to CAP Laboratory Accreditation (as described in the 2018\u202fGuide to CAP Accreditation)**  \n\n| Step | Action (what you do) | Key points |\n|------|----------------------|------------|\n| **1\u202f\u2013 Request Application** | Fill out and submit the *Request for Application* form at\u202fcap.org. International labs must have been enrolled in CAP PT/EQA for at least six\u202fmonths before requesting an application. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **2\u202f\u2013 Review Welcome Kit** | Check your email for the \u201cCAP Accreditation Application Available\u201d link, read the additional information that comes with the link, and (optionally) schedule an onboarding call with CAP staff. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **3\u202f\u2013 Complete Application** | Submit the accreditation application within\u202f3\u202fmonths of its online availability, watch for the due\u2011date on the homepage, heed email reminders, and work with CAP staff on any follow\u2011up questions. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **4\u202f\u2013 Receive Customized Checklists** | CAP sends you customized checklists (by mail or downloadable online) that you will use to prepare for the inspection. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **5\u202f\u2013 Schedule Inspection Date** | Arrange the on\u2011site inspection date with CAP (the guide notes \u201cLook for a let \u2026\u201d indicating you will be prompted to schedule). | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **6\u202f\u2013 *Missing from the extracted material*** | The specific description of Step\u202f6 is not present in the provided excerpts. | \u2014 |\n| **7\u202f\u2013 Respond to Deficiencies Within\u202f30\u202fDays** | After the inspection, review the deficiency\u2011response instructions, submit all responses together, and do so within\u202f30\u202fcalendar days of the inspection date. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **8\u202f\u2013 Support CAP Review of Responses** | Work with the CAP technical specialist on any follow\u2011up questions, await an emailed request for additional documentation, and expect an accreditation decision within\u202f75\u202fdays of the inspection. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **9\u202f\u2013 Receive Certificate of Accreditation** | The laboratory\u2019s Certificate of Accreditation is mailed to the laboratory director; note the initial inspection date as the laboratory\u2019s accreditation anniversary. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **10\u202f\u2013 Perform Self\u2011Inspection & Maintain Continuous Compliance** | On the anniversary date, conduct a self\u2011inspection using CAP\u2011provided materials, update any changes (directorship, location, test menu, personnel, PT/EQA enrollment) via the e\u2011Lab Solutions Suite, and continue ongoing compliance. | \u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n\n**Summary:** The ten\u2011step pathway consists of requesting an application, reviewing the welcome kit, completing the application, receiving customized checklists, scheduling the inspection, (step\u202f6 not captured in the excerpts), responding to any inspection deficiencies, supporting CAP\u2019s review of those responses, receiving the accreditation certificate, and finally performing annual self\u2011inspections to maintain compliance.",
+        "steps": 40,
+        "calls": 41
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The assay was validated down to the lowest input tested \u2013\u202f1\u202fng of cfDNA.  In the input\u2011quantity experiments the library\u2011preparation metrics (mapped reads, insert size, duplicate rate, coverage per\u202fGb, tumour\u2011fraction estimate) were all acceptable at the 1\u202fng level, and the validation report states that the assay \u201cwas validated with inputs as low as\u202f1\u202fng of cfDNA\u201d\u3010folders/Assay_Validation/Approved Validation Reports/Plasma Whole Genome Sequencing Validation Report v3.0.pdf\u3011.  \n\nThus, the minimum amount of cfDNA required for plasma whole\u2011genome sequencing (pWGS) is **1\u202fng** (the corresponding concentration would depend on the volume of the aliquot, but the required input mass is 1\u202fng).",
+        "steps": 8,
+        "calls": 9
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "**Reagents that are used with the Illumina\u202fNextSeq\u202f2000 (as described in the SOP for preparing the PhiX control library)**  \n\n| Reagent | Typical use with the NextSeq\u202f2000 |\n|---------|-----------------------------------|\n| **PhiX Control v3 (10\u202fnM)** | Balanced, adapter\u2011ligated viral library spiked into a sequencing lane as a control.  Stored at \u201315\u202f\u00b0C to \u201325\u202f\u00b0C and thawed on ice.  [folders/Technical SOPs and Worksheets/PhiX Preparation for Sequencing.docx] |\n| **Hybridization Buffer (HT1)** | Used in the denaturation/rehybridization step for PhiX preparation.  Thawed on ice or at 4\u202f\u00b0C.  [folders/Technical SOPs and Worksheets/PhiX Preparation for Sequencing.docx] |\n| **Elution Buffer (10\u202fmM Tris\u2011Cl, pH\u202f8.5)** | Provides a neutral pH environment for diluting and storing the denatured PhiX.  Stored at room temperature.  [folders/Technical SOPs and Worksheets/PhiX Preparation for Sequencing.docx] |\n| **10\u202fN Sodium Hydroxide (NaOH)** | Added to denature the PhiX library before dilution.  Stored at room temperature.  [folders/Technical SOPs and Worksheets/PhiX Preparation for Sequencing.docx] |\n| **Tween\u202f20** | Added to the hybridization and elution buffers to reduce surface tension and improve mixing.  Stored at room temperature.  [folders/Technical SOPs and Worksheets/PhiX Preparation for Sequencing.docx] |\n| **Nuclease\u2011Free Water (non\u2011DEPC\u2011treated)** | Used for final dilutions of PhiX and other buffer preparations.  Stored at room temperature.  [folders/Technical SOPs and Worksheets/PhiX Preparation for Sequencing.docx] |\n| **NextSeq\u202f1000/2000 Reagent System Buffer (RSB) with Tween\u202f20** | Included in the NextSeq\u202f1000/2000 reagent kit (except the P2\u202f(v2) kit) and used as part of the sequencing chemistry on the instrument.  Stored at 4\u202f\u00b0C.  [folders/Technical SOPs and Worksheets/PhiX Preparation for Sequencing.docx] |\n\n**Summary**\n\nWhen running the Illumina\u202fNextSeq\u202f2000, the workflow described in the SOP requires the following reagents: PhiX Control v3, Hybridization Buffer (HT1), Elution Buffer (10\u202fmM Tris\u2011Cl, pH\u202f8.5), 10\u202fN NaOH, Tween\u202f20, nuclease\u2011free water, and the instrument\u2011specific NextSeq\u202f1000/2000 Reagent System Buffer (RSB) that already contains Tween\u202f20.  \n\n*If additional reagents (e.g., library preparation kits, sequencing primers, or other consumables) are needed for a specific experiment, that information is not present in the provided documents.*",
+        "steps": 40,
+        "calls": 41
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "cluster",
+      "thinking": false,
+      "group_summary": "heuristic",
+      "max_branch": 12,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 110.21,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "**The CAP Laboratory Accreditation process is presented as a ten\u2011step sequence.**  \nEach step is taken in order, from the first request for an application through the ongoing self\u2011inspection that keeps the accreditation current.\n\n| # | Step (CAP terminology) | What you do |\n|---|------------------------|-------------|\n| 1 | **Request\u202fApplication** | Fill out and submit the *Request for Application* form (CAP.org). International labs must have been enrolled in CAP PT/EQA for at least six\u202fmonths before requesting. [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n| 2 | **Review\u202fWelcome\u202fKit** | After the request is accepted, check your email for the link to the online application, read the accompanying information, and (optionally) schedule an onboarding call with CAP staff. [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n| 3 | **Complete\u202fApplication** | Log in to e\u2011LAB Solutions Suite, complete the accreditation application within three\u202fmonths, watch for deadline reminders and work with CAP staff on any follow\u2011up questions. [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n| 4 | **Receive\u202fCustomized\u202fChecklists** | CAP sends you checklists that are tailored to your laboratory\u2019s test menu (by mail or downloadable online). Use them to prepare for the inspection. [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n| 5 | **Schedule\u202fInspection\u202fDate** | Once the checklists are received, arrange the on\u2011site inspection date with CAP (a scheduling letter is provided). |\n| 6 | **Inspection** | CAP inspectors conduct the on\u2011site inspection (normally every two\u202fyears) using the customized checklists. [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n| 7 | **Respond to Deficiencies\u202f(\u2264\u202f30\u202fdays)** | Review any deficiency findings, prepare a single response package, and submit it within 30\u202fcalendar days of the inspection. [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n| 8 | **CAP Review of Responses** | Work with the CAP technical specialist on any follow\u2011up questions; CAP will issue its accreditation decision (typically within 75\u202fdays of the inspection). [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n| 9 | **Receive Certificate of Accreditation** | The laboratory\u2019s Certificate of Accreditation is mailed to the laboratory director; the inspection date becomes the lab\u2019s accreditation anniversary. [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n|10| **Perform Self\u2011Inspection & Maintain Continuous Compliance** | On the anniversary date, conduct a self\u2011inspection using CAP\u2011provided materials, update any changes (directorship, test menu, personnel, etc.) in e\u2011LAB Solutions, and manage PT/EQA enrollment as needed. [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n\nThese ten steps constitute the complete CAP Laboratory Accreditation pathway, from the initial request through ongoing compliance.",
+        "steps": 40,
+        "calls": 41
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The validation study determined that **10\u202fng of cfDNA is the minimum amount required for plasma whole\u2011genome sequencing (pWGS)**. This input level was identified as the lowest quantity that consistently yields acceptable library quality and sequencing metrics, while lower inputs (e.g., 1\u202fng) showed markedly inferior performance\u3010folders/Assay_Validation/Approved Validation Reports/Plasma Whole Genome Sequencing Validation Report v3.0.pdf\u3011.",
+        "steps": 10,
+        "calls": 11
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "**Reagents that are used with the Illumina\u202fNextSeq\u202f2000 (as described in the SOP for PhiX preparation and the accompanying reagent list)**  \n\n| Reagent | Purpose / Use with NextSeq\u202f2000 |\n|---------|---------------------------------|\n| **PhiX Control v3 (10\u202fnM)** \u2013 Illumina (FC\u2011110\u20113001) | Balanced, adapter\u2011ligated viral library used as a sequencing control and spiked into runs to increase library diversity. |\n| **Hybridization Buffer (HT1)** \u2013 Illumina (20015892) | Used in the sequencing run for hybridizing libraries to the flow cell. |\n| **Elution Buffer (10\u202fmM Tris\u2011Cl, pH\u202f8.5)** \u2013 Qiagen (19086) | Used to dilute the PhiX stock (e.g., 10\u202fnM \u2192 300\u202fpM) and for other library preparation steps. |\n| **10\u202fN Sodium Hydroxide (NaOH)** \u2013 General supplier | Used for denaturing libraries prior to loading on the instrument. |\n| **Tween\u202f20** \u2013 Fisher Scientific (BP337\u2011500) | Component of the NextSeq\u202f1000/2000 Reagent System Buffer (RSB) and added to dilution mixes (e.g., \u201cNextSeq\u202f1000/2000 RSB with Tween\u202f20\u201d). |\n| **Nuclease\u2011Free Water (non\u2011DEPC\u2011treated)** \u2013 Invitrogen (AM9932) | Diluent for reagents and libraries. |\n| **NextSeq\u202f1000/2000 Reagent System Buffer (RSB) with Tween\u202f20** \u2013 Illumina (included in the NextSeq\u202f1000/2000 reagent kit) | The primary buffer used for library dilution and loading on the NextSeq\u202f2000. Stored at\u202f4\u202f\u00b0C. |\n\n**Evidence**\n\n- The reagent table lists all of the items above, including the NextSeq\u202f1000/2000 RSB with Tween\u202f20, Hybridization Buffer (HT1), Elution Buffer, 10\u202fN NaOH, Tween\u202f20, Nuclease\u2011Free Water, and PhiX Control v3\u202f[folders/Technical SOPs and Worksheets/PhiX Preparation for Sequencing.docx].\n- The SOP describes diluting PhiX with \u201cNextSeq\u202f1000/2000 RSB with Tween\u202f20\u201d (12\u202f\u00b5L 10\u202fnM PhiX\u202f+\u202f108\u202f\u00b5L RSB) and preparing 300\u202fpM PhiX using Elution Buffer, confirming the use of these reagents in the NextSeq\u202f2000 workflow [same source].\n- The description of PhiX Control Genome v3 explains its role as a sequencing control for Illumina platforms, including the NextSeq\u202f2000 [same source].\n\nThese reagents constitute the set required for preparing and loading libraries on the Illumina\u202fNextSeq\u202f2000 according to the provided documentation.",
+        "steps": 40,
+        "calls": 41
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "chunk",
+      "thinking": false,
+      "group_summary": "heuristic",
+      "max_branch": 5,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 111.37,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "The information you provided does not contain a list of \u201cTen Steps to CAP Laboratory Accreditation.\u201d  \n\nThe excerpts you shared describe the structure of a CAP accreditation guide (e.g., sections such as *Understanding the CAP Accreditation Checklist Components*, *Proficiency Testing*, *Quality Management*, etc.) and note that additional tools and resources (checklists, webinars, templates, etc.) are available through the e\u2011LAB Solutions Suite on\u202fcap.org, but none of the cited documents actually enumerate a ten\u2011step process.  \n\n**What is missing:** a specific section or excerpt that outlines the ten individual steps (e.g., Step\u202f1\u202f\u2013\u202fApply for accreditation, Step\u202f2\u202f\u2013\u202fDevelop a quality management system, \u2026) is not present in the provided PDF or summary. To answer the question accurately, that list would need to be located in the CAP accreditation guide or another CAP resource that explicitly enumerates the ten steps.",
+        "steps": 40,
+        "calls": 41
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The validation report states that the **minimum amount of cfDNA required to generate a productive library for plasma whole\u2011genome sequencing (pWGS) was 1\u202fng** (the lowest of the five input levels tested: 1\u202fng, 5\u202fng, 10\u202fng, 20\u202fng and 50\u202fng)\u3010folders/Assay_Validation/Approved Validation Reports/Plasma Whole Genome Sequencing Validation Report v3.0.pdf\u3011.  \n\nHowever, the report does **not provide the concentration (e.g., ng\u202f/\u202f\u00b5L) of the cfDNA aliquot** that corresponds to this 1\u202fng input. Without knowing the volume of the aliquot used for library preparation, the exact concentration cannot be derived from the available information.  \n\n**Missing information:** the volume of cfDNA used (or the concentration of the cfDNA stock) that yields the 1\u202fng input. Once that volume is known, the minimum concentration can be calculated (e.g., if 1\u202fng is added in 10\u202f\u00b5L, the required concentration would be 0.1\u202fng/\u00b5L). As it stands, the minimum **amount** is known, but the minimum **concentration** is not specified in the provided documents.",
+        "steps": 40,
+        "calls": 41
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "The provided evidence only states that sequencing pools are run on the Illumina NextSeq\u202f2000 (or NextSeq\u202f550) according to the instrument\u2019s Operation and Maintenance SOPs, but it does **not** list the specific reagents (e.g., library preparation kits, sequencing kits, buffers, etc.) that are used with the NextSeq\u202f2000.  \n\n**Missing information:** a detailed list of the reagents required for library preparation, loading, and sequencing on the Illumina NextSeq\u202f2000 (such as the Illumina Nextera XT kit, NextSeq 2000 High\u2011Throughput Kit, sequencing reagents, flow cell reagents, etc.) is needed to answer the question.",
+        "steps": 40,
+        "calls": 41
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "chunk",
+      "thinking": true,
+      "group_summary": "heuristic",
+      "max_branch": 5,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 111.41,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "The information you provided does not contain a list of \u201cTen Steps to CAP Laboratory Accreditation.\u201d  \n\nThe excerpts you shared describe the structure of a CAP accreditation guide (e.g., sections such as *Understanding the CAP Accreditation Checklist Components*, *Proficiency Testing*, *Quality Management*, etc.) and note that additional tools and resources (checklists, webinars, templates, etc.) are available through the e\u2011LAB Solutions Suite on\u202fcap.org, but none of the cited documents actually enumerate a ten\u2011step process.  \n\n**What is missing:** a specific section or excerpt that outlines the ten individual steps (e.g., Step\u202f1\u202f\u2013\u202fApply for accreditation, Step\u202f2\u202f\u2013\u202fDevelop a quality management system, \u2026) is not present in the provided PDF or summary. To answer the question accurately, that list would need to be located in the CAP accreditation guide or another CAP resource that explicitly enumerates the ten steps.",
+        "steps": 40,
+        "calls": 41
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The validation report states that the **minimum amount of cfDNA required to generate a productive library for plasma whole\u2011genome sequencing (pWGS) was 1\u202fng** (the lowest of the five input levels tested: 1\u202fng, 5\u202fng, 10\u202fng, 20\u202fng and 50\u202fng)\u3010folders/Assay_Validation/Approved Validation Reports/Plasma Whole Genome Sequencing Validation Report v3.0.pdf\u3011.  \n\nHowever, the report does **not provide the concentration (e.g., ng\u202f/\u202f\u00b5L) of the cfDNA aliquot** that corresponds to this 1\u202fng input. Without knowing the volume of the aliquot used for library preparation, the exact concentration cannot be derived from the available information.  \n\n**Missing information:** the volume of cfDNA used (or the concentration of the cfDNA stock) that yields the 1\u202fng input. Once that volume is known, the minimum concentration can be calculated (e.g., if 1\u202fng is added in 10\u202f\u00b5L, the required concentration would be 0.1\u202fng/\u00b5L). As it stands, the minimum **amount** is known, but the minimum **concentration** is not specified in the provided documents.",
+        "steps": 40,
+        "calls": 41
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "The provided evidence only states that sequencing pools are run on the Illumina NextSeq\u202f2000 (or NextSeq\u202f550) according to the instrument\u2019s Operation and Maintenance SOPs, but it does **not** list the specific reagents (e.g., library preparation kits, sequencing kits, buffers, etc.) that are used with the NextSeq\u202f2000.  \n\n**Missing information:** a detailed list of the reagents required for library preparation, loading, and sequencing on the Illumina NextSeq\u202f2000 (such as the Illumina Nextera XT kit, NextSeq 2000 High\u2011Throughput Kit, sequencing reagents, flow cell reagents, etc.) is needed to answer the question.",
+        "steps": 40,
+        "calls": 41
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "cluster",
+      "thinking": true,
+      "group_summary": "heuristic",
+      "max_branch": 5,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 115.14,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "**Ten Steps to CAP Laboratory Accreditation (as described in the 2018 CAP Guide to Accreditation)**  \n\n| Step | Title | What the step entails (summary) |\n|------|-------|---------------------------------|\n| **1** | **Request Application** | Fill out and submit the *Request for Application* form at\u202fcap.org. International labs must have been enrolled in CAP Proficiency Testing/External Quality Assurance for at least six\u202fmonths before requesting an application.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **2** | **Review Welcome Kit** | Check your email for the link to the online application (subject line \u201cCAP Accreditation Application Available\u201d). Review the additional information that comes with the link and, if desired, schedule an optional onboarding call with CAP staff.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **3** | **Complete Application** | Complete the accreditation application within\u202f3\u202fmonths of its online availability. Monitor the due\u2011date on the homepage, watch for email reminders, and work with CAP staff on any follow\u2011up questions.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **4** | **Receive Customized Checklists** | Receive (by mail or download) the customized checklists that will guide inspection preparation.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **5** | **Schedule Inspection Date** | Look for a notification from CAP and arrange a date for the on\u2011site inspection. *(The source text is truncated, but the step is identified as \u201cSchedule Inspection Date.\u201d)*\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **6** | **[Missing \u2013 not provided in the gathered evidence]** | The guide\u2019s step\u202f6 is not included in the excerpts supplied. |\n| **7** | **Respond to Deficiencies Within 30\u202fDays** | Review the instructions for responding to any deficiencies noted by the inspection team, submit all responses together, and do so within\u202f30\u202fcalendar days of the inspection date.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **8** | **Support CAP Review of Responses** | Work with the CAP technical specialist on any follow\u2011up questions, await an emailed request for additional documentation, and expect an accreditation decision within\u202f75\u202fdays of the inspection.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **9** | **Receive Certificate of Accreditation** | The laboratory\u2019s Certificate of Accreditation is mailed to the laboratory director. Mark the initial inspection date as the laboratory\u2019s anniversary date.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **10** | **Perform Self\u2011Inspection and Maintain Continuous Compliance** | On the anniversary date, conduct a self\u2011inspection using CAP\u2011provided materials, update any changes (directorship, location, test menu, personnel, etc.) via the e\u2011Lab Solutions Suite, and adjust PT/EQA enrollment as needed.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n\n**What is missing?**  \nThe specific description of **Step\u202f6** is not present in the provided excerpts. To give a complete list of the ten steps, the content for Step\u202f6 would need to be obtained from the full 2018 CAP Guide to Accreditation PDF.",
+        "steps": 40,
+        "calls": 41
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The aliquot of circulating\u2011free DNA (cfDNA) that will be used for the pWGS assay must have a **minimum concentration of\u202f0.2\u202fng\u202f\u00b5L\u207b\u00b9**\u3010folders/Technical SOPs and Worksheets/Nucleic Acid Aliquotting Procedure.docx\u3011. This value is listed as the \u201cDesired Minimum Concentration\u201d for the pWGS\u202fcfDNA row in the assay\u2011specific table.",
+        "steps": 31,
+        "calls": 32
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "The Illumina NextSeq\u202f2000 is run with the **NextSeq\u202f1000/2000 Reagent System Buffer (RSB) that contains Tween\u202f20**. This buffer is used when preparing the PhiX control library for sequencing on the instrument\u3010folders/Technical SOPs and Worksheets/PhiX Preparation for Sequencing.docx\u3011.",
+        "steps": 40,
+        "calls": 41
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "chunk",
+      "thinking": false,
+      "group_summary": "llm",
+      "max_branch": 5,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 128.2,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "I\u2019m sorry, but the material you provided does not contain a list of \u201cTen Steps to CAP Laboratory Accreditation.\u201d The excerpts from the CAP accreditation guide only show headings such as \u201cSUMMARY OF CHANGES,\u201d \u201cUNDERSTANDING THE CAP ACCREDITATION CHECKLIST COMPONENTS,\u201d \u201cALL COMMON CHECKLIST,\u201d and various topic sections, but they do not enumerate ten specific steps in the accreditation process. To answer the question, a section of the guide that actually lists those ten steps would be needed.",
+        "steps": 40,
+        "calls": 75
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The available documentation only specifies the **amount** of cfDNA required for plasma whole\u2011genome sequencing (pWGS): the assay accepts 5\u201350\u202fng of cfDNA, and **10\u202fng is considered sufficient** as the minimum input amount\u202f[\u200bsource]. No information is provided about the **concentration** (e.g., ng/\u00b5L) of the cfDNA aliquot that must be supplied. \n\n**Missing information:** the required concentration (ng/\u00b5L or similar) of the cfDNA aliquot for pWGS. Without that detail, the minimum concentration cannot be determined from the given evidence.",
+        "steps": 8,
+        "calls": 23
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "The Illumina\u202fNextSeq\u202f2000 workflow requires the following reagents (as listed in the instrument SOP):\n\n- **P1 kit**  \n- **P2\u202fv3 kit**  \n- **P3 kit**  \n- **PhiX control**  \n- **RSB/Tween\u202f20**  \n- **Lens paper**  \n- **Ethanol**  \n\nThese reagents are enumerated in the \u201cNextSeq\u202f2000 Operation and Maintenance\u201d SOP that details the complete operation, maintenance, and troubleshooting procedures for the instrument\u3010folders/Technical SOPs and Worksheets/NextSeq 2000 Operation and Maintenance.docx\u3011.",
+        "steps": 6,
+        "calls": 21
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "chunk",
+      "thinking": true,
+      "group_summary": "llm",
+      "max_branch": 5,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 128.39,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "I\u2019m sorry, but the material you provided does not contain a list of \u201cTen Steps to CAP Laboratory Accreditation.\u201d The excerpts from the CAP accreditation guide only show headings such as \u201cSUMMARY OF CHANGES,\u201d \u201cUNDERSTANDING THE CAP ACCREDITATION CHECKLIST COMPONENTS,\u201d \u201cALL COMMON CHECKLIST,\u201d and various topic sections, but they do not enumerate ten specific steps in the accreditation process. To answer the question, a section of the guide that actually lists those ten steps would be needed.",
+        "steps": 40,
+        "calls": 75
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The available documentation only specifies the **amount** of cfDNA required for plasma whole\u2011genome sequencing (pWGS): the assay accepts 5\u201350\u202fng of cfDNA, and **10\u202fng is considered sufficient** as the minimum input amount\u202f[\u200bsource]. No information is provided about the **concentration** (e.g., ng/\u00b5L) of the cfDNA aliquot that must be supplied. \n\n**Missing information:** the required concentration (ng/\u00b5L or similar) of the cfDNA aliquot for pWGS. Without that detail, the minimum concentration cannot be determined from the given evidence.",
+        "steps": 8,
+        "calls": 23
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "The Illumina\u202fNextSeq\u202f2000 workflow requires the following reagents (as listed in the instrument SOP):\n\n- **P1 kit**  \n- **P2\u202fv3 kit**  \n- **P3 kit**  \n- **PhiX control**  \n- **RSB/Tween\u202f20**  \n- **Lens paper**  \n- **Ethanol**  \n\nThese reagents are enumerated in the \u201cNextSeq\u202f2000 Operation and Maintenance\u201d SOP that details the complete operation, maintenance, and troubleshooting procedures for the instrument\u3010folders/Technical SOPs and Worksheets/NextSeq 2000 Operation and Maintenance.docx\u3011.",
+        "steps": 6,
+        "calls": 21
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "cluster",
+      "thinking": true,
+      "group_summary": "llm",
+      "max_branch": 5,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 155.9,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "**Ten\u2011step roadmap for CAP laboratory accreditation (as described in the 2018 \u201cGuide to CAP Accreditation\u201d)**\n\n| Step | Title (as it appears in the guide) | What the step entails |\n|------|------------------------------------|-----------------------|\n| **1 \u2013 Request Application** | *Request Application* | Fill out and submit the \u201cRequest for Application\u201d form at\u202fcap.org. International labs must have been enrolled in CAP PT/EQA for at least six\u202fmonths before requesting an application.\u202f[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf] |\n| **2 \u2013 Review Welcome Kit** | *Review Welcome Kit* | After the request is approved, check email for the link to the online application (\u201cCAP Accreditation Application Available\u201d). Review the additional information that comes with the link and (optionally) schedule an onboarding call with CAP staff.\u202f[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf] |\n| **3 \u2013 Complete Application** | *Complete Application* | Submit the accreditation application within three\u202fmonths of its availability. Monitor the due\u2011date on the homepage and email reminders; work with CAP staff for any follow\u2011up questions.\u202f[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf] |\n| **4 \u2013 Receive Customized Checklists** | *Receive Customized Checklists* | CAP sends laboratory\u2011specific checklists (by mail or downloadable online). Use these checklists to begin inspection preparation.\u202f[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf] |\n| **5 \u2013 Schedule Inspection Date** | *Schedule Inspection Date* | Look for the invitation to set an inspection date and coordinate with CAP to lock in the visit.\u202f[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf] |\n| **6 \u2013 *Missing from the extracted material*** | *\u2014* | The guide\u2019s step\u202f6 (typically \u201cPrepare for Inspection\u201d or similar) is not present in the provided excerpts. Additional information from the full PDF would be needed to describe this step. |\n| **7 \u2013 Respond to Deficiencies (within\u202f30\u202fdays)** | *Respond to Deficiencies Within 30 Days* | After the inspection, review the deficiency instructions, submit all responses together, and ensure they are received within 30\u202fcalendar days of the inspection date.\u202f[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf] |\n| **8 \u2013 Support CAP Review of Responses** | *Support CAP Review of Responses* | Work with the CAP technical specialist on any follow\u2011up questions, provide any additional documentation requested, and await the accreditation decision (typically within 75\u202fdays of inspection).\u202f[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf] |\n| **9 \u2013 Receive Certificate of Accreditation** | *Receive Certificate of Accreditation* | The laboratory\u2019s Certificate of Accreditation is mailed to the laboratory director. The initial inspection date becomes the laboratory\u2019s accreditation anniversary.\u202f[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf] |\n| **10 \u2013 Perform Self\u2011Inspection & Maintain Continuous Compliance** | *Perform Self\u2011Inspection and Maintain Continuous Compliance* | On the anniversary date, conduct a self\u2011inspection using CAP\u2011provided materials, update any changes (directorship, location, test menu, personnel, etc.) in the e\u2011Lab Solutions Suite, and adjust PT/EQA enrollment as needed.\u202f[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf] |\n\n**Summary**\n\nThe ten\u2011step CAP accreditation workflow moves a laboratory from the initial request for an application through preparation, inspection, response to any deficiencies, receipt of the accreditation certificate, and ongoing self\u2011inspection to stay compliant. All steps listed above are taken directly from the 2018 CAP guide, except for step\u202f6, which was not included in the extracted excerpts and therefore cannot be described without additional source material.",
+        "steps": 40,
+        "calls": 73
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The validation documentation for the plasma whole\u2011genome sequencing (pWGS) assay specifies the **minimum total amount** of cfDNA that must be provided for a successful library preparation:\n\n* **5\u202fng\u202f\u2013\u202f50\u202fng total cfDNA** is the accepted input range.  \n* **\u226510\u202fng total cfDNA** is considered sufficient to generate a productive library for the assay.  \n\nThese figures are taken from the assay\u2019s approved validation report, which notes that the minimum cfDNA input required to form a productive library was established during assay development\u3010folders/Assay_Validation/Approved Validation Reports/Plasma Whole Genome Sequencing Validation Report v3.0.pdf\u3011.\n\n**What is missing:** The report provides the required **total mass** of cfDNA (ng), but it does not state the **concentration** (e.g., ng/\u00b5L) of the cfDNA aliquot. To determine the concentration needed, you would also need to know the volume of the aliquot that will be used for library preparation. Without that volume information, the exact concentration cannot be calculated.",
+        "steps": 20,
+        "calls": 36
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "The Illumina\u202fNextSeq\u202f2000 workflow requires the following reagents (and consumables) as listed in the instrument SOP:\n\n- **P1 kit** \u2013 primary reagent cartridge for the run  \n- **P2 v3 kit** \u2013 secondary reagent cartridge (version\u202f3)  \n- **P3 kit** \u2013 tertiary reagent cartridge  \n- **PhiX control** \u2013 sequencing control library  \n- **RSB/Tween\u202f20** \u2013 rinse\u2011stop buffer with surfactant for cleaning steps  \n- **Lens paper** \u2013 for wiping optical surfaces  \n- **Ethanol** \u2013 for cleaning and decontamination  \n\nThese items are explicitly enumerated in the \u201cReagents and consumables\u201d section of the NextSeq\u202f2000 SOP\u202f[folders/Technical SOPs and Worksheets/NextSeq\u202f2000\u202fOperation\u202fand\u202fMaintenance.docx].",
+        "steps": 10,
+        "calls": 23
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "cluster",
+      "thinking": false,
+      "group_summary": "llm",
+      "max_branch": 5,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 160.85,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "**Ten\u2011step workflow for CAP laboratory accreditation (as described in the 2018 CAP accreditation guide)**  \n\n| Step | Description (as given in the guide) |\n|------|--------------------------------------|\n| **1\u202f\u2013\u202fRequest/Application** | Fill out and submit the *Request for Application* form at\u202fcap.org.  International labs must have been enrolled in CAP Proficiency Testing/EQA for at least six\u202fmonths before requesting an application.  [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n| **2\u202f\u2013\u202fReview/Welcome Kit** | After the request is accepted, you receive an email with a link to the online application (subject line \u201cCAP Accreditation Application Available\u201d).  Review the additional information that comes with the link and, if desired, schedule an optional onboarding call with CAP staff. [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n| **3\u202f\u2013\u202fComplete Application** | Complete the accreditation application within three\u202fmonths of its availability.  Monitor the homepage for the due date and watch for email reminders; work with CAP staff on any follow\u2011up questions. [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n| **4\u202f\u2013\u202fReceive Customized Checklists** | CAP sends you customized checklists (by mail or downloadable online).  Use these checklists to begin inspection preparation. [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n| **5\u202f\u2013\u202fSchedule Inspection Date** | Look for a \u201clet \u2026\u201d (the guide continues with instructions for selecting an inspection date).  This step involves coordinating with CAP to set the on\u2011site inspection. [[folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf]] |\n| **6\u202f\u2013\u202fPrepare for Inspection** | (Information not provided in the extracted excerpt.) |\n| **7\u202f\u2013\u202fOn\u2011site Inspection** | (Information not provided in the extracted excerpt.) |\n| **8\u202f\u2013\u202fCorrective Action & Documentation** | (Information not provided in the extracted excerpt.) |\n| **9\u202f\u2013\u202fFinal Review & Accreditation Decision** | (Information not provided in the extracted excerpt.) |\n| **10\u202f\u2013\u202fMaintain Accreditation / Ongoing Compliance** | (Information not provided in the extracted excerpt.) |\n\n### What is missing?\nThe source excerpt only contains the first five steps in detail and the headings for the remaining steps (6\u201110) are not included in the provided text. To give a complete list of all ten steps, the following information would be needed from the 2018 guide:\n\n* The exact description of **Step\u202f6 \u2013 Prepare for Inspection** (e.g., completing checklists, internal audits, staff training).  \n* The exact description of **Step\u202f7 \u2013 On\u2011site Inspection** (e.g., CAP inspector visit, document review, observations).  \n* The exact description of **Step\u202f8 \u2013 Corrective Action & Documentation** (e.g., addressing findings, submitting corrective\u2011action plans).  \n* The exact description of **Step\u202f9 \u2013 Final Review & Accreditation Decision** (e.g., CAP\u2019s final evaluation, issuance of accreditation).  \n* The exact description of **Step\u202f10 \u2013 Maintain Accreditation / Ongoing Compliance** (e.g., annual self\u2011assessment, continuous quality improvement, re\u2011inspection schedule).\n\nWithout those sections, we can only list the first five steps with certainty and note that steps\u202f6\u201110 are referenced but not detailed in the supplied material.",
+        "steps": 40,
+        "calls": 78
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The plasma whole\u2011genome sequencing (pWGS) assay requires at least **5\u202fng of cfDNA** in the aliquot to generate a productive library; an input of about **10\u202fng** is considered optimal for stable library preparation\u3010folders/Assay_Validation/Approved Validation Reports/Plasma Whole Genome Sequencing Validation Report v3.0.pdf\u3011.  \n\nThe documentation specifies the required **amount** of cfDNA (\u22655\u202fng), but it does not provide a specific concentration (e.g., ng/\u00b5L) for the aliquot. The concentration needed would depend on the volume of the aliquot used to deliver the \u22655\u202fng input. \n\n**Missing information:** the exact cfDNA concentration (ng/\u00b5L) required for the aliquot is not stated in the available sources.",
+        "steps": 23,
+        "calls": 40
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "The Illumina\u202fNextSeq\u202f2000 workflow requires the following reagents (and consumables) as listed in the instrument SOP:\n\n- **P1 kit** \u2013 primary reagent cartridge for the run  \n- **P2 v3 kit** \u2013 secondary reagent cartridge (version\u202f3)  \n- **P3 kit** \u2013 tertiary reagent cartridge  \n- **PhiX control** \u2013 sequencing control library  \n- **RSB/Tween\u202f20** \u2013 rinse\u2011stop buffer with surfactant for cleaning steps  \n- **Lens paper** \u2013 for wiping optical surfaces  \n- **Ethanol** \u2013 for cleaning and decontamination  \n\nThese items are explicitly enumerated in the \u201cReagents and consumables\u201d section of the NextSeq\u202f2000 SOP\u202f[folders/Technical SOPs and Worksheets/NextSeq\u202f2000\u202fOperation\u202fand\u202fMaintenance.docx].",
+        "steps": 12,
+        "calls": 25
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "cluster",
+      "thinking": true,
+      "group_summary": "llm",
+      "max_branch": 8,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 164.26,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "**Ten\u2011Step CAP Laboratory Accreditation Workflow (as described in the 2018 CAP Accreditation Guide)**  \n\n| Step | Title (as given in the guide) | What the step entails |\n|------|------------------------------|-----------------------|\n| **1** | **Request\u202fApplication** | Fill out and submit the \u201cRequest for Application\u201d form at\u202fcap.org. (International labs must have been enrolled in CAP PT/EQA for \u2265\u202f6\u202fmonths before requesting.)\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **2** | **Review\u202fWelcome\u202fKit** | After the request is approved, check your email for the link to the online application (\u201cCAP Accreditation Application Available\u201d). Review the additional information that comes with the link and, if desired, schedule an optional onboarding call with CAP staff\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **3** | **Complete\u202fApplication** | Complete the accreditation application within\u202f3\u202fmonths of its availability. Monitor the due\u2011date on the homepage, watch for email reminders, and work with CAP staff on any follow\u2011up questions\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **4** | **Receive\u202fCustomized\u202fChecklists** | CAP sends customized inspection\u2011preparation checklists (by mail or downloadable online). Use these checklists to begin preparation for the inspection\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **5** | **Schedule\u202fInspection\u202fDate** | Look for the communication from CAP that allows you to select an inspection date and coordinate the logistics of the peer\u2011inspection team\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **6** | **(Inspection\u202fConducted)** | *The guide references an inspection step, but the specific description of step\u202f6 is not included in the extracted text.* |\n| **7** | **Respond\u202fto\u202fDeficiencies\u202fWithin\u202f30\u202fDays** | Review the instructions for responding to any deficiencies noted by the inspection team, submit all responses together, and do so within\u202f30\u202fcalendar days of the inspection date\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **8** | **CAP\u202fReview\u202fof\u202fResponses** | Work with the CAP technical specialist on any follow\u2011up questions, provide any additional documentation requested, and await the accreditation decision (typically within\u202f75\u202fdays of the inspection)\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **9** | **Receive\u202fCertificate\u202fof\u202fAccreditation** | The laboratory\u2019s Certificate of Accreditation is mailed to the laboratory director. The initial inspection date becomes the laboratory\u2019s accreditation anniversary\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **10** | **Perform\u202fSelf\u2011Inspection\u202fand\u202fMaintain\u202fContinuous\u202fCompliance** | On the anniversary date, conduct a self\u2011inspection using CAP\u2011provided materials, update any changes (director, location, test menu, personnel, PT/EQA enrollment, etc.) in the e\u2011Lab Solutions Suite, and continue ongoing compliance activities\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n\n**What is missing?**  \nThe extracted evidence does not contain the detailed description for **Step\u202f6 (the actual inspection itself)**. To provide a complete ten\u2011step list, the specific wording or actions for that step would be needed from the guide.",
+        "steps": 40,
+        "calls": 71
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The validation documentation specifies the **total amount of cfDNA** that must be provided for a plasma whole\u2011genome sequencing (pWGS) library, but it does not state a required **concentration** (e.g., ng\u202f\u00b5L\u207b\u00b9) for the aliquot.\n\n- The assay input experiments defined a usable range of **5\u202f\u2013\u202f50\u202fng total cfDNA**, and indicated that **\u226510\u202fng** is sufficient to generate a productive library\u3010pWGS requires 5\u201350 ng cfDNA total input, with 10 ng considered sufficient for library prep\u3011.  \n\nNo further detail is given about how many nanograms per microliter (or any other concentration unit) the cfDNA must be at when the aliquot is prepared. Therefore, the minimum concentration of cfDNA aliquot required for pWGS cannot be determined from the information provided; only the minimum total input mass (\u224810\u202fng) is known.",
+        "steps": 40,
+        "calls": 53
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "The Illumina\u202fNextSeq\u202f2000 sequencing workflow requires the following reagents (and related consumables)\u202f[Technical SOPs\u202f\u2192\u202fNextSeq\u202f2000 Operation and Maintenance.docx]:\n\n- **P1 kit** \u2013 primary reagent cartridge for the run  \n- **P2 v3 kit** \u2013 secondary reagent cartridge (v3 version)  \n- **P3 kit** \u2013 tertiary reagent cartridge  \n- **PhiX control** \u2013 sequencing control library  \n- **RSB/Tween\u202f20** \u2013 reagent\u2011stock buffer with surfactant for library handling  \n- **Lens paper** \u2013 for cleaning optical components  \n- **Ethanol** \u2013 for decontamination and cleaning steps  \n\nThese items are listed explicitly as the required reagents and consumables for operating the NextSeq\u202f2000.",
+        "steps": 9,
+        "calls": 22
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "cluster",
+      "thinking": false,
+      "group_summary": "llm",
+      "max_branch": 8,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 164.87,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "**Ten\u2011Step CAP Laboratory Accreditation Workflow (as described in the 2018 CAP Accreditation Guide)**  \n\n| Step | Title (as given in the guide) | What the step entails |\n|------|------------------------------|-----------------------|\n| **1** | **Request\u202fApplication** | Fill out and submit the \u201cRequest for Application\u201d form at\u202fcap.org. (International labs must have been enrolled in CAP PT/EQA for \u2265\u202f6\u202fmonths before requesting.)\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **2** | **Review\u202fWelcome\u202fKit** | After the request is approved, check your email for the link to the online application (\u201cCAP Accreditation Application Available\u201d). Review the additional information that comes with the link and, if desired, schedule an optional onboarding call with CAP staff\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **3** | **Complete\u202fApplication** | Complete the accreditation application within\u202f3\u202fmonths of its availability. Monitor the due\u2011date on the homepage, watch for email reminders, and work with CAP staff on any follow\u2011up questions\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **4** | **Receive\u202fCustomized\u202fChecklists** | CAP sends customized inspection\u2011preparation checklists (by mail or downloadable online). Use these checklists to begin preparation for the inspection\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **5** | **Schedule\u202fInspection\u202fDate** | Look for the communication from CAP that allows you to select an inspection date and coordinate the logistics of the peer\u2011inspection team\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **6** | **(Inspection\u202fConducted)** | *The guide references an inspection step, but the specific description of step\u202f6 is not included in the extracted text.* |\n| **7** | **Respond\u202fto\u202fDeficiencies\u202fWithin\u202f30\u202fDays** | Review the instructions for responding to any deficiencies noted by the inspection team, submit all responses together, and do so within\u202f30\u202fcalendar days of the inspection date\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **8** | **CAP\u202fReview\u202fof\u202fResponses** | Work with the CAP technical specialist on any follow\u2011up questions, provide any additional documentation requested, and await the accreditation decision (typically within\u202f75\u202fdays of the inspection)\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **9** | **Receive\u202fCertificate\u202fof\u202fAccreditation** | The laboratory\u2019s Certificate of Accreditation is mailed to the laboratory director. The initial inspection date becomes the laboratory\u2019s accreditation anniversary\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **10** | **Perform\u202fSelf\u2011Inspection\u202fand\u202fMaintain\u202fContinuous\u202fCompliance** | On the anniversary date, conduct a self\u2011inspection using CAP\u2011provided materials, update any changes (director, location, test menu, personnel, PT/EQA enrollment, etc.) in the e\u2011Lab Solutions Suite, and continue ongoing compliance activities\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n\n**What is missing?**  \nThe extracted evidence does not contain the detailed description for **Step\u202f6 (the actual inspection itself)**. To provide a complete ten\u2011step list, the specific wording or actions for that step would be needed from the guide.",
+        "steps": 40,
+        "calls": 71
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The validation documentation specifies the **total amount of cfDNA** that must be provided for a plasma whole\u2011genome sequencing (pWGS) library, but it does not state a required **concentration** (e.g., ng\u202f\u00b5L\u207b\u00b9) for the aliquot.\n\n- The assay input experiments defined a usable range of **5\u202f\u2013\u202f50\u202fng total cfDNA**, and indicated that **\u226510\u202fng** is sufficient to generate a productive library\u3010pWGS requires 5\u201350 ng cfDNA total input, with 10 ng considered sufficient for library prep\u3011.  \n\nNo further detail is given about how many nanograms per microliter (or any other concentration unit) the cfDNA must be at when the aliquot is prepared. Therefore, the minimum concentration of cfDNA aliquot required for pWGS cannot be determined from the information provided; only the minimum total input mass (\u224810\u202fng) is known.",
+        "steps": 40,
+        "calls": 53
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "The Illumina\u202fNextSeq\u202f2000 sequencing workflow requires the following reagents (and related consumables)\u202f[Technical SOPs\u202f\u2192\u202fNextSeq\u202f2000 Operation and Maintenance.docx]:\n\n- **P1 kit** \u2013 primary reagent cartridge for the run  \n- **P2 v3 kit** \u2013 secondary reagent cartridge (v3 version)  \n- **P3 kit** \u2013 tertiary reagent cartridge  \n- **PhiX control** \u2013 sequencing control library  \n- **RSB/Tween\u202f20** \u2013 reagent\u2011stock buffer with surfactant for library handling  \n- **Lens paper** \u2013 for cleaning optical components  \n- **Ethanol** \u2013 for decontamination and cleaning steps  \n\nThese items are listed explicitly as the required reagents and consumables for operating the NextSeq\u202f2000.",
+        "steps": 9,
+        "calls": 22
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "cluster",
+      "thinking": true,
+      "group_summary": "llm",
+      "max_branch": 12,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 185.68,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "**The ten\u2011step CAP laboratory\u2011accreditation process (as described in the 2018 CAP Accreditation Guide) is:**\n\n| Step | What the step entails |\n|------|-----------------------|\n| **1\u202f\u2013\u202fRequest Application** | Fill out and submit the *Request for Application* form at\u202fcap.org. International labs must have been enrolled in CAP Proficiency\u2011Testing/External Quality Assurance for at least six months before requesting an application.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **2\u202f\u2013\u202fReview Welcome Kit** | Check your email for the \u201cCAP Accreditation Application Available\u201d link, review the information that comes with the link, and (optionally) schedule an onboarding call with CAP staff.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **3\u202f\u2013\u202fComplete Application** | Complete the online accreditation application within three months of its availability, watch the due\u2011date on the homepage, and respond to any CAP follow\u2011up questions.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **4\u202f\u2013\u202fReceive Customized Checklists** | Receive (by mail or electronically) the checklists that are tailored to your laboratory and begin inspection preparation.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **5\u202f\u2013\u202fSchedule Inspection Date** | Look for the notification from CAP and arrange a mutually agreeable inspection date. (The guide\u2019s excerpt cuts off the detailed wording, but the step is to schedule the on\u2011site inspection.)\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **6\u202f\u2013\u202f(Information not provided in the extracted material)** | The guide\u2019s ten\u2011step list includes a step between \u201cSchedule Inspection Date\u201d and \u201cRespond to Deficiencies,\u201d which is the actual **on\u2011site inspection** (conducted by the CAP inspection team). This specific description is missing from the supplied excerpts. |\n| **7\u202f\u2013\u202fRespond to Deficiencies Within\u202f30\u202fDays** | Review the deficiency\u2011response instructions, submit all responses together, and do so within 30 calendar days of the inspection date.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **8\u202f\u2013\u202fSupport CAP Review of Responses** | Work with the CAP technical specialist on any follow\u2011up questions, await the specialist\u2019s request for additional documentation, and expect an accreditation decision within about 75 days of the inspection.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **9\u202f\u2013\u202fReceive Certificate of Accreditation** | The laboratory\u2019s Certificate of Accreditation is mailed to the laboratory director; the initial inspection date becomes the laboratory\u2019s accreditation anniversary.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **10\u202f\u2013\u202fPerform Self\u2011Inspection and Maintain Continuous Compliance** | On the anniversary date, conduct a self\u2011inspection using CAP\u2011provided materials, update any changes (directorship, location, test menu, personnel, PT/EQA enrollment) through the e\u2011Lab Solutions Suite, and continue ongoing compliance.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n\n**What is missing?**  \nThe specific wording for **Step\u202f6** (the on\u2011site inspection itself) is not present in the extracted excerpts. To give a complete, exact list of the ten steps, the description of that step would be needed.",
+        "steps": 40,
+        "calls": 63
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The assay requires at least **10\u202fng of cfDNA per aliquot** to perform plasma whole\u2011genome sequencing (pWGS).  Input amounts below 10\u202fng (e.g., 1\u202fng) gave markedly poorer library\u2011quality metrics, whereas inputs of\u202f\u2265\u202f10\u202fng produced consistent duplication rates, coverage and insert\u2011size distributions, and were identified as the optimal minimal input for reliable pWGS results\u3010folders/Assay_Validation/Approved Validation Reports/Plasma Whole Genome Sequencing Validation Report v3.0.pdf\u3011.",
+        "steps": 31,
+        "calls": 42
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "**Reagents that are used with the Illumina\u202fNextSeq\u202f2000 (as described in the PhiX\u2011control preparation SOP)**  \n\n| Reagent | Vendor | Catalog # | Note |\n|---------|--------|-----------|------|\n| PhiX Control v3 (10\u202fnM) | Illumina | FC\u2011110\u20113001 | Stored at \u201315\u202f\u00b0C to \u201325\u202f\u00b0C; thaw on ice. |\n| Hybridization Buffer (HT1) | Illumina | 20015892 | Thaw and keep on ice. |\n| Elution Buffer (10\u202fmM Tris\u2011Cl, pH\u202f8.5) | Qiagen | 19086 | Room\u2011temperature storage. |\n| 10\u202fN Sodium Hydroxide (NaOH) | General supplier | varies | Room\u2011temperature storage. |\n| Tween\u202f20 | Fisher Scientific | BP337\u2011500 | Room\u2011temperature storage. |\n| Nuclease\u2011Free Water (non\u2011DEPC\u2011treated) | Invitrogen | AM9932 | Room\u2011temperature storage. |\n| NextSeq\u202f1000/2000 RSB with Tween\u202f20 | Illumina | Included in NextSeq\u202f1000/2000 reagent kit (except the P2\u202f(v2) kit) | Store at 4\u202f\u00b0C. |\n\nThese reagents are listed in the SOP for \u201cPhiX Preparation for Sequencing\u201d and are the components required to dilute and denature the PhiX control library that is spiked into a NextSeq\u202f2000 run\u202f[folders/Technical SOPs and Worksheets/PhiX Preparation for Sequencing.docx]\u3010folders/Technical SOPs and Worksheets/PhiX Preparation for Sequencing.docx\u3011.",
+        "steps": 40,
+        "calls": 58
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "chunk",
+      "thinking": true,
+      "group_summary": "llm",
+      "max_branch": 8,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 187.25,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "The information you provided does not contain a list titled \u201cTen Steps to CAP Laboratory Accreditation.\u201d The excerpt from the CAP checklist PDF only shows headings such as \u201cSUMMARY OF CHANGES,\u201d \u201cUNDERSTANDING THE CAP ACCREDITATION CHECKLIST COMPONENTS,\u201d \u201cINTRODUCTION,\u201d \u201cDEFINITION OF TERMS,\u201d and various sections on proficiency testing, quality management, etc., but it does not enumerate ten specific steps for accreditation\u3010folders/Lab_Quality_Documents/Checklists/CAP/MAS_COM_12262024_1738777131928.pdf\u3011.  \n\n**Missing information:** A section or table that explicitly lists the ten steps required for CAP laboratory accreditation. Without that portion of the document, I cannot provide the requested steps.",
+        "steps": 40,
+        "calls": 123
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The validation study showed that plasma whole\u2011genome sequencing (pWGS) libraries can be successfully generated with as little as **1\u202fng of cfDNA per aliquot**.  Input amounts were evaluated across a range of 1\u202fng\u202f\u2013\u202f50\u202fng, and the 1\u202fng level was the lowest amount that still produced a high\u2011quality library that passed the low\u2011pass MiSeq screen and subsequent NovaSeq sequencing criteria\u3010folders/Assay_Validation/Approved Validation Reports/Plasma Whole Genome Sequencing Validation Report v3.0.pdf\u3011.  Therefore, the minimum cfDNA aliquot concentration required for pWGS is 1\u202fng.",
+        "steps": 14,
+        "calls": 28
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "The Illumina NextSeq\u202f2000 workflow requires the following reagents (as listed in the instrument SOP):\n\n- **P1 kit** \u2013 primary sequencing reagent cartridge  \n- **P2 v3 kit** \u2013 secondary reagent cartridge (version\u202f3)  \n- **P3 kit** \u2013 tertiary reagent cartridge  \n- **PhiX control** \u2013 sequencing control library  \n- **RSB/Tween\u202f20** \u2013 reagent\u2011storage buffer with surfactant  \n- **Lens paper** \u2013 for cleaning optical surfaces  \n- **Ethanol** \u2013 for decontamination and cleaning  \n\nThese reagents are explicitly enumerated in the \u201cNextSeq\u202f2000 Operation and Maintenance\u201d SOP\u202f[folders/Technical SOPs and Worksheets/NextSeq\u202f2000 Operation and Maintenance.docx].",
+        "steps": 5,
+        "calls": 19
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "cluster",
+      "thinking": false,
+      "group_summary": "llm",
+      "max_branch": 12,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 187.51,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "**The ten\u2011step CAP laboratory\u2011accreditation process (as described in the 2018 CAP Accreditation Guide) is:**\n\n| Step | What the step entails |\n|------|-----------------------|\n| **1\u202f\u2013\u202fRequest Application** | Fill out and submit the *Request for Application* form at\u202fcap.org. International labs must have been enrolled in CAP Proficiency\u2011Testing/External Quality Assurance for at least six months before requesting an application.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **2\u202f\u2013\u202fReview Welcome Kit** | Check your email for the \u201cCAP Accreditation Application Available\u201d link, review the information that comes with the link, and (optionally) schedule an onboarding call with CAP staff.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **3\u202f\u2013\u202fComplete Application** | Complete the online accreditation application within three months of its availability, watch the due\u2011date on the homepage, and respond to any CAP follow\u2011up questions.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **4\u202f\u2013\u202fReceive Customized Checklists** | Receive (by mail or electronically) the checklists that are tailored to your laboratory and begin inspection preparation.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **5\u202f\u2013\u202fSchedule Inspection Date** | Look for the notification from CAP and arrange a mutually agreeable inspection date. (The guide\u2019s excerpt cuts off the detailed wording, but the step is to schedule the on\u2011site inspection.)\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **6\u202f\u2013\u202f(Information not provided in the extracted material)** | The guide\u2019s ten\u2011step list includes a step between \u201cSchedule Inspection Date\u201d and \u201cRespond to Deficiencies,\u201d which is the actual **on\u2011site inspection** (conducted by the CAP inspection team). This specific description is missing from the supplied excerpts. |\n| **7\u202f\u2013\u202fRespond to Deficiencies Within\u202f30\u202fDays** | Review the deficiency\u2011response instructions, submit all responses together, and do so within 30 calendar days of the inspection date.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **8\u202f\u2013\u202fSupport CAP Review of Responses** | Work with the CAP technical specialist on any follow\u2011up questions, await the specialist\u2019s request for additional documentation, and expect an accreditation decision within about 75 days of the inspection.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **9\u202f\u2013\u202fReceive Certificate of Accreditation** | The laboratory\u2019s Certificate of Accreditation is mailed to the laboratory director; the initial inspection date becomes the laboratory\u2019s accreditation anniversary.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n| **10\u202f\u2013\u202fPerform Self\u2011Inspection and Maintain Continuous Compliance** | On the anniversary date, conduct a self\u2011inspection using CAP\u2011provided materials, update any changes (directorship, location, test menu, personnel, PT/EQA enrollment) through the e\u2011Lab Solutions Suite, and continue ongoing compliance.\u3010folders/Management/Accreditation/CAP/2018-guide-to-accreditation.pdf\u3011 |\n\n**What is missing?**  \nThe specific wording for **Step\u202f6** (the on\u2011site inspection itself) is not present in the extracted excerpts. To give a complete, exact list of the ten steps, the description of that step would be needed.",
+        "steps": 40,
+        "calls": 63
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The assay requires at least **10\u202fng of cfDNA per aliquot** to perform plasma whole\u2011genome sequencing (pWGS).  Input amounts below 10\u202fng (e.g., 1\u202fng) gave markedly poorer library\u2011quality metrics, whereas inputs of\u202f\u2265\u202f10\u202fng produced consistent duplication rates, coverage and insert\u2011size distributions, and were identified as the optimal minimal input for reliable pWGS results\u3010folders/Assay_Validation/Approved Validation Reports/Plasma Whole Genome Sequencing Validation Report v3.0.pdf\u3011.",
+        "steps": 31,
+        "calls": 42
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "**Reagents that are used with the Illumina\u202fNextSeq\u202f2000 (as described in the PhiX\u2011control preparation SOP)**  \n\n| Reagent | Vendor | Catalog # | Note |\n|---------|--------|-----------|------|\n| PhiX Control v3 (10\u202fnM) | Illumina | FC\u2011110\u20113001 | Stored at \u201315\u202f\u00b0C to \u201325\u202f\u00b0C; thaw on ice. |\n| Hybridization Buffer (HT1) | Illumina | 20015892 | Thaw and keep on ice. |\n| Elution Buffer (10\u202fmM Tris\u2011Cl, pH\u202f8.5) | Qiagen | 19086 | Room\u2011temperature storage. |\n| 10\u202fN Sodium Hydroxide (NaOH) | General supplier | varies | Room\u2011temperature storage. |\n| Tween\u202f20 | Fisher Scientific | BP337\u2011500 | Room\u2011temperature storage. |\n| Nuclease\u2011Free Water (non\u2011DEPC\u2011treated) | Invitrogen | AM9932 | Room\u2011temperature storage. |\n| NextSeq\u202f1000/2000 RSB with Tween\u202f20 | Illumina | Included in NextSeq\u202f1000/2000 reagent kit (except the P2\u202f(v2) kit) | Store at 4\u202f\u00b0C. |\n\nThese reagents are listed in the SOP for \u201cPhiX Preparation for Sequencing\u201d and are the components required to dilute and denature the PhiX control library that is spiked into a NextSeq\u202f2000 run\u202f[folders/Technical SOPs and Worksheets/PhiX Preparation for Sequencing.docx]\u3010folders/Technical SOPs and Worksheets/PhiX Preparation for Sequencing.docx\u3011.",
+        "steps": 40,
+        "calls": 58
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "chunk",
+      "thinking": false,
+      "group_summary": "llm",
+      "max_branch": 8,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 187.66,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "The information you provided does not contain a list titled \u201cTen Steps to CAP Laboratory Accreditation.\u201d The excerpt from the CAP checklist PDF only shows headings such as \u201cSUMMARY OF CHANGES,\u201d \u201cUNDERSTANDING THE CAP ACCREDITATION CHECKLIST COMPONENTS,\u201d \u201cINTRODUCTION,\u201d \u201cDEFINITION OF TERMS,\u201d and various sections on proficiency testing, quality management, etc., but it does not enumerate ten specific steps for accreditation\u3010folders/Lab_Quality_Documents/Checklists/CAP/MAS_COM_12262024_1738777131928.pdf\u3011.  \n\n**Missing information:** A section or table that explicitly lists the ten steps required for CAP laboratory accreditation. Without that portion of the document, I cannot provide the requested steps.",
+        "steps": 40,
+        "calls": 123
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The validation study showed that plasma whole\u2011genome sequencing (pWGS) libraries can be successfully generated with as little as **1\u202fng of cfDNA per aliquot**.  Input amounts were evaluated across a range of 1\u202fng\u202f\u2013\u202f50\u202fng, and the 1\u202fng level was the lowest amount that still produced a high\u2011quality library that passed the low\u2011pass MiSeq screen and subsequent NovaSeq sequencing criteria\u3010folders/Assay_Validation/Approved Validation Reports/Plasma Whole Genome Sequencing Validation Report v3.0.pdf\u3011.  Therefore, the minimum cfDNA aliquot concentration required for pWGS is 1\u202fng.",
+        "steps": 14,
+        "calls": 28
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "The Illumina NextSeq\u202f2000 workflow requires the following reagents (as listed in the instrument SOP):\n\n- **P1 kit** \u2013 primary sequencing reagent cartridge  \n- **P2 v3 kit** \u2013 secondary reagent cartridge (version\u202f3)  \n- **P3 kit** \u2013 tertiary reagent cartridge  \n- **PhiX control** \u2013 sequencing control library  \n- **RSB/Tween\u202f20** \u2013 reagent\u2011storage buffer with surfactant  \n- **Lens paper** \u2013 for cleaning optical surfaces  \n- **Ethanol** \u2013 for decontamination and cleaning  \n\nThese reagents are explicitly enumerated in the \u201cNextSeq\u202f2000 Operation and Maintenance\u201d SOP\u202f[folders/Technical SOPs and Worksheets/NextSeq\u202f2000 Operation and Maintenance.docx].",
+        "steps": 5,
+        "calls": 19
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "chunk",
+      "thinking": true,
+      "group_summary": "llm",
+      "max_branch": 12,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 194.58,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "I\u2019m unable to provide the Ten Steps to CAP Laboratory Accreditation because the only evidence supplied is the name of a PDF file\u202f\u2014\u202f`MAS_GEN_12262024_1738777079376.pdf`\u202f\u2014\u202fbut its contents (the actual list of steps) have not been provided. To answer the question, the text of that checklist or a summary of its \u201cTen Steps\u201d would be needed.",
+        "steps": 40,
+        "calls": 97
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The pWGS workflow requires at least **5\u202fng of total cfDNA** in the aliquot to be considered a valid input, and **\u226510\u202fng** is needed to proceed with library preparation.  Thus, the minimum cfDNA amount that must be present in an aliquot for pWGS is 5\u202fng (with 10\u202fng being the practical threshold for library prep)\u3010group 2 \u00b7 5 items\u3011.",
+        "steps": 5,
+        "calls": 18
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "The Illumina\u202fNextSeq\u202f2000 run for the REVOLVE Panel uses the following Illumina sequencing reagents:\n\n- **Illumina P1 kit**  \n- **Illumina P2 v3 kit**  \n- **Illumina P3 kit**  \n- **Illumina PhiX Control v3**  \n\nThese reagents are listed in the assay documentation for the NextSeq\u202f2000 workflow\u202f[folders/Technical SOPs and Worksheets/CAP Targeted Sequencing \u2013 REVOLVE Panel Procedure.docx].",
+        "steps": 40,
+        "calls": 52
+      }
+    }
+  },
+  {
+    "config": {
+      "strategy": "chunk",
+      "thinking": false,
+      "group_summary": "llm",
+      "max_branch": 12,
+      "decision_cap": 256,
+      "model": "gpt-oss:120b"
+    },
+    "mean_s": 195.04,
+    "answers": {
+      "What are the Ten Steps To CAP Laboratory Accreditation?": {
+        "answer": "I\u2019m unable to provide the Ten Steps to CAP Laboratory Accreditation because the only evidence supplied is the name of a PDF file\u202f\u2014\u202f`MAS_GEN_12262024_1738777079376.pdf`\u202f\u2014\u202fbut its contents (the actual list of steps) have not been provided. To answer the question, the text of that checklist or a summary of its \u201cTen Steps\u201d would be needed.",
+        "steps": 40,
+        "calls": 97
+      },
+      "What is the minimum concentration of cfDNA aliquot needed for pWGS?": {
+        "answer": "The pWGS workflow requires at least **5\u202fng of total cfDNA** in the aliquot to be considered a valid input, and **\u226510\u202fng** is needed to proceed with library preparation.  Thus, the minimum cfDNA amount that must be present in an aliquot for pWGS is 5\u202fng (with 10\u202fng being the practical threshold for library prep)\u3010group 2 \u00b7 5 items\u3011.",
+        "steps": 5,
+        "calls": 18
+      },
+      "What reagents are used with the Illumina NextSeq 2000?": {
+        "answer": "The Illumina\u202fNextSeq\u202f2000 run for the REVOLVE Panel uses the following Illumina sequencing reagents:\n\n- **Illumina P1 kit**  \n- **Illumina P2 v3 kit**  \n- **Illumina P3 kit**  \n- **Illumina PhiX Control v3**  \n\nThese reagents are listed in the assay documentation for the NextSeq\u202f2000 workflow\u202f[folders/Technical SOPs and Worksheets/CAP Targeted Sequencing \u2013 REVOLVE Panel Procedure.docx].",
+        "steps": 40,
+        "calls": 52
+      }
+    }
+  }
+]
