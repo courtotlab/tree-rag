@@ -1,5 +1,7 @@
 # TreeRAG
 
+All sensitive OICR data has been omitted from this repository.
+
 ## File Descriptions
 
 This Github repository includes the most updated versions of three scripts central to this research project:
