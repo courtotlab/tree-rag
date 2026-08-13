@@ -22,7 +22,7 @@ Use it from a second local terminal:
 export TREERAG_OLLAMA_URL=http://127.0.0.1:11528
 export TREERAG_MODEL=gpt-oss:120b
 curl -fsS "$TREERAG_OLLAMA_URL/api/version"
-./scripts/query_demo.sh "Your question"
+./scripts/query_single_question.sh "Your question"
 ```
 
 Keep the tunnel terminal open while TreeRAG runs. Do not bind port `11528` to an

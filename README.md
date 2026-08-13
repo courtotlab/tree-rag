@@ -136,7 +136,7 @@ export TREERAG_BUILD_WORKERS=4
 RUN_ROOT="$HOME/treerag-runs/build-smoke-$(date +%Y%m%d_%H%M%S)"
 mkdir -p "$RUN_ROOT"
 export TREERAG_CACHE_DIR="$RUN_ROOT/tree_cache"
-uv run ./scripts/build_multihop_demo.sh
+uv run ./scripts/build_tree.sh
 ```
 
 The script first materializes and parses 609 public documents. Wait until
@@ -161,7 +161,7 @@ export TREERAG_MODEL=gpt-oss:120b
 export TREERAG_MODE=thorough
 RUN_ROOT="$HOME/treerag-runs/query-$(date +%Y%m%d_%H%M%S)"
 mkdir -p "$RUN_ROOT"
-uv run ./scripts/query_demo.sh \
+uv run ./scripts/query_single_question.sh \
   "Which developments are compared across multiple reports?" \
   | tee "$RUN_ROOT/query.json"
 ```

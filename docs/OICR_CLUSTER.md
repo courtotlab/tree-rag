@@ -69,7 +69,7 @@ RUN_ROOT="$HOME/treerag-runs/build-smoke-$RUN_ID"
 mkdir -p "$RUN_ROOT"
 export TREERAG_CACHE_DIR="$RUN_ROOT/tree_cache"
 
-./scripts/build_multihop_demo.sh
+./scripts/build_tree.sh
 ```
 
 The script first downloads and parses the public articles. Wait until its live `tqdm`
@@ -94,7 +94,7 @@ RUN_ID="$(date +%Y%m%d_%H%M%S)"
 RUN_ROOT="$HOME/treerag-runs/query-$RUN_ID"
 mkdir -p "$RUN_ROOT"
 
-./scripts/query_demo.sh \
+./scripts/query_single_question.sh \
   "Which developments are compared across multiple reports?" \
   2>&1 | tee "$RUN_ROOT/query.log"
 
