@@ -1,4 +1,4 @@
-"""Shared fixtures for the TreeQuest tests.
+"""Shared fixtures for the TreeRAG tests.
 
 Every tree here is invented: the names are generic laboratory-management placeholders, not
 corpus documents, so no real document name, path or passage ever reaches a test fixture.
@@ -6,11 +6,11 @@ corpus documents, so no real document name, path or passage ever reaches a test 
 
 from collections.abc import Callable, Sequence
 
-from treequest.client import Counters, HealthStatus, LlmResponse, OllamaClient
-from treequest.config import TreeRagConfig
-from treequest.context import SearchContext
-from treequest.tree import TreeIndex, TreeStats
-from treequest.types import NodeMetadata, TreeNode
+from treerag.client import Counters, HealthStatus, LlmResponse, OllamaClient
+from treerag.config import TreeRAGConfig
+from treerag.context import SearchContext
+from treerag.tree import TreeIndex, TreeStats
+from treerag.types import NodeMetadata, TreeNode
 
 #: A scripted responder: given the prompt, return the model's reply.
 Responder = Callable[[str], str]
@@ -32,12 +32,12 @@ class FakeClient(OllamaClient):
       healthy: What health_check should report.
     """
     self._responder = responder
-    self._fake_config = TreeRagConfig()
+    self._fake_config = TreeRAGConfig()
     self.prompts: list[str] = []
     self.healthy = healthy
 
   @property
-  def config(self) -> TreeRagConfig:
+  def config(self) -> TreeRAGConfig:
     """The configuration this fake was built with.
 
     Returns:
@@ -313,7 +313,7 @@ def make_context(responder: Responder) -> SearchContext:
     A context whose LLM calls never leave the process.
   """
   return SearchContext(
-    config=TreeRagConfig(),
+    config=TreeRAGConfig(),
     client=FakeClient(responder),
     index=sample_tree(),
   )

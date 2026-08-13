@@ -1,5 +1,5 @@
 """
-FetchQuest - TreeQuest hierarchical agentic search
+FetchQuest - TreeRAG hierarchical agentic search
 Copyright (C) 2025 Ontario Institute for Cancer Research
 
 This program is free software: you can redistribute it and/or modify
@@ -27,9 +27,9 @@ neighbouring-subject passage displaces an answer already in hand.
 import re
 from dataclasses import dataclass
 
-from treequest.prompting import DUNNO
-from treequest.context import SearchContext
-from treequest.events import (
+from treerag.prompting import DUNNO
+from treerag.context import SearchContext
+from treerag.events import (
   GranularityStep,
   RankedCandidate,
   SweepBreadthEvict,
@@ -40,7 +40,7 @@ from treequest.events import (
   SweepSelection,
   SweepTriaged,
 )
-from treequest.prompts import (
+from treerag.prompts import (
   CONTRAST_TAG,
   POLARITY_CRITERIA,
   PROVENANCE_CRITERIA,
@@ -51,18 +51,18 @@ from treequest.prompts import (
   contrast_directive,
   residual_directive,
 )
-from treequest.ranking import (
+from treerag.ranking import (
   alternative_entry,
   parse_choice,
   rank_children,
 )
-from treequest.state import (
+from treerag.state import (
   AgentState,
   FrontierItem,
   add_memory,
   evidence_sources,
 )
-from treequest.text import (
+from treerag.text import (
   clip,
   full,
   json_str,
@@ -70,8 +70,8 @@ from treequest.text import (
   parse_json_object,
   strip_code_fence,
 )
-from treequest.tree import whole_unit
-from treequest.types import TreeNode
+from treerag.tree import whole_unit
+from treerag.types import TreeNode
 
 _SCOPE_RE = re.compile(r'"?scope"?\s*[:=]\s*"?(self|wider)"?', re.I)
 _DECISION_RE = re.compile(r'"?decision"?\s*[:=]\s*"?(take|skip)"?', re.I)

@@ -80,8 +80,8 @@ print("All packages OK" + ("" if HAVE_PYMUPDF4LLM else "  (pymupdf4llm missing)"
 # ---------------------------------------------------------------------------
 # Ollama / models
 # ---------------------------------------------------------------------------
-OLLAMA_URL    = os.environ.get("TREEQUEST_OLLAMA_URL", "http://127.0.0.1:11528")
-SUMMARY_MODEL = os.environ.get("TREEQUEST_MODEL", "gpt-oss:120b")
+OLLAMA_URL    = os.environ.get("TREERAG_OLLAMA_URL", "http://127.0.0.1:11528")
+SUMMARY_MODEL = os.environ.get("TREERAG_MODEL", "gpt-oss:120b")
 VISION_MODEL  = "gemma3:27b"               # figure descriptions (gpt-oss is text-only!)
 AGENT_MODEL   = "gpt-oss:120b"             # traversal decisions (later stages)
 CHAT_MODEL    = "gpt-oss:120b"             # final answer synthesis (later stages)
@@ -90,8 +90,8 @@ EMBED_MODEL   = "nomic-embed-text"         # vector-search baseline
 # ---------------------------------------------------------------------------
 # Paths
 # ---------------------------------------------------------------------------
-DOCS_ROOT       = Path(os.environ.get("TREEQUEST_DOCS_ROOT", "folders"))
-CACHE_DIR       = Path(os.environ.get("TREEQUEST_CACHE_DIR", "tree_cache"))
+DOCS_ROOT       = Path(os.environ.get("TREERAG_DOCS_ROOT", "folders"))
+CACHE_DIR       = Path(os.environ.get("TREERAG_CACHE_DIR", "tree_cache"))
 TREE_FILE       = CACHE_DIR / "corpus_tree.json"
 NODE_CACHE_DIR  = CACHE_DIR / "nodes"      # per-node cache (crash-resumable)
 PARSE_CACHE_DIR = CACHE_DIR / "parse"      # parsed-document cache (skip re-parsing)
@@ -100,7 +100,7 @@ IMG_DIR         = CACHE_DIR / "images"     # extracted figures (per document)
 # ---------------------------------------------------------------------------
 # Speed / parallelism
 # ---------------------------------------------------------------------------
-NUM_WORKERS     = int(os.environ.get("TREEQUEST_BUILD_WORKERS", "4"))
+NUM_WORKERS     = int(os.environ.get("TREERAG_BUILD_WORKERS", "4"))
 VISION_WORKERS  = 2      # concurrent figure requests (vision model is heavier per call)
 GEN_NUM_PREDICT = 320    # max output tokens per summary (bounds per-call latency)
 KEEP_ALIVE      = "30m"  # keep the large model resident between calls
@@ -173,7 +173,7 @@ try:
 except Exception as e:
     print(f"Cannot reach Ollama at {OLLAMA_URL}: {type(e).__name__}: {e}")
     print("Run this script on the compute host that serves Ollama, or set")
-    print("  TREEQUEST_OLLAMA_URL=http://<approved-ollama-host>:11434")
+    print("  TREERAG_OLLAMA_URL=http://<approved-ollama-host>:11434")
 
 
 # In[5]:

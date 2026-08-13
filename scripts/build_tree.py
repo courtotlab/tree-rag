@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # TreeQuest prototype 5 — whole-corpus summary tree (phased, no model thrash)
+# # TreeRAG prototype 5 — whole-corpus summary tree (phased, no model thrash)
 # 
 # Builds one summary tree over **every** file under `DOCS_ROOT`, nesting bottom-up:
 # 
@@ -79,9 +79,9 @@ print("All packages OK" + ("" if HAVE_PYMUPDF4LLM else "  (pymupdf4llm missing)"
 # ---------------------------------------------------------------------------
 # Ollama / models
 # ---------------------------------------------------------------------------
-OLLAMA_URL    = os.getenv("TREEQUEST_OLLAMA_URL", "http://127.0.0.1:11528")
-SUMMARY_MODEL = os.getenv("TREEQUEST_MODEL", "gpt-oss:120b")
-VISION_MODEL  = os.getenv("TREEQUEST_VISION_MODEL", "gemma3:27b")
+OLLAMA_URL    = os.getenv("TREERAG_OLLAMA_URL", "http://127.0.0.1:11528")
+SUMMARY_MODEL = os.getenv("TREERAG_MODEL", "gpt-oss:120b")
+VISION_MODEL  = os.getenv("TREERAG_VISION_MODEL", "gemma3:27b")
 AGENT_MODEL   = "gpt-oss:120b"             # traversal decisions (later stages)
 CHAT_MODEL    = "gpt-oss:120b"             # final answer synthesis (later stages)
 EMBED_MODEL   = "nomic-embed-text"         # vector-search baseline
@@ -89,8 +89,8 @@ EMBED_MODEL   = "nomic-embed-text"         # vector-search baseline
 # ---------------------------------------------------------------------------
 # Paths
 # ---------------------------------------------------------------------------
-DOCS_ROOT       = Path(os.getenv("TREEQUEST_DOCS_ROOT", "folders"))
-CACHE_DIR       = Path(os.getenv("TREEQUEST_CACHE_DIR", "tree_cache"))
+DOCS_ROOT       = Path(os.getenv("TREERAG_DOCS_ROOT", "folders"))
+CACHE_DIR       = Path(os.getenv("TREERAG_CACHE_DIR", "tree_cache"))
 TREE_FILE       = CACHE_DIR / "corpus_tree.json"
 NODE_CACHE_DIR  = CACHE_DIR / "nodes"      # per-node cache (crash-resumable)
 PARSE_CACHE_DIR = CACHE_DIR / "parse"      # parsed-document cache (skip re-parsing)
@@ -99,8 +99,8 @@ IMG_DIR         = CACHE_DIR / "images"     # extracted figures (per document)
 # ---------------------------------------------------------------------------
 # Speed / parallelism
 # ---------------------------------------------------------------------------
-NUM_WORKERS     = int(os.getenv("TREEQUEST_BUILD_WORKERS", "4"))
-VISION_WORKERS  = int(os.getenv("TREEQUEST_VISION_WORKERS", "2"))
+NUM_WORKERS     = int(os.getenv("TREERAG_BUILD_WORKERS", "4"))
+VISION_WORKERS  = int(os.getenv("TREERAG_VISION_WORKERS", "2"))
 GEN_NUM_PREDICT = 320    # max output tokens per summary (bounds per-call latency)
 KEEP_ALIVE      = "30m"  # keep the large model resident between calls
 DISABLE_THINKING = True  # gpt-oss is a reasoning model; skip visible thinking for speed
@@ -109,7 +109,7 @@ SKIP_SUMMARY_WORDS = 8   # text units this short are stored verbatim (no LLM cal
 # ---------------------------------------------------------------------------
 # Image handling
 # ---------------------------------------------------------------------------
-DESCRIBE_IMAGES = os.getenv("TREEQUEST_DESCRIBE_IMAGES", "false").lower() in {
+DESCRIBE_IMAGES = os.getenv("TREERAG_DESCRIBE_IMAGES", "false").lower() in {
     "1", "true", "yes"
 }
 MD_DPI          = 150

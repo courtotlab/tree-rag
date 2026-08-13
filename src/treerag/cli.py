@@ -1,4 +1,4 @@
-"""Command-line entry point for one TreeQuest search."""
+"""Command-line entry point for one TreeRAG search."""
 
 from __future__ import annotations
 
@@ -7,11 +7,11 @@ import json
 from dataclasses import replace
 from pathlib import Path
 
-from treequest import TreeRagConfig, TreeRagMode, treerag_search
+from treerag import TreeRAGConfig, TreeRAGMode, treerag_search
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Navigate a TreeQuest corpus tree")
+    parser = argparse.ArgumentParser(description="Navigate a TreeRAG corpus tree")
     parser.add_argument("question")
     parser.add_argument("--mode", choices=("quick", "thorough"), default="thorough")
     parser.add_argument("--tree", help="Path to corpus_tree.json")
@@ -19,7 +19,7 @@ def main() -> None:
     parser.add_argument("--model")
     args = parser.parse_args()
 
-    config = TreeRagConfig.from_env().with_mode(TreeRagMode(args.mode))
+    config = TreeRAGConfig.from_env().with_mode(TreeRAGMode(args.mode))
     updates = {}
     if args.tree:
         updates["tree_path"] = Path(args.tree)

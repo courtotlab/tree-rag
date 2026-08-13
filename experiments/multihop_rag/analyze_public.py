@@ -43,7 +43,7 @@ def load_answers(name: str) -> list[dict]:
 
 
 def tree_answers() -> list[dict]:
-    report = json.loads((RESULTS / "treequest_report.json").read_text(encoding="utf-8"))
+    report = json.loads((RESULTS / "treerag_report.json").read_text(encoding="utf-8"))
     output = []
     for row in report.get("results", []):
         output.append(
@@ -84,7 +84,7 @@ def main() -> None:
     sample = json.loads((HERE / "input" / "sample_200.json").read_text(encoding="utf-8"))
     gold = {row["qid"]: row for row in sample}
     systems = {
-        "TreeQuest": tree_answers(),
+        "TreeRAG": tree_answers(),
         "Flat hybrid": load_answers("flat"),
         "Collapsed tree": load_answers("collapsed"),
         "Oracle context": load_answers("oracle"),

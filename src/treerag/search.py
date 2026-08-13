@@ -1,5 +1,5 @@
 """
-FetchQuest - TreeQuest hierarchical agentic search
+FetchQuest - TreeRAG hierarchical agentic search
 Copyright (C) 2025 Ontario Institute for Cancer Research
 
 This program is free software: you can redistribute it and/or modify
@@ -31,17 +31,17 @@ from collections.abc import Iterator
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from treequest.agent import run_agent
-from treequest.answer import AnswerDiagnostics, DraftedAnswer, write_answer
-from treequest.budget import SearchBudget
-from treequest.citations import render_citations
-from treequest.client import HealthStatus, OllamaClient, get_client
-from treequest.config import TreeRagConfig, TreeRagMode
-from treequest.context import SearchContext
-from treequest.errors import SearchBudgetError
-from treequest.events import TraceEvent
-from treequest.tree import TreeIndex, get_tree
-from treequest.types import TreeNode
+from treerag.agent import run_agent
+from treerag.answer import AnswerDiagnostics, DraftedAnswer, write_answer
+from treerag.budget import SearchBudget
+from treerag.citations import render_citations
+from treerag.client import HealthStatus, OllamaClient, get_client
+from treerag.config import TreeRAGConfig, TreeRAGMode
+from treerag.context import SearchContext
+from treerag.errors import SearchBudgetError
+from treerag.events import TraceEvent
+from treerag.tree import TreeIndex, get_tree
+from treerag.types import TreeNode
 
 
 @dataclass(frozen=True, slots=True)
@@ -51,13 +51,15 @@ class SearchTick:
   A single LLM call can run for a minute or more, and a progress panel that stops updating
   for that long reads as a hung request. Ticks let a caller refresh an elapsed timer
   without inventing progress it does not have. They are not trace events and never appear
-  in :attr:`TreeRagResult.trace`.
+  in :attr:`TreeRAGResult.trace`.
 
   Attributes:
     elapsed_seconds: Seconds since the search started.
+    llm_calls: Successful model calls completed so far.
   """
 
   elapsed_seconds: float
+  llm_calls: int = 0
 
 
 @dataclass(frozen=True, slots=True)
@@ -78,8 +80,8 @@ class EvidenceItem:
 
 
 @dataclass(frozen=True, slots=True)
-class TreeRagResult:
-  """Everything one TreeQuest search produced.
+class TreeRAGResult:
+  """Everything one TreeRAG search produced.
 
   Attributes:
     question: The question that was asked.
@@ -116,7 +118,7 @@ class TreeRagResult:
   trace: tuple[TraceEvent, ...]
   synthesis: bool
   diagnostics: AnswerDiagnostics = field(default_factory=AnswerDiagnostics)
-  mode: TreeRagMode = TreeRagMode.THOROUGH
+  mode: TreeRAGMode = TreeRAGMode.THOROUGH
   stopped_early: str = ""
 
 
@@ -141,7 +143,7 @@ def _to_evidence(nodes: list[TreeNode]) -> tuple[EvidenceItem, ...]:
 
 
 def build_context(
-  config: TreeRagConfig,
+  config: TreeRAGConfig,
   *,
   tree: TreeIndex | None = None,
   client: OllamaClient | None = None,
@@ -172,7 +174,7 @@ def build_context(
   )
 
 
-def health_check(config: TreeRagConfig, *, force: bool = False) -> HealthStatus:
+def health_check(config: TreeRAGConfig, *, force: bool = False) -> HealthStatus:
   """Check that the Ollama endpoint is reachable and the required model is loaded.
 
   Args:
@@ -185,7 +187,7 @@ def health_check(config: TreeRagConfig, *, force: bool = False) -> HealthStatus:
   return get_client(config).health_check(force=force)
 
 
-def _run(ctx: SearchContext, question: str) -> TreeRagResult:
+def _run(ctx: SearchContext, question: str) -> TreeRAGResult:
   """Run one traversal and write its answer.
 
   Args:
@@ -211,12 +213,12 @@ def _run(ctx: SearchContext, question: str) -> TreeRagResult:
       Path(e.source_file() or e.path or e.name).stem for e in traversal.evidence
     )
     rendered = (
-      f"TreeQuest ran out of time before it could write an answer ({exc}). "
+      f"TreeRAG ran out of time before it could write an answer ({exc}). "
       + (f"It had gathered evidence from: {sources}." if sources else "")
       + " Try the quick mode, or vector search, for a faster response."
     )
   elapsed = time.perf_counter() - started
-  return TreeRagResult(
+  return TreeRAGResult(
     question=question,
     answer=rendered,
     raw_answer=drafted.text,
@@ -239,11 +241,11 @@ def _run(ctx: SearchContext, question: str) -> TreeRagResult:
 
 def treerag_search(
   question: str,
-  config: TreeRagConfig,
+  config: TreeRAGConfig,
   *,
   tree: TreeIndex | None = None,
   client: OllamaClient | None = None,
-) -> TreeRagResult:
+) -> TreeRAGResult:
   """Answer a question by navigating the corpus tree.
 
   This is the non-streaming path, for programmatic callers such as the CLI and the tests.
@@ -273,12 +275,12 @@ def treerag_search(
 
 def treerag_search_stream(
   question: str,
-  config: TreeRagConfig,
+  config: TreeRAGConfig,
   *,
   tree: TreeIndex | None = None,
   client: OllamaClient | None = None,
   tick_seconds: float = 1.0,
-) -> Iterator[TraceEvent | SearchTick | TreeRagResult]:
+) -> Iterator[TraceEvent | SearchTick | TreeRAGResult]:
   """Answer a question, yielding each navigation event as it happens.
 
   The traversal runs on a worker thread and its events are drained through a queue, so the
@@ -286,7 +288,7 @@ def treerag_search_stream(
   still running. Between events a :class:`SearchTick` is yielded every ``tick_seconds`` so
   a live elapsed timer keeps moving even across one slow LLM call - a search that goes
   quiet for two minutes must not look frozen. Ticks are not part of the result's trace.
-  The final item yielded is always the :class:`TreeRagResult`.
+  The final item yielded is always the :class:`TreeRAGResult`.
 
   Args:
     question: The question to answer.
@@ -311,7 +313,7 @@ def treerag_search_stream(
 
   ctx = build_context(config, tree=tree, client=client)
   events: queue.Queue[TraceEvent] = queue.Queue()
-  outcome: dict[str, TreeRagResult | BaseException] = {}
+  outcome: dict[str, TreeRAGResult | BaseException] = {}
   finished = threading.Event()
 
   def sink(event: TraceEvent) -> None:
@@ -342,7 +344,10 @@ def treerag_search_stream(
       now = time.perf_counter()
       if now >= next_tick:
         next_tick = now + tick_seconds
-        yield SearchTick(elapsed_seconds=now - started)
+        yield SearchTick(
+          elapsed_seconds=now - started,
+          llm_calls=ctx.counters.calls,
+        )
   # Drain anything queued between the last get and the worker finishing.
   while True:
     try:
@@ -355,5 +360,5 @@ def treerag_search_stream(
   if isinstance(error, BaseException):
     raise error
   result = outcome.get("result")
-  if isinstance(result, TreeRagResult):
+  if isinstance(result, TreeRAGResult):
     yield result

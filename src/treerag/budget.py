@@ -1,5 +1,5 @@
 """
-FetchQuest - TreeQuest hierarchical agentic search
+FetchQuest - TreeRAG hierarchical agentic search
 Copyright (C) 2025 Ontario Institute for Cancer Research
 
 This program is free software: you can redistribute it and/or modify
@@ -33,7 +33,7 @@ top of it.
 import time
 from dataclasses import dataclass, field
 
-from treequest.errors import SearchBudgetError
+from treerag.errors import SearchBudgetError
 
 
 @dataclass(slots=True)
@@ -129,10 +129,10 @@ class SearchBudget:
     limit = self.traversal_seconds + self.answer_seconds
     if elapsed >= limit:
       raise SearchBudgetError(
-        f"TreeQuest stopped after {elapsed:.0f}s at its cooperative {limit:.0f}s ceiling"
+        f"TreeRAG stopped after {elapsed:.0f}s at its cooperative {limit:.0f}s ceiling"
       )
     if self.calls >= self.max_calls:
       raise SearchBudgetError(
-        f"TreeQuest stopped after {self.calls} successful LLM calls at its exact "
+        f"TreeRAG stopped after {self.calls} successful LLM calls at its exact "
         f"{self.max_calls}-call ceiling"
       )

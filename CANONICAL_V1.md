@@ -1,4 +1,4 @@
-# TreeQuest canonical-v1
+# TreeRAG canonical-v1
 
 This document defines the publication-default implementation used for new experiments.
 It is part of the reproducibility contract, not a claim that earlier deployment results
@@ -58,8 +58,8 @@ wall-clock deadline. Lexical seeding may scan a corpus-level lexical index.
 
 ## Reproducibility mapping
 
-- Modular implementation: `src/treequest/`
-- Frozen public runner: `experiments/multihop_rag/benchmark_treequest_public_canonical_v1.py`
+- Modular implementation: `src/treerag/`
+- Frozen public runner: `experiments/multihop_rag/benchmark_treerag_public_canonical_v1.py`
 - Formal specification and proofs: supplied with the paper appendix
 - Public reports: new versioned artifacts only
 - Private reports and corpus artifacts: excluded from this repository

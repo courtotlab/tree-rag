@@ -1,4 +1,4 @@
-"""Unit tests for the extracted TreeQuest agent's pure logic.
+"""Unit tests for the extracted TreeRAG agent's pure logic.
 
 Nothing here contacts Ollama or reads the real corpus tree: the LLM is a scripted fake and
 every tree is invented. The suite therefore runs in CI without the SSH tunnel.
@@ -10,40 +10,40 @@ from pathlib import Path
 from typing import Any
 
 import pytest
-from treequest_fixtures import FakeClient, chunk, sample_tree
+from treerag_fixtures import FakeClient, chunk, sample_tree
 
-from treequest import events as ev
-from treequest.answer import dedupe_citations
-from treequest.budget import SearchBudget
-from treequest.citations import render_citations, source_names
-from treequest.client import Counters, HealthStatus, LlmResponse, OllamaClient
-from treequest.config import (
+from treerag import events as ev
+from treerag.answer import dedupe_citations
+from treerag.budget import SearchBudget
+from treerag.citations import render_citations, source_names
+from treerag.client import Counters, HealthStatus, LlmResponse, OllamaClient
+from treerag.config import (
   DEFAULT_OLLAMA_URL,
-  TreeRagConfig,
-  TreeRagMode,
+  TreeRAGConfig,
+  TreeRAGMode,
   resolve_ollama_url,
 )
-from treequest.context import SearchContext
-from treequest.errors import (
+from treerag.context import SearchContext
+from treerag.errors import (
   MalformedTreeError,
   OllamaUnavailableError,
   SearchBudgetError,
 )
-from treequest.ranking import (
+from treerag.ranking import (
   parse_choice,
   parse_scores,
   shortlist_by_fanout,
 )
-from treequest.shapes import (
+from treerag.shapes import (
   is_definitional_question,
   is_polarity_question,
   is_recency_question,
   is_synthesis_question,
 )
-from treequest.state import AgentState, FrontierItem, add_memory, distinct_files
-from treequest.text import clip, full, name_stem_set, parse_json_object, stem
-from treequest.tree import all_chunks, load_tree, source_of, whole_unit
-from treequest.types import TreeNode, node_from_dict
+from treerag.state import AgentState, FrontierItem, add_memory, distinct_files
+from treerag.text import clip, full, name_stem_set, parse_json_object, stem
+from treerag.tree import all_chunks, load_tree, source_of, whole_unit
+from treerag.types import TreeNode, node_from_dict
 
 # ---------------------------------------------------------------------------
 # config validation
@@ -51,7 +51,7 @@ from treequest.types import TreeNode, node_from_dict
 
 
 def test_default_config_is_valid() -> None:
-  config = TreeRagConfig()
+  config = TreeRAGConfig()
   config.validate()
   assert config.max_steps == 40
   assert config.max_files == 8
@@ -75,24 +75,24 @@ def test_default_config_is_valid() -> None:
 def test_invalid_config_rejected(field: str, value: object) -> None:
   kwargs: dict[str, Any] = {field: value}
   with pytest.raises(ValueError, match=field):
-    TreeRagConfig(**kwargs)
+    TreeRAGConfig(**kwargs)
 
 
 def test_max_evidence_must_cover_max_files() -> None:
   with pytest.raises(ValueError, match="max_evidence"):
-    TreeRagConfig(max_files=10, max_evidence=4)
+    TreeRAGConfig(max_files=10, max_evidence=4)
 
 
 def test_backoff_cap_must_not_be_below_base() -> None:
   with pytest.raises(ValueError, match="retry_backoff_cap_s"):
-    TreeRagConfig(retry_backoff_base_s=10.0, retry_backoff_cap_s=1.0)
+    TreeRAGConfig(retry_backoff_base_s=10.0, retry_backoff_cap_s=1.0)
 
 
 def test_config_from_env(monkeypatch: pytest.MonkeyPatch) -> None:
-  monkeypatch.setenv("TREEQUEST_OLLAMA_URL", "http://ollama.example.invalid:9999")
-  monkeypatch.setenv("TREEQUEST_MODEL", "some-model:1b")
-  monkeypatch.setenv("TREEQUEST_TREE_PATH", "/tmp/tree.json")
-  config = TreeRagConfig.from_env()
+  monkeypatch.setenv("TREERAG_OLLAMA_URL", "http://ollama.example.invalid:9999")
+  monkeypatch.setenv("TREERAG_MODEL", "some-model:1b")
+  monkeypatch.setenv("TREERAG_TREE_PATH", "/tmp/tree.json")
+  config = TreeRAGConfig.from_env()
   assert config.ollama_url == "http://ollama.example.invalid:9999"
   assert config.model == "some-model:1b"
   assert config.tree_path == Path("/tmp/tree.json")
@@ -101,13 +101,13 @@ def test_config_from_env(monkeypatch: pytest.MonkeyPatch) -> None:
 def test_endpoint_follows_the_vector_agent_by_default(
   monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-  # One place configures Ollama for the deployment. TreeQuest must not carry a second copy
+  # One place configures Ollama for the deployment. TreeRAG must not carry a second copy
   # of the address, or the two retrieval modes can silently point at different servers.
-  monkeypatch.delenv("TREEQUEST_OLLAMA_URL", raising=False)
+  monkeypatch.delenv("TREERAG_OLLAMA_URL", raising=False)
   monkeypatch.setenv("OLLAMA_HOST", "host.docker.internal")
   monkeypatch.setenv("OLLAMA_PORT", "11434")
   assert resolve_ollama_url() == "http://host.docker.internal:11434"
-  assert TreeRagConfig.from_env().ollama_url == "http://host.docker.internal:11434"
+  assert TreeRAGConfig.from_env().ollama_url == "http://host.docker.internal:11434"
 
 
 def test_endpoint_accepts_a_host_written_with_a_scheme(
@@ -115,7 +115,7 @@ def test_endpoint_accepts_a_host_written_with_a_scheme(
 ) -> None:
   # The existing agent interpolates OLLAMA_HOST as "{host}:{port}", and deployments write
   # it both with and without a scheme.
-  monkeypatch.delenv("TREEQUEST_OLLAMA_URL", raising=False)
+  monkeypatch.delenv("TREERAG_OLLAMA_URL", raising=False)
   monkeypatch.setenv("OLLAMA_HOST", "http://10.0.0.204")
   monkeypatch.setenv("OLLAMA_PORT", "11434")
   assert resolve_ollama_url() == "http://10.0.0.204:11434"
@@ -126,20 +126,20 @@ def test_treerag_url_overrides_the_shared_endpoint(
 ) -> None:
   monkeypatch.setenv("OLLAMA_HOST", "tunnel")
   monkeypatch.setenv("OLLAMA_PORT", "11437")
-  monkeypatch.setenv("TREEQUEST_OLLAMA_URL", "http://elsewhere.invalid:1234")
+  monkeypatch.setenv("TREERAG_OLLAMA_URL", "http://elsewhere.invalid:1234")
   assert resolve_ollama_url() == "http://elsewhere.invalid:1234"
 
 
 def test_endpoint_falls_back_only_when_nothing_is_configured(
   monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-  for name in ("TREEQUEST_OLLAMA_URL", "OLLAMA_HOST", "OLLAMA_PORT"):
+  for name in ("TREERAG_OLLAMA_URL", "OLLAMA_HOST", "OLLAMA_PORT"):
     monkeypatch.delenv(name, raising=False)
   assert resolve_ollama_url() == DEFAULT_OLLAMA_URL
 
 
 def test_config_describe_has_every_field() -> None:
-  described = TreeRagConfig().describe()
+  described = TreeRAGConfig().describe()
   assert "noise_floor" in described
   assert "ollama_url" in described
 
@@ -199,16 +199,16 @@ def test_whole_unit_assembles_text_and_resolves_source() -> None:
 def test_lexical_seed_finds_a_rare_body_term() -> None:
   index = sample_tree()
   seeds = index.lexical_seed_files(
-    "what is the metrology vendor arrangement", TreeRagConfig()
+    "what is the metrology vendor arrangement", TreeRAGConfig()
   )
   assert seeds
   assert seeds[0][0].node_id == "doc-a"
-  assert 0.0 < seeds[0][1] <= TreeRagConfig().lex_seed_cap
+  assert 0.0 < seeds[0][1] <= TreeRAGConfig().lex_seed_cap
 
 
 def test_lexical_seed_is_empty_for_a_generic_question() -> None:
   index = sample_tree()
-  assert index.lexical_seed_files("the and of", TreeRagConfig()) == []
+  assert index.lexical_seed_files("the and of", TreeRAGConfig()) == []
 
 
 # ---------------------------------------------------------------------------
@@ -468,7 +468,7 @@ def test_dedupe_citations_handles_empty_text() -> None:
 
 
 def test_render_citations_renumbers_paths(monkeypatch: pytest.MonkeyPatch) -> None:
-  monkeypatch.setattr("treequest.citations._lookup_urls", lambda paths: {})
+  monkeypatch.setattr("treerag.citations._lookup_urls", lambda paths: {})
   answer = "Stored at minus eighty [Policies/Sample Storage Policy.docx]."
   out = render_citations(answer, ["Policies/Sample Storage Policy.docx"])
   assert "[1]" in out
@@ -481,7 +481,7 @@ def test_render_citations_links_when_urls_resolve(
   monkeypatch: pytest.MonkeyPatch,
 ) -> None:
   monkeypatch.setattr(
-    "treequest.citations._lookup_urls",
+    "treerag.citations._lookup_urls",
     lambda paths: {p: f"https://example.invalid/{Path(p).name}" for p in paths},
   )
   answer = "Fact one [A/One.docx]. Fact two [A/Two.docx]."
@@ -492,7 +492,7 @@ def test_render_citations_links_when_urls_resolve(
 
 
 def test_render_citations_ignores_unknown_tokens(monkeypatch: pytest.MonkeyPatch) -> None:
-  monkeypatch.setattr("treequest.citations._lookup_urls", lambda paths: {})
+  monkeypatch.setattr("treerag.citations._lookup_urls", lambda paths: {})
   answer = "A bracketed [aside] that is not a citation."
   assert render_citations(answer, ["A/One.docx"]) == answer
 
@@ -614,7 +614,7 @@ def test_recency_question_detected() -> None:
 
 
 def _state() -> AgentState:
-  return AgentState(config=TreeRagConfig(), index=sample_tree())
+  return AgentState(config=TreeRAGConfig(), index=sample_tree())
 
 
 def test_push_frontier_splits_on_the_noise_floor() -> None:
@@ -711,19 +711,19 @@ def test_add_memory_ignores_empty_and_duplicate_facts() -> None:
 class _ExplodingClient(OllamaClient):
   """A client whose transport always fails, to exercise the retry bound."""
 
-  def __init__(self, config: TreeRagConfig) -> None:
+  def __init__(self, config: TreeRAGConfig) -> None:
     self._config = config
     self.attempts = 0
 
   @property
-  def config(self) -> TreeRagConfig:
+  def config(self) -> TreeRAGConfig:
     return self._config
 
 
 def test_chat_raises_a_typed_error_once_retries_are_exhausted(
   monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-  config = TreeRagConfig(
+  config = TreeRAGConfig(
     max_attempts=3,
     retry_deadline_s=1.0,
     retry_backoff_base_s=0.01,
@@ -850,10 +850,10 @@ def test_budget_hard_check_raises_past_the_exact_call_ceiling() -> None:
 
 
 def test_quick_mode_is_strictly_cheaper_than_thorough() -> None:
-  quick = TreeRagConfig.for_mode(TreeRagMode.QUICK)
-  thorough = TreeRagConfig.for_mode(TreeRagMode.THOROUGH)
-  assert quick.mode is TreeRagMode.QUICK
-  assert thorough.mode is TreeRagMode.THOROUGH
+  quick = TreeRAGConfig.for_mode(TreeRAGMode.QUICK)
+  thorough = TreeRAGConfig.for_mode(TreeRAGMode.THOROUGH)
+  assert quick.mode is TreeRAGMode.QUICK
+  assert thorough.mode is TreeRAGMode.THOROUGH
   for field_name in (
     "time_budget_s",
     "max_llm_calls",
@@ -869,7 +869,7 @@ def test_quick_mode_is_strictly_cheaper_than_thorough() -> None:
 
 
 def test_thorough_mode_preserves_the_canonical_navigation_knobs() -> None:
-  thorough = TreeRagConfig.for_mode(TreeRagMode.THOROUGH)
+  thorough = TreeRAGConfig.for_mode(TreeRAGMode.THOROUGH)
   assert thorough.max_steps == 40
   assert thorough.max_files == 8
   assert thorough.max_evidence == 50
@@ -881,8 +881,8 @@ def test_thorough_mode_preserves_the_canonical_navigation_knobs() -> None:
 
 
 def test_mode_preset_keeps_the_endpoint_and_tree() -> None:
-  base = TreeRagConfig(ollama_url="http://example.invalid:1234", model="m:1b")
-  quick = base.with_mode(TreeRagMode.QUICK)
+  base = TreeRAGConfig(ollama_url="http://example.invalid:1234", model="m:1b")
+  quick = base.with_mode(TreeRAGMode.QUICK)
   assert quick.ollama_url == "http://example.invalid:1234"
   assert quick.model == "m:1b"
   assert quick.tree_path == base.tree_path
@@ -895,7 +895,7 @@ def test_mode_preset_keeps_the_endpoint_and_tree() -> None:
 
 def _wide_context(cap: int) -> tuple[SearchContext, list[TreeNode]]:
   ctx = SearchContext(
-    config=TreeRagConfig(max_rank_candidates=cap),
+    config=TreeRAGConfig(max_rank_candidates=cap),
     client=FakeClient(lambda p: '{"scores":{"0":0.5}}'),
     index=sample_tree(),
   )
@@ -939,7 +939,7 @@ def test_the_cap_keeps_the_question_relevant_names() -> None:
 def test_overflow_lands_in_the_reserve_tier_not_the_bin() -> None:
   # Overflow is returned at score 0.0, which is below the noise floor, so the existing
   # frontier push routes it to the reserve where it stays reachable.
-  state = AgentState(config=TreeRagConfig(), index=sample_tree())
+  state = AgentState(config=TreeRAGConfig(), index=sample_tree())
   overflow = [chunk(f"o{i}", f"Section {i}", "x", "A/Doc.docx") for i in range(3)]
   state.push_frontier([(n, 0.0, "deferred") for n in overflow], "Doc")
   assert not state.frontier

@@ -1,5 +1,5 @@
 """
-FetchQuest - TreeQuest hierarchical agentic search
+FetchQuest - TreeRAG hierarchical agentic search
 Copyright (C) 2025 Ontario Institute for Cancer Research
 
 This program is free software: you can redistribute it and/or modify
@@ -30,9 +30,9 @@ from collections import Counter
 from collections.abc import Callable, Iterator
 from typing import TypeAlias
 
-from treequest.context import SearchContext
-from treequest.state import FrontierItem
-from treequest.text import (
+from treerag.context import SearchContext
+from treerag.state import FrontierItem
+from treerag.text import (
   clip,
   full,
   json_str,
@@ -42,7 +42,7 @@ from treequest.text import (
   strip_code_fence,
   tokens,
 )
-from treequest.types import TreeNode
+from treerag.types import TreeNode
 
 #: One scored candidate: the node, its score, and the ranker's reasoning sentence.
 ScoredChild: TypeAlias = tuple[TreeNode, float, str]

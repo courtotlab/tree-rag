@@ -5,7 +5,7 @@ Do not submit it directly for anonymous review.
 
 Create a separate, new artifact directory:
 
-    scripts/make_anonymous_artifact.sh /absolute/new/path/treequest-anonymous
+    scripts/make_anonymous_artifact.sh /absolute/new/path/treerag-anonymous
 
 The builder is non-destructive. It refuses an existing destination, copies only
 release-eligible files, excludes Git history, environments, caches, generated

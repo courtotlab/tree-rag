@@ -6,12 +6,12 @@ public ODC-BY MultiHop-RAG inputs and public model outputs.
 ## Completed artifacts
 
 - Frozen sample: `input/sample_200.json` (50 questions per type, seed 20260806).
-- Exact executed TreeQuest source:
-  `../../reference/evaluated_v0/benchmark_treequest_public_frozen_v0.py`.
-- Immutable full TreeQuest report:
-  `results/treequest_public_frozen_v0_200_20260811.json`.
+- Exact executed TreeRAG source:
+  `../../reference/evaluated_v0/benchmark_treerag_public_frozen_v0.py`.
+- Immutable full TreeRAG report:
+  `results/treerag_public_frozen_v0_200_20260811.json`.
 - Official aggregate:
-  `results/treequest_official_multihop_eval_v2_20260813.json`.
+  `results/treerag_official_multihop_eval_v2_20260813.json`.
 - Pinned upstream evaluator: `vendor/multihop_rag/`.
 - Build record: `results/build_metadata_20260810.txt`.
 
@@ -26,8 +26,8 @@ Run on a compute host with Ollama, preferably inside `tmux`:
 
 ```bash
 python download_data.py
-export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11434
-export TREEQUEST_MODEL=gpt-oss:120b
+export TREERAG_OLLAMA_URL=http://127.0.0.1:11434
+export TREERAG_MODEL=gpt-oss:120b
 python build_tree_public.py
 ```
 
@@ -39,10 +39,10 @@ tree at the repository root. Parse and node caches make the build resumable.
 The runnable benchmark uses environment-configured paths and endpoint:
 
 ```bash
-export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11434
-export TREEQUEST_MODEL=gpt-oss:120b
-export IMPROVE_REPORT_PATH=results/treequest_public_rerun_$(date -u +%Y%m%dT%H%M%SZ).json
-python benchmark_treequest_public.py
+export TREERAG_OLLAMA_URL=http://127.0.0.1:11434
+export TREERAG_MODEL=gpt-oss:120b
+export IMPROVE_REPORT_PATH=results/treerag_public_rerun_$(date -u +%Y%m%dT%H%M%SZ).json
+python benchmark_treerag_public.py
 ```
 
 Do not run the immutable file in `reference/` directly; it preserves the original
@@ -51,7 +51,7 @@ machine-specific constants solely for provenance. Never overwrite the released r
 ## Official evaluation
 
 The adapter pins and hashes the official `retrieval_evaluate.py` and `qa_evaluate.py`.
-It maps TreeQuest's first-visit `read_file` events to ordered public passages, excludes
+It maps TreeRAG's first-visit `read_file` events to ordered public passages, excludes
 navigation-only nodes, preserves first-visit order, and reports mapping coverage.
 
 ```bash

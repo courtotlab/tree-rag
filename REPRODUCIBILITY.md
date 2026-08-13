@@ -1,6 +1,6 @@
 # Reproducibility contract
 
-TreeQuest keeps implementation versions and result artifacts separate. A reported
+TreeRAG keeps implementation versions and result artifacts separate. A reported
 number is valid only for the named implementation, data manifest, model, and evaluator.
 
 ## Version boundary
@@ -8,7 +8,7 @@ number is valid only for the named implementation, data manifest, model, and eva
 - **evaluated-v0** is the immutable implementation that generated the 294-question
   restricted deployment study, 63-question ablations, and frozen 200-question public
   run. Exact source snapshots are under `reference/evaluated_v0/`.
-- **modular-v1** is the documented package under `src/treequest/`. It preserves the
+- **modular-v1** is the documented package under `src/treerag/`. It preserves the
   controller design while adding bounded retries, queue hygiene, unique-ID validation,
   exact evidence/call caps, and lexical-only wide-node ordering by default.
 - No evaluated-v0 result may be presented as modular-v1 evidence. A new run receives a
@@ -21,10 +21,10 @@ number is valid only for the named implementation, data manifest, model, and eva
 - Frozen sample: 200 qids, seed 20260806, 50 per question type.
 - Tree: 20,495 nodes, 19,212 chunks, maximum depth 5 edges, maximum fan-out 236.
 - Build: 49,401 seconds and 19,976 LLM calls.
-- TreeQuest/answer model: `gpt-oss:120b`.
+- TreeRAG/answer model: `gpt-oss:120b`.
 - Official evaluator: upstream commit
   `cde8e844af14b3012f20158abc2854fe8458212a`.
-- Immutable aggregate: `experiments/multihop_rag/results/treequest_official_multihop_eval_v2_20260813.json`.
+- Immutable aggregate: `experiments/multihop_rag/results/treerag_official_multihop_eval_v2_20260813.json`.
 
 The balanced sample is not the benchmark's natural-prevalence test distribution.
 Published full-dataset results are contextual, not directly comparable leaderboard

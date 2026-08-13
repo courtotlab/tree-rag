@@ -1,5 +1,5 @@
 """
-FetchQuest - TreeQuest hierarchical agentic search
+FetchQuest - TreeRAG hierarchical agentic search
 Copyright (C) 2025 Ontario Institute for Cancer Research
 
 This program is free software: you can redistribute it and/or modify
@@ -23,7 +23,7 @@ modelled as a total=False TypedDict with the keys the builder actually emits.
 from dataclasses import dataclass, field
 from typing import TypedDict
 
-from treequest.errors import MalformedTreeError
+from treerag.errors import MalformedTreeError
 
 #: Node types the tree builder emits. The document level is labelled ``document`` in this
 #: corpus but ``file`` in older builds, and both are treated as the document level.

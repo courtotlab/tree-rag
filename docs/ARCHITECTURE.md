@@ -34,9 +34,9 @@ wall-clock budgets.
 ## Why a native hierarchy
 
 A governed hierarchy is stable, human-auditable, and already maintained for operational
-reasons. TreeQuest tests that regime rather than claiming every corpus has a useful native
+reasons. TreeRAG tests that regime rather than claiming every corpus has a useful native
 tree. PageIndex File System is the closest disclosed collection-scale architecture; it
-adds query-dependent virtual nodes and dynamic flattening for weak hierarchies. TreeQuest
+adds query-dependent virtual nodes and dynamic flattening for weak hierarchies. TreeRAG
 instead studies a frozen native hierarchy with a released controller and paired empirical
 evaluation.
 

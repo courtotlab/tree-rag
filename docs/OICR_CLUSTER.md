@@ -1,8 +1,8 @@
 # OICR Ollama SSH-tunnel setup (private operations)
 
-This document belongs only in the private Courtot Lab repository. TreeQuest runs on the
+This document belongs only in the private Courtot Lab repository. TreeRAG runs on the
 workstation; the OICR server supplies only the approved Ollama endpoint. The corpus,
-repository, caches, and TreeQuest process remain local.
+repository, caches, and TreeRAG process remain local.
 
 ## Prerequisites
 
@@ -27,7 +27,7 @@ ssh -NT \
 ```
 
 A successful tunnel prints nothing and keeps the terminal occupied. Stop it with
-`Ctrl-C` only after the local TreeQuest command has finished. The loopback binding
+`Ctrl-C` only after the local TreeRAG command has finished. The loopback binding
 prevents other machines from connecting to the forwarded port.
 
 ## Terminal 2: install and verify locally
@@ -41,10 +41,10 @@ source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -e '.[build,test]'
 
-export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11528
-export TREEQUEST_MODEL=gpt-oss:120b
-curl -fsS "$TREEQUEST_OLLAMA_URL/api/version"
-curl -fsS "$TREEQUEST_OLLAMA_URL/api/tags"
+export TREERAG_OLLAMA_URL=http://127.0.0.1:11528
+export TREERAG_MODEL=gpt-oss:120b
+curl -fsS "$TREERAG_OLLAMA_URL/api/version"
+curl -fsS "$TREERAG_OLLAMA_URL/api/tags"
 ```
 
 Do not run `ollama pull` on the workstation. Models are managed on the approved OICR
@@ -61,13 +61,13 @@ Do not change that setting.
 cd /path/to/tree-rag
 source .venv/bin/activate
 
-export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11528
-export TREEQUEST_MODEL=gpt-oss:120b
-export TREEQUEST_BUILD_WORKERS=4
+export TREERAG_OLLAMA_URL=http://127.0.0.1:11528
+export TREERAG_MODEL=gpt-oss:120b
+export TREERAG_BUILD_WORKERS=4
 RUN_ID="$(date +%Y%m%d_%H%M%S)"
-RUN_ROOT="$HOME/treequest-runs/build-smoke-$RUN_ID"
+RUN_ROOT="$HOME/treerag-runs/build-smoke-$RUN_ID"
 mkdir -p "$RUN_ROOT"
-export TREEQUEST_CACHE_DIR="$RUN_ROOT/tree_cache"
+export TREERAG_CACHE_DIR="$RUN_ROOT/tree_cache"
 
 ./scripts/build_multihop_demo.sh
 ```
@@ -85,13 +85,13 @@ Leave Terminal 1's tunnel running. In Terminal 2:
 cd /path/to/tree-rag
 source .venv/bin/activate
 
-export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11528
-export TREEQUEST_MODEL=gpt-oss:120b
-export TREEQUEST_MODE=thorough
-export TREEQUEST_TREE_PATH="$PWD/data/multihop_rag_demo/corpus_tree.json"
+export TREERAG_OLLAMA_URL=http://127.0.0.1:11528
+export TREERAG_MODEL=gpt-oss:120b
+export TREERAG_MODE=thorough
+export TREERAG_TREE_PATH="$PWD/data/multihop_rag_demo/corpus_tree.json"
 
 RUN_ID="$(date +%Y%m%d_%H%M%S)"
-RUN_ROOT="$HOME/treequest-runs/query-$RUN_ID"
+RUN_ROOT="$HOME/treerag-runs/query-$RUN_ID"
 mkdir -p "$RUN_ROOT"
 
 ./scripts/query_demo.sh \

@@ -1,5 +1,5 @@
 """
-FetchQuest - TreeQuest hierarchical agentic search
+FetchQuest - TreeRAG hierarchical agentic search
 Copyright (C) 2025 Ontario Institute for Cancer Research
 
 This program is free software: you can redistribute it and/or modify
@@ -17,11 +17,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 
-class TreeRagError(Exception):
-  """Base class for every error raised by the TreeQuest subsystem."""
+class TreeRAGError(Exception):
+  """Base class for every error raised by the TreeRAG subsystem."""
 
 
-class OllamaUnavailableError(TreeRagError):
+class OllamaUnavailableError(TreeRAGError):
   """The Ollama endpoint could not be reached, or the required model is not loaded.
 
   Raised once the bounded retry policy is exhausted, so a dead endpoint surfaces as a
@@ -30,7 +30,7 @@ class OllamaUnavailableError(TreeRagError):
   """
 
 
-class SearchBudgetError(TreeRagError):
+class SearchBudgetError(TreeRAGError):
   """The search ran past its wall-clock deadline or its LLM-call ceiling.
 
   Raised only as a backstop. The traversal checks its budget between decisions and stops
@@ -40,7 +40,7 @@ class SearchBudgetError(TreeRagError):
   """
 
 
-class TreeUnavailableError(TreeRagError):
+class TreeUnavailableError(TreeRAGError):
   """The corpus tree could not be loaded, or was requested before it was loaded."""
 
 

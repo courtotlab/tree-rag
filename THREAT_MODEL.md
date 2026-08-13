@@ -1,4 +1,4 @@
-# TreeQuest privacy and security threat model
+# TreeRAG privacy and security threat model
 
 Status: canonical-v1 research artifact  
 Scope: document-tree construction, interactive retrieval, answer generation,
@@ -6,7 +6,7 @@ evaluation, and anonymous/public release
 
 ## 1. Security objective
 
-TreeQuest should let an authorized user retrieve evidence from a governed
+TreeRAG should let an authorized user retrieve evidence from a governed
 document hierarchy without moving corpus-derived text outside the approved
 inference boundary or accidentally publishing it through code, logs,
 benchmarks, artifacts, or manuscript materials.
@@ -76,14 +76,14 @@ document text.
 | Cross-corpus cache contamination | A public run retrieves a private cached summary or embedding. | Separate roots, caches, indexes, manifests, and immutable run IDs; prohibit private artifacts in public analysis. | Operator error remains possible without filesystem-level isolation. |
 | Citation or path leakage | An answer exposes internal filenames, folder names, or URLs. | Keep private answers inside the approved boundary; public release uses only public corpus identifiers; aggregate analyses omit identifiers. | Authorized private users still see evidence identifiers by design. |
 | Overbroad result release | Per-question scores appear harmless but reveal workload or corpus properties. | Private analysis emits aggregate statistics only and excludes qids from released outputs. | Small or highly stratified aggregates can still disclose information; disclosure approval is required. |
-| Membership or attribute inference | Repeated questions reveal whether a sensitive policy or fact exists. | Authentication, authorization, audit policy, rate limits, and corpus-level access controls are required around the host application. | TreeQuest itself does not implement document-level authorization or differential privacy. |
+| Membership or attribute inference | Repeated questions reveal whether a sensitive policy or fact exists. | Authentication, authorization, audit policy, rate limits, and corpus-level access controls are required around the host application. | TreeRAG itself does not implement document-level authorization or differential privacy. |
 | Model hallucination or unsupported synthesis | The generated answer is treated as authoritative despite incomplete evidence. | Sufficiency checks, evidence citations, bounded not-found behavior, uncertainty-aware evaluation, and explicit limitations. | Citations do not prove the synthesis is correct; human review remains necessary for consequential use. |
 | Denial of service or runaway cost | Wide hierarchy nodes or slow requests consume excessive inference time. | Canonical fanout cap, exact successful context-call cap, node/file/evidence limits, bounded retries, and cooperative wall-time checks. | An in-flight model call is not preempted and can exceed the nominal wall-clock allowance. |
 | Re-identification through metadata | Authors, affiliations, usernames, local paths, Git history, or PDF metadata break double blindness. | Separate anonymous artifact, anonymous package metadata, excluded Git history, marker scan, checksum manifest, and manual PDF inspection. | Automated scans are incomplete and require human review. |
 
 ## 5. Prompt-injection assumptions
 
-TreeQuest treats corpus text as untrusted data. The language model should not
+TreeRAG treats corpus text as untrusted data. The language model should not
 interpret document instructions as authorization to alter budgets, access
 external systems, disclose unrelated evidence, or override the user question.
 
@@ -134,7 +134,7 @@ license and provenance review before release.
 
 The deployment motivates requirements such as local inference, provenance,
 bounded operation, and auditable evidence paths. It does not establish that
-TreeQuest is a medical device, validated clinical decision-support system, or
+TreeRAG is a medical device, validated clinical decision-support system, or
 compliant with a particular regulation. The system is not evaluated for
 diagnosis, treatment, patient outcome, or autonomous clinical action.
 

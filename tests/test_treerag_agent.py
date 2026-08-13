@@ -1,4 +1,4 @@
-"""End-to-end tests of the TreeQuest traversal against a scripted LLM.
+"""End-to-end tests of the TreeRAG traversal against a scripted LLM.
 
 These drive the real ``run_agent`` and the real answer assembly; only the model is faked.
 The fake routes on the distinctive first sentence of each prompt, so if a prompt is
@@ -8,17 +8,17 @@ reworded in a way that changes which decision it is, these tests notice.
 import re
 
 import pytest
-from treequest_fixtures import FakeClient, chunk, make_context, sample_tree
+from treerag_fixtures import FakeClient, chunk, make_context, sample_tree
 
-from treequest import events as ev
-from treequest.agent import run_agent
-from treequest.budget import SearchBudget
-from treequest.config import TreeRagConfig, TreeRagMode
-from treequest.context import SearchContext
-from treequest.errors import OllamaUnavailableError
-from treequest.search import (
+from treerag import events as ev
+from treerag.agent import run_agent
+from treerag.budget import SearchBudget
+from treerag.config import TreeRAGConfig, TreeRAGMode
+from treerag.context import SearchContext
+from treerag.errors import OllamaUnavailableError
+from treerag.search import (
   SearchTick,
-  TreeRagResult,
+  TreeRAGResult,
   treerag_search,
   treerag_search_stream,
 )
@@ -59,7 +59,7 @@ def _score_reply(prompt: str) -> str:
 
 
 def script(prompt: str) -> str:
-  """Answer any TreeQuest prompt deterministically.
+  """Answer any TreeRAG prompt deterministically.
 
   Args:
     prompt: The prompt the agent produced.
@@ -173,10 +173,10 @@ def test_runner_ups_are_pushed_to_the_frontier_and_used() -> None:
 
 def test_full_search_writes_a_cited_answer() -> None:
   ctx = make_context(script)
-  from treequest.search import _run
+  from treerag.search import _run
 
   result = _run(ctx, QUESTION)
-  assert isinstance(result, TreeRagResult)
+  assert isinstance(result, TreeRAGResult)
   assert "six months" in result.answer
   assert result.sources == ("Policies/Instrument Calibration Policy.docx",)
   assert "[1]" in result.answer
@@ -192,22 +192,22 @@ def test_full_search_writes_a_cited_answer() -> None:
 
 def test_treerag_search_rejects_an_empty_question() -> None:
   with pytest.raises(ValueError, match="must not be empty"):
-    treerag_search("   ", TreeRagConfig(), tree=sample_tree(), client=FakeClient(script))
+    treerag_search("   ", TreeRAGConfig(), tree=sample_tree(), client=FakeClient(script))
 
 
 def test_stream_yields_events_then_the_result() -> None:
   items = list(
     treerag_search_stream(
       QUESTION,
-      TreeRagConfig(),
+      TreeRAGConfig(),
       tree=sample_tree(),
       client=FakeClient(script),
       tick_seconds=0.05,
     )
   )
   assert items, "the stream must yield something"
-  assert isinstance(items[-1], TreeRagResult)
-  events = [i for i in items if not isinstance(i, (SearchTick, TreeRagResult))]
+  assert isinstance(items[-1], TreeRAGResult)
+  events = [i for i in items if not isinstance(i, (SearchTick, TreeRAGResult))]
   assert events
   assert all(hasattr(e, "event") for e in events)
   # The streamed events are exactly the result's trace, in order.
@@ -222,7 +222,7 @@ def test_stream_surfaces_a_dead_endpoint_rather_than_hanging() -> None:
     list(
       treerag_search_stream(
         QUESTION,
-        TreeRagConfig(),
+        TreeRAGConfig(),
         tree=sample_tree(),
         client=FakeClient(dead),
         tick_seconds=0.05,
@@ -232,18 +232,18 @@ def test_stream_surfaces_a_dead_endpoint_rather_than_hanging() -> None:
 
 def test_non_streaming_and_streaming_agree() -> None:
   blocking = treerag_search(
-    QUESTION, TreeRagConfig(), tree=sample_tree(), client=FakeClient(script)
+    QUESTION, TreeRAGConfig(), tree=sample_tree(), client=FakeClient(script)
   )
   streamed = [
     i
     for i in treerag_search_stream(
       QUESTION,
-      TreeRagConfig(),
+      TreeRAGConfig(),
       tree=sample_tree(),
       client=FakeClient(script),
       tick_seconds=0.05,
     )
-    if isinstance(i, TreeRagResult)
+    if isinstance(i, TreeRAGResult)
   ][0]
   assert blocking.answer == streamed.answer
   assert blocking.sources == streamed.sources
@@ -260,7 +260,7 @@ def test_step_and_evidence_caps_are_honoured() -> None:
       return '{"reasoning":"keep","remember":"","decision":"take"}'
     return script(prompt)
 
-  config = TreeRagConfig(max_steps=6, max_files=8, max_evidence=50)
+  config = TreeRAGConfig(max_steps=6, max_files=8, max_evidence=50)
   ctx = SearchContext(config=config, client=FakeClient(never_enough), index=sample_tree())
   result = run_agent(ctx, QUESTION)
   assert result.steps <= 6
@@ -275,7 +275,7 @@ def test_a_rejecting_run_still_returns_something() -> None:
     return script(prompt)
 
   ctx = SearchContext(
-    config=TreeRagConfig(max_steps=8),
+    config=TreeRAGConfig(max_steps=8),
     client=FakeClient(reject_everything),
     index=sample_tree(),
   )
@@ -301,7 +301,7 @@ def test_traversal_stops_on_its_time_budget_and_still_answers() -> None:
   # A budget already spent: the traversal must stop at its first check, say so, and hand
   # whatever it holds to the answer step rather than running on or raising.
   ctx = SearchContext(
-    config=TreeRagConfig(),
+    config=TreeRAGConfig(),
     client=FakeClient(script),
     index=sample_tree(),
     budget=SearchBudget(traversal_seconds=0.0, answer_seconds=60.0, max_calls=500),
@@ -319,7 +319,7 @@ def test_traversal_stops_on_its_time_budget_and_still_answers() -> None:
 
 def test_traversal_stops_on_its_call_budget() -> None:
   ctx = SearchContext(
-    config=TreeRagConfig(),
+    config=TreeRAGConfig(),
     client=FakeClient(script),
     index=sample_tree(),
     budget=SearchBudget(traversal_seconds=600.0, answer_seconds=60.0, max_calls=3),
@@ -330,10 +330,10 @@ def test_traversal_stops_on_its_call_budget() -> None:
 
 
 def test_a_budget_stop_still_produces_a_cited_answer() -> None:
-  from treequest.search import _run
+  from treerag.search import _run
 
   ctx = SearchContext(
-    config=TreeRagConfig(),
+    config=TreeRAGConfig(),
     client=FakeClient(script),
     index=sample_tree(),
     budget=SearchBudget(traversal_seconds=0.0, answer_seconds=120.0, max_calls=500),
@@ -359,25 +359,25 @@ def test_budget_stop_event_reads_as_progress() -> None:
 
 
 def test_quick_mode_makes_fewer_calls_than_thorough() -> None:
-  def counted(mode: TreeRagMode) -> int:
+  def counted(mode: TreeRAGMode) -> int:
     ctx = SearchContext(
-      config=TreeRagConfig.for_mode(mode),
+      config=TreeRAGConfig.for_mode(mode),
       client=FakeClient(script),
       index=sample_tree(),
     )
     run_agent(ctx, "What are the storage requirements and who approves them?")
     return ctx.counters.calls
 
-  assert counted(TreeRagMode.QUICK) <= counted(TreeRagMode.THOROUGH)
+  assert counted(TreeRAGMode.QUICK) <= counted(TreeRAGMode.THOROUGH)
 
 
 def test_a_wide_node_costs_a_bounded_number_of_calls() -> None:
   # The regression this guards: ranking scored every child, so one wide node cost
   # ceil(n / score_batch) LLM calls - 533 for the widest node in the real corpus.
-  from treequest.ranking import rank_children
+  from treerag.ranking import rank_children
 
   ctx = SearchContext(
-    config=TreeRagConfig(max_rank_candidates=20, score_batch=5),
+    config=TreeRAGConfig(max_rank_candidates=20, score_batch=5),
     client=FakeClient(script),
     index=sample_tree(),
   )

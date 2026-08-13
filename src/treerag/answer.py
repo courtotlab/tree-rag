@@ -1,5 +1,5 @@
 """
-FetchQuest - TreeQuest hierarchical agentic search
+FetchQuest - TreeRAG hierarchical agentic search
 Copyright (C) 2025 Ontario Institute for Cancer Research
 
 This program is free software: you can redistribute it and/or modify
@@ -28,11 +28,11 @@ references the instructions require.
 import re
 from dataclasses import dataclass, field
 
-from treequest.prompting import DUNNO
-from treequest.context import SearchContext
-from treequest.prompts import ANSWER_INSTRUCTIONS, system_prompt
-from treequest.text import full, word_count
-from treequest.types import TreeNode
+from treerag.prompting import DUNNO
+from treerag.context import SearchContext
+from treerag.prompts import ANSWER_INSTRUCTIONS, system_prompt
+from treerag.text import full, word_count
+from treerag.types import TreeNode
 
 _CITATION_RE = re.compile(r"\[[^\]\[]+\]")
 _PATH_CITATION_RE = re.compile(r"\[([^\]\[]+)\]")

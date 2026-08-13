@@ -1,5 +1,5 @@
 """
-FetchQuest - TreeQuest hierarchical agentic search
+FetchQuest - TreeRAG hierarchical agentic search
 Copyright (C) 2025 Ontario Institute for Cancer Research
 
 This program is free software: you can redistribute it and/or modify
@@ -32,9 +32,9 @@ LLM calls underneath are bounded rather than retried forever.
 
 from dataclasses import dataclass, field
 
-from treequest.context import SearchContext
-from treequest.errors import SearchBudgetError
-from treequest.events import (
+from treerag.context import SearchContext
+from treerag.errors import SearchBudgetError
+from treerag.events import (
   BreadthEscapeEvent,
   BudgetStopEvent,
   ContrastAbortEvent,
@@ -57,7 +57,7 @@ from treequest.events import (
   TeleportEvent,
   TraceEvent,
 )
-from treequest.judging import (
+from treerag.judging import (
   SufficiencyVerdict,
   choose_alternative,
   choose_by_residual,
@@ -72,29 +72,29 @@ from treequest.judging import (
   set_contrast,
   set_residual,
 )
-from treequest.prompts import (
+from treerag.prompts import (
   DEFINITION_DIRECTIVE,
   PIN,
   POLARITY_DIRECTIVE,
   RECENCY_DIRECTIVE,
   subject_directive,
 )
-from treequest.ranking import diverse_shortlist, rank_children
-from treequest.shapes import (
+from treerag.ranking import diverse_shortlist, rank_children
+from treerag.shapes import (
   is_definitional_question,
   is_polarity_question,
   is_recency_question,
   is_synthesis_question,
 )
-from treequest.state import (
+from treerag.state import (
   AgentState,
   FrontierItem,
   add_memory,
   distinct_files,
 )
-from treequest.text import clip
-from treequest.tree import source_of
-from treequest.types import TreeNode
+from treerag.text import clip
+from treerag.tree import source_of
+from treerag.types import TreeNode
 
 
 @dataclass(slots=True)

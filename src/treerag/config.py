@@ -1,5 +1,5 @@
 """
-FetchQuest - TreeQuest hierarchical agentic search
+FetchQuest - TreeRAG hierarchical agentic search
 Copyright (C) 2025 Ontario Institute for Cancer Research
 
 This program is free software: you can redistribute it and/or modify
@@ -15,7 +15,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-Every tuning constant of the extracted TreeQuest agent lives here as a field of one frozen
+Every tuning constant of the extracted TreeRAG agent lives here as a field of one frozen
 dataclass, with the benchmarked value as its default. The source notebook scattered these
 as module-level globals; the values are unchanged, only their home is.
 """
@@ -26,8 +26,8 @@ from enum import Enum
 from pathlib import Path
 
 
-class TreeRagMode(str, Enum):
-  """How much work a TreeQuest search is allowed to do.
+class TreeRAGMode(str, Enum):
+  """How much work a TreeRAG search is allowed to do.
 
   Attributes:
     QUICK: A bounded look, aimed at roughly two minutes. Narrower budgets and none of the
@@ -42,20 +42,20 @@ class TreeRagMode(str, Enum):
 
 #: Last-resort endpoint, used only when the deployment configures nothing at all. This is
 #: the Ollama project's own default address; a real deployment always sets the endpoint,
-#: either through the shared OLLAMA_HOST/OLLAMA_PORT pair or through TREEQUEST_OLLAMA_URL.
+#: either through the shared OLLAMA_HOST/OLLAMA_PORT pair or through TREERAG_OLLAMA_URL.
 DEFAULT_OLLAMA_URL = "http://127.0.0.1:11528"
 DEFAULT_MODEL = "gpt-oss:120b"
 DEFAULT_EMBED_MODEL = "nomic-embed-text"
 DEFAULT_TREE_PATH = "corpus_tree.json"
 IMPLEMENTATION_VERSION = "modular-v1"
 
-_ENV_URL = "TREEQUEST_OLLAMA_URL"
-_ENV_MODEL = "TREEQUEST_MODEL"
-_ENV_EMBED_MODEL = "TREEQUEST_EMBED_MODEL"
-_ENV_TREE = "TREEQUEST_TREE_PATH"
-_ENV_ENABLED = "TREEQUEST_ENABLED"
+_ENV_URL = "TREERAG_OLLAMA_URL"
+_ENV_MODEL = "TREERAG_MODEL"
+_ENV_EMBED_MODEL = "TREERAG_EMBED_MODEL"
+_ENV_TREE = "TREERAG_TREE_PATH"
+_ENV_ENABLED = "TREERAG_ENABLED"
 
-#: The endpoint the existing vector-search agent already uses. TreeQuest follows it rather
+#: The endpoint the existing vector-search agent already uses. TreeRAG follows it rather
 #: than carrying a second copy of the same address, so there is one place to configure
 #: Ollama for the deployment and the two modes cannot drift apart.
 _ENV_SHARED_HOST = "OLLAMA_HOST"
@@ -67,10 +67,10 @@ def resolve_ollama_url() -> str:
 
   Resolution order:
 
-  1. ``TREEQUEST_OLLAMA_URL``, when TreeQuest needs to point somewhere of its own.
+  1. ``TREERAG_OLLAMA_URL``, when TreeRAG needs to point somewhere of its own.
   2. ``OLLAMA_HOST`` and ``OLLAMA_PORT`` - the pair the vector-search agent already uses.
      Following it means the deployment configures Ollama once and both retrieval modes
-     agree; whatever the server reaches Ollama by, TreeQuest uses the same thing.
+     agree; whatever the server reaches Ollama by, TreeRAG uses the same thing.
   3. :data:`DEFAULT_OLLAMA_URL`, only when nothing at all is configured.
 
   ``OLLAMA_HOST`` is accepted with or without a scheme, because the existing agent
@@ -98,8 +98,8 @@ def resolve_ollama_url() -> str:
 
 
 @dataclass(frozen=True, slots=True)
-class TreeRagConfig:
-  """Configuration for one TreeQuest search.
+class TreeRAGConfig:
+  """Configuration for one TreeRAG search.
 
   Defaults preserve the evaluated controller's high-level operating point while applying
   the hardened modular-v1 semantics documented in REPRODUCIBILITY.md. Exact evaluated-v0
@@ -198,7 +198,7 @@ class TreeRagConfig:
   health_ttl_s: float = 30.0
 
   # ---- work budget: what keeps a search answerable ----
-  mode: TreeRagMode = TreeRagMode.THOROUGH
+  mode: TreeRAGMode = TreeRAGMode.THOROUGH
   time_budget_s: float = 900.0
   answer_budget_s: float = 120.0
   max_llm_calls: int = 400
@@ -293,7 +293,7 @@ class TreeRagConfig:
     """
     for name in ("ollama_url", "model", "embed_model", "keep_alive"):
       if not str(getattr(self, name)).strip():
-        raise ValueError(f"TreeRagConfig.{name} must be a non-empty string")
+        raise ValueError(f"TreeRAGConfig.{name} must be a non-empty string")
 
     positive_ints = (
       "max_attempts",
@@ -328,14 +328,14 @@ class TreeRagConfig:
     for name in positive_ints:
       value = int(getattr(self, name))
       if value <= 0:
-        raise ValueError(f"TreeRagConfig.{name} must be > 0, got {value}")
+        raise ValueError(f"TreeRAGConfig.{name} must be > 0, got {value}")
 
     # Zero is meaningful for both: it switches the mechanism off, which is how the quick
     # mode drops the pre-answer cross-check and the deferred-section recovery.
     for name in ("deferred_max_reads", "tie_max_explore", "max_embed_per_decision"):
       value = int(getattr(self, name))
       if value < 0:
-        raise ValueError(f"TreeRagConfig.{name} must be >= 0, got {value}")
+        raise ValueError(f"TreeRAGConfig.{name} must be >= 0, got {value}")
 
     positive_floats = (
       "request_timeout_s",
@@ -349,11 +349,11 @@ class TreeRagConfig:
     for name in positive_floats:
       fvalue = float(getattr(self, name))
       if fvalue <= 0.0:
-        raise ValueError(f"TreeRagConfig.{name} must be > 0, got {fvalue}")
+        raise ValueError(f"TreeRAGConfig.{name} must be > 0, got {fvalue}")
 
     if self.health_ttl_s < 0.0:
       raise ValueError(
-        f"TreeRagConfig.health_ttl_s must be >= 0, got {self.health_ttl_s}"
+        f"TreeRAGConfig.health_ttl_s must be >= 0, got {self.health_ttl_s}"
       )
 
     unit_floats = (
@@ -374,20 +374,20 @@ class TreeRagConfig:
     for name in unit_floats:
       ufvalue = float(getattr(self, name))
       if not 0.0 <= ufvalue <= 1.0:
-        raise ValueError(f"TreeRagConfig.{name} must be in [0, 1], got {ufvalue}")
+        raise ValueError(f"TreeRAGConfig.{name} must be in [0, 1], got {ufvalue}")
 
     if self.max_evidence < self.max_files:
       raise ValueError(
-        "TreeRagConfig.max_evidence must be >= max_files "
+        "TreeRAGConfig.max_evidence must be >= max_files "
         f"({self.max_evidence} < {self.max_files})"
       )
     if self.retry_backoff_cap_s < self.retry_backoff_base_s:
       raise ValueError(
-        "TreeRagConfig.retry_backoff_cap_s must be >= retry_backoff_base_s "
+        "TreeRAGConfig.retry_backoff_cap_s must be >= retry_backoff_base_s "
         f"({self.retry_backoff_cap_s} < {self.retry_backoff_base_s})"
       )
 
-  def with_mode(self, mode: TreeRagMode) -> "TreeRagConfig":
+  def with_mode(self, mode: TreeRAGMode) -> "TreeRAGConfig":
     """Return this configuration retuned for a named mode.
 
     The endpoint, model and tree path are kept; only the work budget changes.
@@ -406,7 +406,7 @@ class TreeRagConfig:
     Raises:
       ValueError: If the resulting configuration is out of range.
     """
-    if mode is TreeRagMode.THOROUGH:
+    if mode is TreeRAGMode.THOROUGH:
       return replace(
         self,
         mode=mode,
@@ -446,7 +446,7 @@ class TreeRagConfig:
     )
 
   @classmethod
-  def for_mode(cls, mode: TreeRagMode) -> "TreeRagConfig":
+  def for_mode(cls, mode: TreeRAGMode) -> "TreeRAGConfig":
     """Build a configuration for a named mode, reading the endpoint from the environment.
 
     Args:
@@ -461,12 +461,12 @@ class TreeRagConfig:
     return cls.from_env().with_mode(mode)
 
   @classmethod
-  def from_env(cls) -> "TreeRagConfig":
+  def from_env(cls) -> "TreeRAGConfig":
     """Build a configuration from environment variables, falling back to the defaults.
 
-    Reads ``TREEQUEST_MODEL``, ``TREEQUEST_EMBED_MODEL`` and ``TREEQUEST_TREE_PATH``, and
+    Reads ``TREERAG_MODEL``, ``TREERAG_EMBED_MODEL`` and ``TREERAG_TREE_PATH``, and
     resolves the endpoint through :func:`resolve_ollama_url` - which prefers
-    ``TREEQUEST_OLLAMA_URL`` and otherwise follows the ``OLLAMA_HOST``/``OLLAMA_PORT`` pair
+    ``TREERAG_OLLAMA_URL`` and otherwise follows the ``OLLAMA_HOST``/``OLLAMA_PORT`` pair
     the vector-search agent already uses. No host name is hardcoded anywhere.
 
     Returns:
@@ -493,13 +493,13 @@ class TreeRagConfig:
 
 
 def treerag_enabled() -> bool:
-  """Report whether the TreeQuest search mode is switched on for this deployment.
+  """Report whether the TreeRAG search mode is switched on for this deployment.
 
-  Controlled by ``TREEQUEST_ENABLED``; anything other than a recognised false value enables
+  Controlled by ``TREERAG_ENABLED``; anything other than a recognised false value enables
   it, so the mode is available by default once the package is installed.
 
   Returns:
-    True when TreeQuest should be offered in the UI.
+    True when TreeRAG should be offered in the UI.
   """
   raw = os.getenv(_ENV_ENABLED)
   if raw is None:

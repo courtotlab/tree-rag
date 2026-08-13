@@ -37,15 +37,15 @@ import ollama
 import numpy as np
 import pandas as pd
 
-OLLAMA_URL  = os.environ.get("TREEQUEST_OLLAMA_URL", "http://127.0.0.1:11434")
-AGENT_MODEL = os.environ.get("TREEQUEST_MODEL", "gpt-oss:120b")
-JUDGE_MODEL = os.environ.get("TREEQUEST_JUDGE_MODEL", AGENT_MODEL)
-EMBED_MODEL = os.environ.get("TREEQUEST_EMBED_MODEL", "nomic-embed-text")
-CACHE_DIR   = Path(os.environ.get("TREEQUEST_CACHE_DIR", "tree_cache")); TREE_FILE = CACHE_DIR / "corpus_tree.json"
-QUESTIONS_FILE = os.environ.get("TREEQUEST_QUESTIONS_FILE", "questions_public.json")
-QMS_ANSWERS_FILE = os.environ.get("TREEQUEST_BASELINE_ANSWERS", "qms_answers_public.json")
-REPORT_FILE = __import__("os").environ.get("IMPROVE_REPORT_PATH") or "results/treequest_report.json"
-DOSSIER_FILE = os.environ.get("TREEQUEST_DOSSIER_PATH", "results/treequest_failure_dossiers.json")
+OLLAMA_URL  = "http://localhost:11528"
+AGENT_MODEL = "gpt-oss:120b"
+JUDGE_MODEL = "gpt-oss:120b"
+EMBED_MODEL = "nomic-embed-text"
+CACHE_DIR   = Path("tree_cache"); TREE_FILE = CACHE_DIR / "corpus_tree.json"
+QUESTIONS_FILE = "questions_public.json"
+QMS_ANSWERS_FILE = "qms_answers_public.json"  # public flat-hybrid answers
+REPORT_FILE = __import__("os").environ.get("IMPROVE_REPORT_PATH") or "results/treerag_report.json"
+DOSSIER_FILE = "results/treerag_failure_dossiers.json"
                                                # outperforms treerag: traversal event sequence with scores,
                                                # warnings, timings, lengths — no LLM diagnosis (the in-loop
                                                # diagnoser confabulated mechanisms), no document names, no

@@ -1,5 +1,5 @@
 """
-FetchQuest - TreeQuest hierarchical agentic search
+FetchQuest - TreeRAG hierarchical agentic search
 Copyright (C) 2025 Ontario Institute for Cancer Research
 
 This program is free software: you can redistribute it and/or modify
@@ -19,14 +19,14 @@ The long prompt texts, kept out of the control flow that uses them.
 
 The answer instructions are FetchQuest's own, word for word, with two deliberate
 deviations: the system prompt drops the description of the search and text-retrieval
-tools, which TreeQuest does not expose (and which sent the model into unbounded
+tools, which TreeRAG does not expose (and which sent the model into unbounded
 deliberation), and ``doc_id`` here is a source path rather than an integer index. The
-one-cite-per-document sentence is TreeQuest's; the citation dedupe depends on it.
+one-cite-per-document sentence is TreeRAG's; the citation dedupe depends on it.
 """
 
 from datetime import datetime
 
-from treequest.prompting import DOMAIN, DUNNO, ORGANIZATION
+from treerag.prompting import DOMAIN, DUNNO, ORGANIZATION
 
 #: Prefix marking a steering DIRECTIVE in working memory rather than a gathered fact. The
 #: recency cap must never evict one: on a real run the evidence facts overflow the cap
@@ -45,7 +45,7 @@ def system_prompt() -> str:
 
   Returns:
     The system prompt. It states the same role as FetchQuest's own, without the tool
-    descriptions TreeQuest has no tools to back.
+    descriptions TreeRAG has no tools to back.
   """
   return (
     "You are a skilled information retrieval agent for "

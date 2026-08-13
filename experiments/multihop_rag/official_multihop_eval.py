@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Score frozen TreeQuest outputs with the official MultiHop-RAG metrics.
+"""Score frozen TreeRAG outputs with the official MultiHop-RAG metrics.
 
 The metric implementations are vendored byte-for-byte from the pinned upstream
 repository. This adapter supplies their expected in-memory inputs and writes an
 aggregate-only, versioned output. It never modifies an existing result.
 
-TreeQuest is an interactive reader rather than a fixed top-k retriever. Its
+TreeRAG is an interactive reader rather than a fixed top-k retriever. Its
 ordered retrieval list is defined as the first-visit sequence of public-corpus
 chunk nodes recorded by ``read_file`` trace events: the passages actually
 opened by the reader. Navigation-only folder events are not passages and are
@@ -32,13 +32,13 @@ HERE = Path(__file__).resolve().parent
 RESULTS = HERE / "results"
 VENDOR = HERE / "vendor" / "multihop_rag"
 DEFAULT_SAMPLE = HERE / "input" / "sample_200.json"
-DEFAULT_REPORT = RESULTS / "treequest_public_frozen_v0_200_20260811.json"
+DEFAULT_REPORT = RESULTS / "treerag_public_frozen_v0_200_20260811.json"
 DEFAULT_PUBLIC_TREE = HERE / "tree_cache" / "corpus_tree.json"
 DEFAULT_COLLAPSED = RESULTS / "collapsed_answers.json"
 DEFAULT_ORACLE = RESULTS / "oracle_answers.json"
 DEFAULT_COLLAPSED_NODES = RESULTS / "collapsed_nodes.jsonl"
-DEFAULT_OUTPUT = RESULTS / "treequest_official_multihop_eval_v2_20260813.json"
-SCHEMA = "treequest.multihop-rag-official-eval.v2"
+DEFAULT_OUTPUT = RESULTS / "treerag_official_multihop_eval_v2_20260813.json"
+SCHEMA = "treerag.multihop-rag-official-eval.v2"
 UPSTREAM_COMMIT = "cde8e844af14b3012f20158abc2854fe8458212a"
 SEED = 20260813
 
@@ -46,7 +46,7 @@ SEED = 20260813
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--sample", type=Path, default=DEFAULT_SAMPLE)
-    parser.add_argument("--treequest-report", type=Path, default=DEFAULT_REPORT)
+    parser.add_argument("--treerag-report", type=Path, default=DEFAULT_REPORT)
     parser.add_argument("--public-tree", type=Path, default=DEFAULT_PUBLIC_TREE)
     parser.add_argument("--collapsed-answers", type=Path, default=DEFAULT_COLLAPSED)
     parser.add_argument("--oracle-answers", type=Path, default=DEFAULT_ORACLE)
@@ -119,7 +119,7 @@ def official_retrieval_inputs(
             continue
         qid = str(question["qid"])
         if qid not in report_by_qid:
-            raise ValueError(f"missing TreeQuest result for qid={qid}")
+            raise ValueError(f"missing TreeRAG result for qid={qid}")
         row = report_by_qid[qid]
         retrieved: list[str] = []
         seen: set[str] = set()
@@ -351,7 +351,7 @@ def matched_judge_analysis(
     return {
         "metric": "shared_gpt_oss_120b_joint_judge_score_0_0.5_1",
         "n": len(difference),
-        "treequest_mean": mean(tree),
+        "treerag_mean": mean(tree),
         "flat_hybrid_mean": mean(baseline),
         "mean_paired_difference": float(difference.mean()),
         "paired_bootstrap_95_percent_ci": [float(ci_low), float(ci_high)],
@@ -379,7 +379,7 @@ def main() -> None:
     retrieval_module = load_module("official_multihop_retrieval", retrieval_path)
     qa_module = load_module("official_multihop_qa", qa_path)
     questions = read_json(args.sample)
-    report_payload = read_json(args.treequest_report)
+    report_payload = read_json(args.treerag_report)
     rows = report_payload["results"]
     report_by_qid = {str(row["qid"]): row for row in rows}
     collapsed_rows = read_json(args.collapsed_answers)
@@ -428,7 +428,7 @@ def main() -> None:
         },
         "inputs": {
             "sample_sha256": sha256(args.sample),
-            "treequest_report_sha256": sha256(args.treequest_report),
+            "treerag_report_sha256": sha256(args.treerag_report),
             "public_tree_sha256": sha256(args.public_tree),
             "collapsed_answers_sha256": sha256(args.collapsed_answers),
             "oracle_answers_sha256": sha256(args.oracle_answers),
@@ -442,7 +442,7 @@ def main() -> None:
             "coverage": coverage,
         },
         "official_retrieval": {
-            "treequest": score_retrieval(retrieval_module, retrieved, gold, by_type),
+            "treerag": score_retrieval(retrieval_module, retrieved, gold, by_type),
             "flat_hybrid": {
                 "status": "unavailable",
                 "reason": (
@@ -469,7 +469,7 @@ def main() -> None:
             },
         },
         "official_qa": {
-            "treequest": score_qa(qa_module, questions, report_by_qid, "treerag_answer"),
+            "treerag": score_qa(qa_module, questions, report_by_qid, "treerag_answer"),
             "flat_hybrid": score_qa(qa_module, questions, report_by_qid, "qms_answer"),
             "collapsed": score_qa(
                 qa_module, questions, collapsed_by_qid, "answer"
@@ -483,7 +483,7 @@ def main() -> None:
             "Report official retrieval and QA metrics separately from the matched joint judge.",
             "Do not call the matched joint-judge score retrieval accuracy.",
             "Do not describe the balanced 200-question sample as the full MultiHop-RAG test set.",
-            "Preserve the original frozen TreeQuest report as an immutable input.",
+            "Preserve the original frozen TreeRAG report as an immutable input.",
             "Treat oracle retrieval as a diagnostic ceiling, not a deployable system.",
             "Do not report unavailable flat-hybrid retrieval metrics as zero.",
         ],
@@ -492,7 +492,7 @@ def main() -> None:
     args.output.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     print(f"wrote {args.output}")
     print(json.dumps({
-        "official_retrieval": payload["official_retrieval"]["treequest"]["metrics"],
+        "official_retrieval": payload["official_retrieval"]["treerag"]["metrics"],
         "official_retrieval_collapsed": payload["official_retrieval"]["collapsed"]["metrics"],
         "official_retrieval_oracle": payload["official_retrieval"]["oracle"]["metrics"],
         "official_qa": {

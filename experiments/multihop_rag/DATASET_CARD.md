@@ -1,4 +1,4 @@
-# MultiHop-RAG dataset card for the TreeQuest study
+# MultiHop-RAG dataset card for the TreeRAG study
 
 ## Source and license
 
@@ -12,7 +12,7 @@
 The official repository's license statement governs the released database.
 Because the knowledge base contains news articles, redistributors must still
 review whether database licensing covers every underlying text and intended
-form of redistribution. The TreeQuest artifact should preferentially provide
+form of redistribution. The TreeRAG artifact should preferentially provide
 download/materialization code, qids, checksums, and derived aggregate results
 rather than republishing upstream article text.
 
@@ -39,9 +39,9 @@ The articles were collected from September 26 through December 26, 2023.
 Queries and answers were generated with GPT-4 from extracted claims and bridge
 entities/topics, followed by automated checks and manual review of a subset.
 
-## Frozen TreeQuest sample
+## Frozen TreeRAG sample
 
-TreeQuest uses a deterministic 200-question sample with seed 20260806:
+TreeRAG uses a deterministic 200-question sample with seed 20260806:
 
 | Query type | Sample count | Sample share |
 |---|---:|---:|
@@ -63,7 +63,7 @@ artifacts; qids cannot be changed after observing system outcomes.
 ## Public hierarchy transformation
 
 The original dataset is a news-article knowledge base, not the private
-deployment's governed filesystem. The TreeQuest public pipeline deterministically
+deployment's governed filesystem. The TreeRAG public pipeline deterministically
 materializes a metadata-derived hierarchy:
 
     category -> source -> document -> section -> chunk
@@ -81,13 +81,13 @@ the regulated deployment.
 ## Outcomes and comparability
 
 The original paper reports answer accuracy for short answers and also evaluates
-retrieval against supporting evidence. The TreeQuest study uses blinded joint
+retrieval against supporting evidence. The TreeRAG study uses blinded joint
 scores in {0, 0.5, 1} for free-form system answers. These outcome definitions
-are not numerically interchangeable. TreeQuest results cannot be compared
+are not numerically interchangeable. TreeRAG results cannot be compared
 directly with the original paper's accuracy table as though they used the same
 judge, prompts, answer format, retrieval context, or model.
 
-Primary TreeQuest inference uses gpt-oss:120b. The same model is used for the
+Primary TreeRAG inference uses gpt-oss:120b. The same model is used for the
 main model judge, with balanced answer ordering and a separate order-sensitivity
 audit. Human/LLM agreement is reported only after the study team supplies
 approved aggregate validation statistics.
@@ -117,7 +117,7 @@ that no training contamination occurred.
 
 ### Null oversampling
 
-Null questions are 25 percent of the TreeQuest sample but 11.78 percent of the
+Null questions are 25 percent of the TreeRAG sample but 11.78 percent of the
 full dataset. This deliberately gives insufficient-evidence behavior equal
 weight; it also changes the aggregate relative to natural prevalence.
 

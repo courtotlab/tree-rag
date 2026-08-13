@@ -1,5 +1,5 @@
 """
-FetchQuest - TreeQuest hierarchical agentic search
+FetchQuest - TreeRAG hierarchical agentic search
 Copyright (C) 2025 Ontario Institute for Cancer Research
 
 This program is free software: you can redistribute it and/or modify
@@ -39,10 +39,10 @@ from pathlib import Path
 
 from loguru import logger
 
-from treequest.config import TreeRagConfig
-from treequest.errors import MalformedTreeError, TreeUnavailableError
-from treequest.text import full, tokens
-from treequest.types import TreeNode, node_from_dict
+from treerag.config import TreeRAGConfig
+from treerag.errors import MalformedTreeError, TreeUnavailableError
+from treerag.text import full, tokens
+from treerag.types import TreeNode, node_from_dict
 
 
 def _max_rss_mb() -> float:
@@ -324,7 +324,7 @@ class TreeIndex:
     return self.lexical
 
   def lexical_seed_files(
-    self, query: str, config: TreeRagConfig
+    self, query: str, config: TreeRAGConfig
   ) -> list[tuple[TreeNode, float, str]]:
     """Find documents whose body text matches the question's rare, distinctive terms.
 
@@ -480,7 +480,7 @@ def load_tree(path: Path) -> TreeIndex:
   """
   if not path.exists():
     raise TreeUnavailableError(
-      f"corpus tree not found at {path}; TreeQuest cannot run without it"
+      f"corpus tree not found at {path}; TreeRAG cannot run without it"
     )
   rss_before = _max_rss_mb()
   file_mb = path.stat().st_size / (1024 * 1024)
@@ -563,7 +563,7 @@ class _TreeSingleton:
 _SINGLETON = _TreeSingleton()
 
 
-def get_tree(config: TreeRagConfig) -> TreeIndex:
+def get_tree(config: TreeRAGConfig) -> TreeIndex:
   """Return the process-wide corpus tree, loading it on first use.
 
   Args:
@@ -583,14 +583,14 @@ def get_tree(config: TreeRagConfig) -> TreeIndex:
     _SINGLETON.index = index
     _SINGLETON.path = config.tree_path
     _SINGLETON.error = ""
-    logger.info("TreeQuest: {}", index.stats.summary())
+    logger.info("TreeRAG: {}", index.stats.summary())
     return index
 
 
-def preload_tree(config: TreeRagConfig) -> TreeStats | None:
+def preload_tree(config: TreeRAGConfig) -> TreeStats | None:
   """Load the tree at application startup, without letting a failure crash the app.
 
-  Vector search must keep working when TreeQuest cannot start, so a missing or malformed
+  Vector search must keep working when TreeRAG cannot start, so a missing or malformed
   tree is logged and recorded rather than raised.
 
   Args:
@@ -604,7 +604,7 @@ def preload_tree(config: TreeRagConfig) -> TreeStats | None:
   except TreeUnavailableError as exc:
     with _SINGLETON.lock:
       _SINGLETON.error = str(exc)
-    logger.warning("TreeQuest disabled: {}", exc)
+    logger.warning("TreeRAG disabled: {}", exc)
     return None
 
 

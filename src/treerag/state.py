@@ -1,5 +1,5 @@
 """
-FetchQuest - TreeQuest hierarchical agentic search
+FetchQuest - TreeRAG hierarchical agentic search
 Copyright (C) 2025 Ontario Institute for Cancer Research
 
 This program is free software: you can redistribute it and/or modify
@@ -25,10 +25,10 @@ without passing eleven positional arguments, and so nothing needs a module-level
 from collections import Counter
 from dataclasses import dataclass, field, replace
 
-from treequest.config import TreeRagConfig
-from treequest.text import clip
-from treequest.tree import TreeIndex, all_chunks, source_of, whole_unit
-from treequest.types import TreeNode
+from treerag.config import TreeRAGConfig
+from treerag.text import clip
+from treerag.tree import TreeIndex, all_chunks, source_of, whole_unit
+from treerag.types import TreeNode
 
 #: Prefix marking a steering directive in working memory rather than a gathered fact.
 _PIN = "!! "
@@ -128,7 +128,7 @@ class AgentState:
     line_entry_score: The folder/file score by which the current line was reached.
   """
 
-  config: TreeRagConfig
+  config: TreeRAGConfig
   index: TreeIndex
   memory: list[str] = field(default_factory=list)
   evidence: list[TreeNode] = field(default_factory=list)

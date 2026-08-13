@@ -1,5 +1,5 @@
 """
-FetchQuest - TreeQuest hierarchical agentic search
+FetchQuest - TreeRAG hierarchical agentic search
 Copyright (C) 2025 Ontario Institute for Cancer Research
 
 This program is free software: you can redistribute it and/or modify
@@ -22,7 +22,7 @@ probe looped forever printing "waiting for ollama ... wont stop", and its chat w
 caught every exception and retried with exponential backoff without limit. Both are fatal
 inside a web request - a dropped SSH tunnel becomes a spinner that never resolves. Here
 both are bounded by an attempt count AND a total deadline, and raise
-:class:`~treequest.errors.OllamaUnavailableError` on exhaustion.
+:class:`~treerag.errors.OllamaUnavailableError` on exhaustion.
 """
 
 import threading
@@ -32,8 +32,8 @@ from dataclasses import dataclass, field
 import ollama
 from loguru import logger
 
-from treequest.config import TreeRagConfig
-from treequest.errors import OllamaUnavailableError
+from treerag.config import TreeRAGConfig
+from treerag.errors import OllamaUnavailableError
 
 
 @dataclass(slots=True)
@@ -123,7 +123,7 @@ class HealthStatus:
     return host in ("localhost", "127.0.0.1", "::1", "[::1]")
 
   def ui_message(self) -> str:
-    """Render the status as the message shown next to a disabled TreeQuest toggle.
+    """Render the status as the message shown next to a disabled TreeRAG toggle.
 
     The remedy named depends on how the endpoint is reached: a forwarded local port means
     a tunnel to check, whereas a remote endpoint means the Ollama service itself.
@@ -138,7 +138,7 @@ class HealthStatus:
       if self.is_local_endpoint()
       else f"check that Ollama is running and reachable at {self.endpoint}"
     )
-    return f"TreeQuest unavailable — {self.detail}, {remedy}"
+    return f"TreeRAG unavailable — {self.detail}, {remedy}"
 
 
 class OllamaClient:
@@ -149,11 +149,11 @@ class OllamaClient:
   cache are guarded by a lock.
   """
 
-  def __init__(self, config: TreeRagConfig) -> None:
+  def __init__(self, config: TreeRAGConfig) -> None:
     """Create a client for the configured endpoint.
 
     Args:
-      config: The TreeQuest configuration supplying endpoint, model and retry policy.
+      config: The TreeRAG configuration supplying endpoint, model and retry policy.
     """
     self._config = config
     self._client = ollama.Client(host=config.ollama_url, timeout=config.request_timeout_s)
@@ -162,11 +162,11 @@ class OllamaClient:
     self._embed_cache: dict[str, list[float]] = {}
 
   @property
-  def config(self) -> TreeRagConfig:
+  def config(self) -> TreeRAGConfig:
     """The configuration this client was built from.
 
     Returns:
-      The client's :class:`~treequest.config.TreeRagConfig`.
+      The client's :class:`~treerag.config.TreeRAGConfig`.
     """
     return self._config
 
@@ -184,7 +184,7 @@ class OllamaClient:
 
     Returns:
       The health status. This never raises: an unreachable endpoint is reported as a
-      status with ``ok=False``, because startup must not crash when TreeQuest is down.
+      status with ``ok=False``, because startup must not crash when TreeRAG is down.
     """
     now = time.monotonic()
     with self._lock:
@@ -333,7 +333,7 @@ class OllamaClient:
         )
         backoff = min(backoff, remaining)
         logger.warning(
-          "TreeQuest: Ollama call failed (attempt {}/{}), retrying in {:.1f}s: {}",
+          "TreeRAG: Ollama call failed (attempt {}/{}), retrying in {:.1f}s: {}",
           attempt,
           self._config.max_attempts,
           backoff,
@@ -430,7 +430,7 @@ class _SharedClient:
 _SHARED = _SharedClient()
 
 
-def get_client(config: TreeRagConfig) -> OllamaClient:
+def get_client(config: TreeRAGConfig) -> OllamaClient:
   """Return the process-wide client, building it on first use.
 
   A client whose configured endpoint or model differs from ``config`` is replaced, so a

@@ -1,5 +1,5 @@
 """
-FetchQuest - TreeQuest hierarchical agentic search
+FetchQuest - TreeRAG hierarchical agentic search
 Copyright (C) 2025 Ontario Institute for Cancer Research
 
 This program is free software: you can redistribute it and/or modify
@@ -15,15 +15,15 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-Reconciling TreeQuest's citations with the ones vector search already renders.
+Reconciling TreeRAG's citations with the ones vector search already renders.
 
 The two modes cite differently by construction. Vector search hands the model integer
 document indices and rewrites them into a numbered reference table via
-``format_llm_references``. TreeQuest hands the model full source paths, because it has no
+``format_llm_references``. TreeRAG hands the model full source paths, because it has no
 index to hand and the path IS the document's identity in the tree.
 
 They reconcile cleanly in one direction: a source path is resolvable to the same document
-row vector search draws its URL from, so TreeQuest's ``[path/to/file.docx]`` citations are
+row vector search draws its URL from, so TreeRAG's ``[path/to/file.docx]`` citations are
 renumbered to ``[1]``, ``[2]`` in order of first appearance and then handed to the very
 same ``format_llm_references`` renderer. Both modes therefore end with an identical
 numbered, clickable reference table. Neither format is mangled: the model still emits what
@@ -35,7 +35,7 @@ from pathlib import Path
 
 from loguru import logger
 
-from treequest.prompting import format_llm_references
+from treerag.prompting import format_llm_references
 
 _PATH_CITATION_RE = re.compile(r"\[([^\]\[]+)\]")
 

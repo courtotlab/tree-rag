@@ -1,5 +1,5 @@
 """
-FetchQuest - TreeQuest hierarchical agentic search
+FetchQuest - TreeRAG hierarchical agentic search
 Copyright (C) 2025 Ontario Institute for Cancer Research
 
 This program is free software: you can redistribute it and/or modify
@@ -23,11 +23,11 @@ concurrent requests; bundling them here is the only structural change that requi
 from collections.abc import Callable
 from dataclasses import dataclass, field
 
-from treequest.budget import SearchBudget
-from treequest.client import Counters, LlmResponse, OllamaClient
-from treequest.config import TreeRagConfig
-from treequest.events import TraceEvent
-from treequest.tree import TreeIndex
+from treerag.budget import SearchBudget
+from treerag.client import Counters, LlmResponse, OllamaClient
+from treerag.config import TreeRAGConfig
+from treerag.events import TraceEvent
+from treerag.tree import TreeIndex
 
 #: A callback invoked with each trace event as it is produced.
 EventSink = Callable[[TraceEvent], None]
@@ -45,7 +45,7 @@ def _discard(event: TraceEvent) -> None:
 
 @dataclass(slots=True)
 class SearchContext:
-  """Everything one TreeQuest search needs, threaded through the helpers.
+  """Everything one TreeRAG search needs, threaded through the helpers.
 
   Attributes:
     config: The tuning knobs and endpoint settings.
@@ -58,7 +58,7 @@ class SearchContext:
       the unit tests use; every real search is given one.
   """
 
-  config: TreeRagConfig
+  config: TreeRAGConfig
   client: OllamaClient
   index: TreeIndex
   counters: Counters = field(default_factory=Counters)

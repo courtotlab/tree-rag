@@ -1,5 +1,5 @@
 """
-TreeQuest - bounded interactive reading over a governed document hierarchy
+TreeRAG - bounded interactive reading over a governed document hierarchy
 Copyright (C) 2025 Ontario Institute for Cancer Research
 
 This program is free software: you can redistribute it and/or modify
@@ -26,32 +26,32 @@ separate operation provided by ``scripts/build_tree.py``; it is never triggered 
 search request.
 """
 
-from treequest.client import Counters, HealthStatus, OllamaClient, get_client
-from treequest.config import TreeRagConfig, TreeRagMode, treerag_enabled
-from treequest.errors import (
+from treerag.client import Counters, HealthStatus, OllamaClient, get_client
+from treerag.config import TreeRAGConfig, TreeRAGMode, treerag_enabled
+from treerag.errors import (
   MalformedTreeError,
   OllamaUnavailableError,
   SearchBudgetError,
-  TreeRagError,
+  TreeRAGError,
   TreeUnavailableError,
 )
-from treequest.events import TraceEvent, render_event
-from treequest.search import (
+from treerag.events import TraceEvent, render_event
+from treerag.search import (
   EvidenceItem,
   SearchTick,
-  TreeRagResult,
+  TreeRAGResult,
   health_check,
   treerag_search,
   treerag_search_stream,
 )
-from treequest.tree import (
+from treerag.tree import (
   TreeIndex,
   TreeStats,
   get_tree,
   preload_tree,
   tree_error,
 )
-from treequest.types import TreeNode
+from treerag.types import TreeNode
 
 __all__ = [
   "Counters",
@@ -65,10 +65,10 @@ __all__ = [
   "TraceEvent",
   "TreeIndex",
   "TreeNode",
-  "TreeRagConfig",
-  "TreeRagError",
-  "TreeRagMode",
-  "TreeRagResult",
+  "TreeRAGConfig",
+  "TreeRAGError",
+  "TreeRAGMode",
+  "TreeRAGResult",
   "TreeStats",
   "TreeUnavailableError",
   "get_client",

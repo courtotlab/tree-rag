@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: "TreeQuest: Scaling Interactive Reading from Long Documents to Governed Collections"
+title: "TreeRAG: Scaling Interactive Reading from Long Documents to Governed Collections"
 message: "If you use this software, please cite the accompanying manuscript."
 type: software
 authors:

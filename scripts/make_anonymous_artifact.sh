@@ -47,7 +47,7 @@ cp "$source_root/packaging/pyproject.anonymous.toml" "$destination/pyproject.tom
 cp "$source_root/packaging/CITATION.anonymous.cff" "$destination/CITATION.cff"
 
 cat > "$destination/ARTIFACT_BUILD.txt" <<META
-artifact: TreeQuest anonymous review artifact
+artifact: TreeRAG anonymous review artifact
 built_utc: $(date -u +%Y-%m-%dT%H:%M:%SZ)
 source: sanitized working-tree snapshot
 identity_metadata: anonymous
