@@ -1,0 +1,17 @@
+{
+  "schema": "treequest.private-deployment-approved-aggregate.v1",
+  "implementation": "evaluated-v0",
+  "privacy": "aggregate numeric fields only; no identifiers or private content",
+  "n": 294,
+  "treequest_mean_quality": 0.5629,
+  "hybrid_mean_quality": 0.4686,
+  "paired_difference": 0.0943,
+  "paired_bootstrap_95ci": [0.0628, 0.1265],
+  "wilcoxon_p": 7.24e-8,
+  "cohens_dz": 0.338,
+  "wins": 59,
+  "ties": 230,
+  "losses": 5,
+  "treequest_mean_seconds": 586.7,
+  "hybrid_mean_seconds": 84.4
+}

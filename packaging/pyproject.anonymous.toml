@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "treequest"
+version = "0.1.0"
+description = "Budgeted LLM navigation over native organizational document hierarchies"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "GPL-3.0-or-later"}
+authors = [
+  {name = "Anonymous Authors"},
+]
+dependencies = [
+  "loguru>=0.7",
+  "ollama>=0.5",
+]
+
+[project.optional-dependencies]
+build = [
+  "numpy>=2.0",
+  "pandas>=2.0",
+  "pymupdf>=1.26",
+  "pymupdf4llm>=0.0.27",
+  "python-docx>=1.2",
+  "tqdm>=4.67",
+]
+test = ["pytest>=8.0"]
+
+[project.scripts]
+treequest = "treequest.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/treequest"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100

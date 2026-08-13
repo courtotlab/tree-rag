@@ -1,0 +1,13 @@
+{
+  "repository": "https://github.com/yixuantt/MultiHop-RAG",
+  "commit": "cde8e844af14b3012f20158abc2854fe8458212a",
+  "retrieved_utc": "2026-08-13T14:56:00Z",
+  "files": {
+    "retrieval_evaluate.py": {
+      "sha256": "6734516f0d5f9385076f76bf4e08d54968541fdb05f519f1cf687c0b65ae0f90"
+    },
+    "qa_evaluate.py": {
+      "sha256": "a518bc37d94d2e84cc9012b41a758567e308dceea92aba14cda44a1364626ae7"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+title: "TreeQuest: Scaling Interactive Reading from Long Documents to Governed Collections"
+message: "If you use this software, please cite the accompanying manuscript."
+type: software
+authors:
+  - family-names: Sharma
+    given-names: Arjun
+  - family-names: Weile
+    given-names: Jochen
+  - family-names: Marsh
+    given-names: Kayla
+  - family-names: Courtot
+    given-names: Mélanie
+license: GPL-3.0-or-later
+version: 0.1.0
+repository-code: "https://github.com/asharma391/treerag"
