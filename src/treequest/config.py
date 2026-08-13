@@ -43,7 +43,7 @@ class TreeRagMode(str, Enum):
 #: Last-resort endpoint, used only when the deployment configures nothing at all. This is
 #: the Ollama project's own default address; a real deployment always sets the endpoint,
 #: either through the shared OLLAMA_HOST/OLLAMA_PORT pair or through TREEQUEST_OLLAMA_URL.
-DEFAULT_OLLAMA_URL = "http://localhost:11434"
+DEFAULT_OLLAMA_URL = "http://127.0.0.1:11528"
 DEFAULT_MODEL = "gpt-oss:120b"
 DEFAULT_EMBED_MODEL = "nomic-embed-text"
 DEFAULT_TREE_PATH = "corpus_tree.json"

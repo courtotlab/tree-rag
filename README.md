@@ -78,8 +78,8 @@ find and retain the most relevant passages for a question.
 ### Package requirements
 
 - Python 3.11 or 3.12
-- An Ollama-compatible endpoint
-- Enough memory for the selected open-weight model
+- OICR VPN and SSH access to the approved Ollama host
+- Local port `11528` available for the SSH tunnel
 - Approximately 30 MB of free space for the committed public tree
 
 ### Install
@@ -94,45 +94,36 @@ python -m pip install -e '.[build,test]'
 pytest -q
 ```
 
-### Run on the OICR compute host
+### Open the OICR Ollama tunnel
 
-FetchQuest and TreeQuest are intended to run on the OICR server, where the
-application can access the local Ollama service. The laptop is only an SSH client.
+TreeQuest runs on the workstation. Model requests reach the approved OICR Ollama
+service through an SSH local forward; no TreeQuest process or corpus is placed on
+the server.
 
-On first login:
+Keep this command running in a dedicated terminal while using TreeQuest:
 
 ```bash
-ssh asharma@10.30.134.39
-passwd
+ssh -NT \
+  -o ExitOnForwardFailure=yes \
+  -o ServerAliveInterval=60 \
+  -o ServerAliveCountMax=3 \
+  -o IdentitiesOnly=yes \
+  -i "$HOME/.ssh/id_ed25519_oicr" \
+  -L 127.0.0.1:11528:127.0.0.1:11434 \
+  asharma@10.30.134.39
 ```
 
-Enter the temporary password when SSH prompts, then follow `passwd` to replace
-it. Password input is not displayed. Do not store the temporary credential or
-its delivery link in this repository.
-
-After installation, keep the endpoint on the compute host:
+The command is silent after connecting. In a second terminal, configure and verify
+the tunneled endpoint:
 
 ```bash
-export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11434
+export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11528
 export TREEQUEST_MODEL=gpt-oss:120b
+curl -fsS "$TREEQUEST_OLLAMA_URL/api/version"
 ```
 
-Use `tmux` or the cluster scheduler for long jobs. No laptop-hosted Ollama port
-or production SSH forward is required. See
-[OICR cluster deployment](docs/OICR_CLUSTER.md). The private runbook includes
-copy-paste commands and a personal-computer agent prompt for both supported
-demos: rebuilding the public MultiHop-RAG tree and querying the committed tree.
-
-### Configure the model endpoint
-
-```bash
-ollama pull gpt-oss:120b
-export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11434
-export TREEQUEST_MODEL=gpt-oss:120b
-```
-
-Run TreeQuest and Ollama on the same compute host. If the corpus is confidential,
-do not expose its contents to a third-party model endpoint.
+Do not run Ollama locally or bind the forward to a non-loopback address. See the
+[private OICR tunnel runbook](docs/OICR_CLUSTER.md) for both demos.
 
 ### Query the existing MultiHop-RAG tree
 

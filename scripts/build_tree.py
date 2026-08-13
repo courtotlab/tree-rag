@@ -79,7 +79,7 @@ print("All packages OK" + ("" if HAVE_PYMUPDF4LLM else "  (pymupdf4llm missing)"
 # ---------------------------------------------------------------------------
 # Ollama / models
 # ---------------------------------------------------------------------------
-OLLAMA_URL    = os.getenv("TREEQUEST_OLLAMA_URL", "http://localhost:11434")
+OLLAMA_URL    = os.getenv("TREEQUEST_OLLAMA_URL", "http://127.0.0.1:11528")
 SUMMARY_MODEL = os.getenv("TREEQUEST_MODEL", "gpt-oss:120b")
 VISION_MODEL  = os.getenv("TREEQUEST_VISION_MODEL", "gemma3:27b")
 AGENT_MODEL   = "gpt-oss:120b"             # traversal decisions (later stages)

@@ -1,224 +1,123 @@
-# OICR compute-host setup (private operations)
+# OICR Ollama SSH-tunnel setup (private operations)
 
-This document belongs only in the private Courtot Lab repository. The public export
-intentionally omits it.
+This document belongs only in the private Courtot Lab repository. TreeQuest runs on the
+workstation; the OICR server supplies only the approved Ollama endpoint. The corpus,
+repository, caches, and TreeQuest process remain local.
 
-## First login and mandatory password change
+## Prerequisites
 
-Obtain the temporary password through the approved private channel. Do not paste it into
-Git, a shell command, a script, chat, or `.env` file.
+- Connect the workstation to the OICR VPN.
+- Keep the private key at `~/.ssh/id_ed25519_oicr` with mode `600`.
+- Install this repository and Python 3.11 or 3.12 on the workstation.
+- Do not copy credentials, private corpora, or private trees to the server.
+
+## Terminal 1: open local port 11528
+
+Keep this command running for the duration of either demo:
 
 ```bash
-ssh asharma@10.30.134.39
-passwd
+ssh -NT \
+  -o ExitOnForwardFailure=yes \
+  -o ServerAliveInterval=60 \
+  -o ServerAliveCountMax=3 \
+  -o IdentitiesOnly=yes \
+  -i "$HOME/.ssh/id_ed25519_oicr" \
+  -L 127.0.0.1:11528:127.0.0.1:11434 \
+  asharma@10.30.134.39
 ```
 
-`passwd` prompts for the current temporary password, then the new password twice. Input
-is intentionally not echoed. Use a unique password and store it in the approved password
-manager. Log out and sign in again to confirm the change.
+A successful tunnel prints nothing and keeps the terminal occupied. Stop it with
+`Ctrl-C` only after the local TreeQuest command has finished. The loopback binding
+prevents other machines from connecting to the forwarded port.
 
-## Configure key-based SSH after changing the password
+## Terminal 2: install and verify locally
 
-On the laptop:
-
-```bash
-ssh-keygen -t ed25519 -C "treequest-oicr"
-cat ~/.ssh/id_ed25519.pub | ssh asharma@10.30.134.39 \
-  'umask 077; mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys'
-```
-
-Then connect with `ssh asharma@10.30.134.39`. Keep password authentication available
-until the key has been tested in a second terminal.
-
-## Install and run on the host
+Run these commands on the workstation, not inside an OICR SSH shell:
 
 ```bash
-ssh asharma@10.30.134.39
-git clone git@github.com:courtotlab/tree-rag.git
-cd tree-rag
-git switch main
-git pull --ff-only
+cd /path/to/tree-rag
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -e '.[build,test]'
-curl -fsS http://127.0.0.1:11434/api/version
-ollama list
-```
 
-The repository and Ollama both run on `10.30.134.39`; therefore the correct application
-endpoint is cluster-local `http://127.0.0.1:11434`. No laptop tunnel or port 11528 is
-required. Do not expose Ollama's port outside the compute host.
-
-## Survive disconnects and laptop shutdown
-
-```bash
-tmux new -s treequest
-cd ~/tree-rag
-source .venv/bin/activate
-export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11434
+export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11528
 export TREEQUEST_MODEL=gpt-oss:120b
-./scripts/query_demo.sh "Your question"
+curl -fsS "$TREEQUEST_OLLAMA_URL/api/version"
+curl -fsS "$TREEQUEST_OLLAMA_URL/api/tags"
 ```
 
-Detach with `Ctrl-b`, `d`; reconnect with `tmux attach -t treequest`. For a fresh public
-tree build, run `./scripts/build_multihop_demo.sh` in its own `tmux` session.
+Do not run `ollama pull` on the workstation. Models are managed on the approved OICR
+Ollama host.
 
-## Two end-to-end public demos from a personal computer
+## Demo 1: start the MultiHop-RAG tree builder, observe progress, then stop
 
-The personal computer is only an SSH client. Connect it to the OICR VPN, then run all
-repository code, model calls, caches, and outputs on `10.30.134.39`. Do not install or
-run Ollama on the personal computer, create a laptop-local port forward, or expose the
-cluster Ollama port. These demos use only the public MultiHop-RAG corpus.
-
-### Frozen model behavior
-
-Do not change the model or image settings for these demonstrations:
-
-- Agentic traversal and answer synthesis use cluster-local `gpt-oss:120b`.
-- MultiHop-RAG tree construction uses `gpt-oss:120b` for text summaries and bottom-up
-  combines.
-- The general document builder uses `gemma3:27b` for figure descriptions, but the
-  frozen MultiHop-RAG builder deliberately sets `DESCRIBE_IMAGES=False` because its
-  609 news articles are text-only. It therefore makes no `gemma3:27b` calls. Do not
-  toggle this flag merely to exercise the vision model.
-- The frozen builder also checks for `nomic-embed-text`. This inherited build-time
-  dependency does not turn the query demo into dense-vector evidence retrieval.
-
-Check the cluster-local service and install only missing required models:
+This is a capability smoke test, not a complete rebuild. The frozen public builder uses
+`gpt-oss:120b` for text summaries and bottom-up combines. MultiHop-RAG is text-only, so
+its existing `DESCRIBE_IMAGES=False` setting correctly makes no `gemma3:27b` calls.
+Do not change that setting.
 
 ```bash
-curl -fsS http://127.0.0.1:11434/api/version
-ollama list
-ollama show gpt-oss:120b >/dev/null 2>&1 || ollama pull gpt-oss:120b
-ollama show nomic-embed-text >/dev/null 2>&1 || ollama pull nomic-embed-text
-```
-
-`gemma3:27b` need not be downloaded for the text-only MultiHop-RAG demos. It should
-already be available before using `scripts/build_tree.py` on a PDF or DOCX collection
-that actually contains figures.
-
-### Demo 1: rebuild the public MultiHop-RAG tree
-
-The complete build previously required about 13.7 hours and 19,976 model calls. Run it
-inside `tmux`. The versioned run directory is outside the Git checkout, so it cannot
-overwrite the committed public tree or an earlier build.
-
-```bash
-ssh asharma@10.30.134.39
-tmux new -s treequest-build
-
-cd ~/tree-rag
-git switch main
-git pull --ff-only
+cd /path/to/tree-rag
 source .venv/bin/activate
 
-export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11434
+export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11528
 export TREEQUEST_MODEL=gpt-oss:120b
 export TREEQUEST_BUILD_WORKERS=4
 RUN_ID="$(date +%Y%m%d_%H%M%S)"
-RUN_ROOT="$HOME/treequest-runs/multihop-build-$RUN_ID"
+RUN_ROOT="$HOME/treequest-runs/build-smoke-$RUN_ID"
 mkdir -p "$RUN_ROOT"
 export TREEQUEST_CACHE_DIR="$RUN_ROOT/tree_cache"
 
-./scripts/build_multihop_demo.sh 2>&1 | tee "$RUN_ROOT/build.log"
-test -s "$RUN_ROOT/tree_cache/corpus_tree.json"
-printf 'Tree: %s\nLog:  %s\n' \
-  "$RUN_ROOT/tree_cache/corpus_tree.json" "$RUN_ROOT/build.log"
+./scripts/build_multihop_demo.sh
 ```
 
-Detach without stopping the build with `Ctrl-b`, then `d`. Reconnect from any computer
-on the VPN with:
+The script first downloads and parses the public articles. Wait until its live `tqdm`
+progress bar reports completed calls, rate, and ETA. After several model calls complete,
+press `Ctrl-C` once. The versioned partial cache remains available and neither the
+committed demonstration tree nor any previous run is overwritten.
+
+## Demo 2: query the already-built public tree
+
+Leave Terminal 1's tunnel running. In Terminal 2:
 
 ```bash
-ssh asharma@10.30.134.39
-tmux attach -t treequest-build
-```
-
-The per-node and parse caches make the build resumable. If the process itself stops,
-rerun the same command with the same `TREEQUEST_CACHE_DIR`; do not create a new run ID
-when the intent is to resume that build.
-
-### Demo 2: run one question through agentic traversal
-
-This demo uses the committed public tree and cluster-local `gpt-oss:120b` for branch
-selection, evidence retention, sufficiency checks, teleport recovery, and final answer
-synthesis.
-
-```bash
-ssh asharma@10.30.134.39
-tmux new -s treequest-query
-
-cd ~/tree-rag
-git switch main
-git pull --ff-only
+cd /path/to/tree-rag
 source .venv/bin/activate
 
-export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11434
+export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11528
 export TREEQUEST_MODEL=gpt-oss:120b
 export TREEQUEST_MODE=thorough
+export TREEQUEST_TREE_PATH="$PWD/data/multihop_rag_demo/corpus_tree.json"
+
 RUN_ID="$(date +%Y%m%d_%H%M%S)"
 RUN_ROOT="$HOME/treequest-runs/query-$RUN_ID"
 mkdir -p "$RUN_ROOT"
 
 ./scripts/query_demo.sh \
   "Which developments are compared across multiple reports?" \
-  2>&1 | tee "$RUN_ROOT/query.json"
-printf 'Result: %s\n' "$RUN_ROOT/query.json"
+  2>&1 | tee "$RUN_ROOT/query.log"
+
+printf 'Query output: %s\n' "$RUN_ROOT/query.log"
 ```
 
-To query the newly built tree instead of the committed demonstration tree, preserve
-the build path printed by Demo 1 and set it explicitly:
+The local agent traverses the committed public tree, retains evidence, tests
+sufficiency, performs bounded recovery when needed, and sends model calls through local
+port `11528` to OICR `gpt-oss:120b` for traversal and final answer synthesis.
+
+## Troubleshooting
+
+If port `11528` is already occupied:
 
 ```bash
-export TREEQUEST_TREE_PATH="$HOME/treequest-runs/multihop-build-YYYYMMDD_HHMMSS/tree_cache/corpus_tree.json"
-./scripts/query_demo.sh "Your question"
+lsof -nP -iTCP:11528 -sTCP:LISTEN
 ```
 
-## Prompt for a coding agent on the personal computer
+If the tunnel exits immediately, confirm the VPN is connected and test SSH directly:
 
-Give the following prompt to the coding agent on the replacement computer. It is
-deliberately explicit about the compute boundary and the frozen implementation:
-
-```text
-Set up and run the two existing TreeQuest public demos on the OICR compute host. My
-personal computer must be only an SSH client. Connect through the OICR VPN to
-asharma@10.30.134.39, and perform all repository operations, model calls, caches, and
-outputs on that host. Do not run Ollama locally, open port 11434 or 11528 to my laptop,
-or copy any corpus to my laptop.
-
-Use only the private git@github.com:courtotlab/tree-rag.git repository on branch main.
-If ~/tree-rag exists, do not reclone or delete it; run git status, stop if it has
-uncommitted changes, and otherwise use git switch main followed by git pull --ff-only.
-If it does not exist, clone it. Never touch or push to the public TreeRAG repository.
-Do not modify source code, model defaults, the committed demo tree, or prior outputs.
-
-Create or reuse ~/tree-rag/.venv and install the package with:
-python -m pip install -e '.[build,test]'
-Use the cluster-local endpoint http://127.0.0.1:11434. Confirm that Ollama is reachable
-and that gpt-oss:120b and nomic-embed-text exist; pull only a missing model. Do not
-change the frozen MultiHop builder's DESCRIBE_IMAGES=False setting. The MultiHop-RAG
-articles are text-only, so this demo correctly uses gpt-oss:120b for summaries and
-combines and makes no gemma3:27b calls. gemma3:27b is only the existing vision model
-for general PDF/DOCX builds that contain figures.
-
-Run Demo 1 in a tmux session named treequest-build. Execute
-./scripts/build_multihop_demo.sh with TREEQUEST_OLLAMA_URL=http://127.0.0.1:11434,
-TREEQUEST_MODEL=gpt-oss:120b, and TREEQUEST_BUILD_WORKERS=4. Put TREEQUEST_CACHE_DIR
-under a new versioned directory in ~/treequest-runs, outside the Git checkout, and tee
-the log there. Never overwrite or delete an existing run. Report the tmux session name,
-tree path, log path, and whether the process is still running. The full build may take
-about 13.7 hours; do not wait while consuming agent usage. Leave it running in tmux.
-
-Run Demo 2 in a separate tmux session named treequest-query. From ~/tree-rag, activate
-the same virtual environment and run ./scripts/query_demo.sh in thorough mode with the
-question "Which developments are compared across multiple reports?". Use the committed
-public MultiHop-RAG tree and cluster-local gpt-oss:120b. Tee the complete output to a
-new versioned directory under ~/treequest-runs. Report the answer output path and any
-error exactly. Do not inspect or use private corpus files, private questions, or private
-benchmark reports.
-
-If SSH, GitHub authentication, VPN access, or a required model needs an interactive
-credential or approval, stop and ask me rather than embedding a password or token in a
-command, file, URL, log, or chat response.
+```bash
+ssh -o IdentitiesOnly=yes -i "$HOME/.ssh/id_ed25519_oicr" asharma@10.30.134.39
 ```
+
+If the tunnel is running but the API check fails, verify that the remote Ollama service
+is listening on server loopback port `11434`; do not expose that port directly.

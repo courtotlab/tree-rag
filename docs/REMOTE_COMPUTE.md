@@ -1,48 +1,31 @@
-# Running on remote compute
+# Running through the OICR Ollama tunnel
 
-Long tree builds and thorough queries should run on the machine that hosts Ollama. This
-avoids laptop-local forwarding and lets jobs survive sleep, lid closure, and disconnects.
+TreeQuest code, corpus data, caches, and outputs run on the workstation. Only Ollama API
+traffic crosses an authenticated SSH tunnel to the approved OICR server.
 
-## One-time setup
+Open the tunnel in one terminal:
 
 ```bash
-ssh <user>@<compute-host>
-git clone https://github.com/asharma391/treerag.git
-cd treerag
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -e '.[build,test]'
-ollama pull gpt-oss:120b
-curl -fsS http://127.0.0.1:11434/api/version
+ssh -NT \
+  -o ExitOnForwardFailure=yes \
+  -o ServerAliveInterval=60 \
+  -o ServerAliveCountMax=3 \
+  -o IdentitiesOnly=yes \
+  -i "$HOME/.ssh/id_ed25519_oicr" \
+  -L 127.0.0.1:11528:127.0.0.1:11434 \
+  asharma@10.30.134.39
 ```
 
-Do not bind Ollama to an internet-facing interface. Keep the corpus, caches, code, and
-model endpoint inside the same approved trust boundary.
-
-## Persistent session
+Use it from a second local terminal:
 
 ```bash
-tmux new -s treequest
-cd ~/treerag
-source .venv/bin/activate
-export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11434
+export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11528
 export TREEQUEST_MODEL=gpt-oss:120b
-./scripts/build_multihop_demo.sh
-```
-
-Detach with `Ctrl-b`, then `d`. Reconnect later with `tmux attach -t treequest`.
-The job remains on the compute host after SSH disconnects or the laptop sleeps.
-
-## Query the committed tree
-
-```bash
-tmux new -s treequest-query
-cd ~/treerag
-source .venv/bin/activate
-export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11434
+curl -fsS "$TREEQUEST_OLLAMA_URL/api/version"
 ./scripts/query_demo.sh "Your question"
 ```
 
-For shared production service, replace `tmux` with the site's scheduler or a supervised
-service account. Never store passwords or tokens in shell scripts, `.env`, Git history,
-job logs, or command-line arguments.
+Keep the tunnel terminal open while TreeQuest runs. Do not bind port `11528` to an
+external interface, expose Ollama port `11434`, or send restricted corpus content to a
+third-party endpoint. The full private procedure and smoke-test instructions are in
+`docs/OICR_CLUSTER.md`.
