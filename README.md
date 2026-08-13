@@ -1,4 +1,4 @@
-# TreeQuest: Agentic Hierarchical Retrieval for Governed Document Collections
+# TreeRAG: Agentic Hierarchical Retrieval for Governed Document Collections
 
 <div align="center">
 
@@ -10,16 +10,16 @@
 
 **Recursive summarization and agentic tree traversal over large, structured corpora.**
 
-TreeQuest lets an open-weight language model navigate a corpus-level hierarchy,
-retain relevant evidence, recover from an early wrong turn, and answer with source
+TreeRAG involves an open-weight language model traversing a corpus-level hierarchy,
+retain relevant evidence, recover from an early wrong turn, and answering with source
 references. It is designed for document collections where structure, privacy,
 and auditability matter.
 
-![TreeQuest architecture](assets/treequest-system.svg)
+![TreeRAG architecture](assets/TreeRAG-system.svg)
 
 - [Overview](#overview)
 - [Getting started](#getting-started)
-- [How TreeQuest retrieves evidence](#how-treequest-retrieves-evidence)
+- [How TreeRAG retrieves evidence](#how-TreeRAG-retrieves-evidence)
 - [Reproducing the public evaluation](#reproducing-the-public-evaluation)
 - [Advanced settings](#advanced-settings)
 - [Evaluated implementation and vector boundary](#evaluated-implementation-and-vector-boundary)
@@ -40,7 +40,7 @@ across large collections of policies, procedures, reports, and records.
 
 Single-shot ranking does not explicitly consider document structure, so queries
 whose answers are found in tables, span sections, or require multiple documents
-can perform poorly. TreeQuest recursively summarizes the corpus into a
+can perform poorly. TreeRAG recursively summarizes the corpus into a
 hierarchical tree. From there, an open-weight LLM agent traverses the tree to
 find and retain the most relevant passages for a question.
 
@@ -58,14 +58,14 @@ find and retain the most relevant passages for a question.
   evidence-sufficiency gate determine whether to answer or continue searching.
 - **Bounded and auditable execution:** explicit budgets limit model calls and
   visited nodes, while traces and source identifiers support inspection.
-- **Open-weight deployment:** TreeQuest uses an Ollama-compatible endpoint and
+- **Open-weight deployment:** TreeRAG uses an Ollama-compatible endpoint and
   can run inside the same approved compute boundary as confidential data.
 - **No dense-vector evidence retrieval:** evidence is reached through tree
   navigation rather than a dense retrieval index.
 
 ### What this release contains
 
-- `src/treequest/`: the documented modular controller and command-line interface.
+- `src/TreeRAG/`: the documented modular controller and command-line interface.
 - `reference/evaluated_v0/`: immutable source snapshots for the evaluated method.
 - `experiments/multihop_rag/`: the frozen public sample, runner, official
   evaluator adapter, aggregate outputs, and pinned upstream evaluator.
@@ -92,11 +92,11 @@ uv sync
 
 ### Open the OICR Ollama tunnel
 
-TreeQuest runs on the workstation. Model requests reach the approved OICR Ollama
-service through an SSH local forward; no TreeQuest process or corpus is placed on
+TreeRAG runs on the workstation. Model requests reach the approved OICR Ollama
+service through an SSH local forward; no TreeRAG process or corpus is placed on
 the server.
 
-Keep this command running in a dedicated terminal while using TreeQuest:
+Keep this command running in a dedicated terminal while using TreeRAG:
 
 ```bash
 ssh -NT \
@@ -113,10 +113,10 @@ The command is silent after connecting. In a second terminal, configure and veri
 the tunneled endpoint:
 
 ```bash
-export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11528
-export TREEQUEST_MODEL=gpt-oss:120b
-curl -fsS "$TREEQUEST_OLLAMA_URL/api/version"
-curl -fsS "$TREEQUEST_OLLAMA_URL/api/tags"
+export TreeRAG_OLLAMA_URL=http://127.0.0.1:11528
+export TreeRAG_MODEL=gpt-oss:120b
+curl -fsS "$TreeRAG_OLLAMA_URL/api/version"
+curl -fsS "$TreeRAG_OLLAMA_URL/api/tags"
 ```
 
 Do not run Ollama locally or bind the forward to a non-loopback address. See the
@@ -128,25 +128,14 @@ Querying the committed tree exercises retrieval without rebuilding the index. Ke
 the tunnel terminal open, then run in a second terminal:
 
 ```bash
-export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11528
-export TREEQUEST_MODEL=gpt-oss:120b
-export TREEQUEST_MODE=thorough
-RUN_ROOT="$HOME/treequest-runs/query-$(date +%Y%m%d_%H%M%S)"
+export TreeRAG_OLLAMA_URL=http://127.0.0.1:11528
+export TreeRAG_MODEL=gpt-oss:120b
+export TreeRAG_MODE=thorough
+RUN_ROOT="$HOME/TreeRAG-runs/query-$(date +%Y%m%d_%H%M%S)"
 mkdir -p "$RUN_ROOT"
 uv run ./scripts/query_demo.sh \
   "Which developments are compared across multiple reports?" \
   | tee "$RUN_ROOT/query.json"
-```
-
-Equivalent direct invocation:
-
-```bash
-uv run treequest \
-  --tree data/multihop_rag_demo/corpus_tree.json \
-  --ollama-url "$TREEQUEST_OLLAMA_URL" \
-  --model "$TREEQUEST_MODEL" \
-  --mode thorough \
-  "Your question"
 ```
 
 The JSON response contains the answer, source identifiers, elapsed time, model
@@ -159,12 +148,12 @@ the progress bar, and ETA. It writes to a versioned cache and never overwrites t
 committed tree:
 
 ```bash
-export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11528
-export TREEQUEST_MODEL=gpt-oss:120b
-export TREEQUEST_BUILD_WORKERS=4
-RUN_ROOT="$HOME/treequest-runs/build-smoke-$(date +%Y%m%d_%H%M%S)"
+export TreeRAG_OLLAMA_URL=http://127.0.0.1:11528
+export TreeRAG_MODEL=gpt-oss:120b
+export TreeRAG_BUILD_WORKERS=4
+RUN_ROOT="$HOME/TreeRAG-runs/build-smoke-$(date +%Y%m%d_%H%M%S)"
 mkdir -p "$RUN_ROOT"
-export TREEQUEST_CACHE_DIR="$RUN_ROOT/tree_cache"
+export TreeRAG_CACHE_DIR="$RUN_ROOT/tree_cache"
 uv run ./scripts/build_multihop_demo.sh
 ```
 
@@ -178,7 +167,7 @@ This workflow was exercised on August 13, 2026 with Ollama 0.30.10. The smoke te
 planned 19,971 calls and displayed a live ETA; the thorough query completed with 26
 model calls in 124.36 seconds. Timing varies with shared-server load.
 
-## How TreeQuest retrieves evidence
+## How TreeRAG retrieves evidence
 
 1. **Build the summarization tree.** Each node describes its children while
    preserving the path from corpus to folder, document, section, and passage.
@@ -190,7 +179,7 @@ model calls in 124.36 seconds. Timing varies with shared-server load.
    read while unrelated sections are skipped.
 5. **Check sufficiency.** A gate asks whether the retained evidence answers the
    question completely.
-6. **Answer or revisit the frontier.** If evidence is incomplete, TreeQuest jumps
+6. **Answer or revisit the frontier.** If evidence is incomplete, TreeRAG jumps
    to the best unexplored node at any depth and continues within budget.
 
 ## Reproducing the public evaluation
@@ -205,7 +194,7 @@ uv run python official_multihop_eval.py --help
 ```
 
 The exact executed runner is preserved at
-`reference/evaluated_v0/benchmark_treequest_public_frozen_v0.py`. The runnable
+`reference/evaluated_v0/benchmark_TreeRAG_public_frozen_v0.py`. The runnable
 experiment copy changes only runtime path, model, and endpoint configuration.
 Read [the experiment guide](experiments/multihop_rag/README.md) before launching
 a full run. It is expensive, and each output must use a new versioned path.
@@ -224,9 +213,9 @@ See [REPRODUCIBILITY.md](REPRODUCIBILITY.md) for the artifact checklist.
 ### Runtime configuration
 
 ```bash
-export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11528
-export TREEQUEST_MODEL=gpt-oss:120b
-uv run treequest --help
+export TreeRAG_OLLAMA_URL=http://127.0.0.1:11528
+export TreeRAG_MODEL=gpt-oss:120b
+uv run TreeRAG --help
 ```
 
 Do not edit a frozen result file in place. Use a new output path for every run so
@@ -240,7 +229,7 @@ queue hygiene, tree validation, and a lexical-only default for over-wide
 candidate presentation. Results are never retrospectively relabeled across
 these versions.
 
-TreeQuest does not use a dense index to retrieve evidence: the LLM scores tree
+TreeRAG does not use a dense index to retrieve evidence: the LLM scores tree
 branches, and evidence is reached through navigation. For scientific precision,
 evaluated-v0 used local embeddings only to order names displayed inside an
 over-wide `contains:` preview. The modular release defaults
@@ -251,7 +240,7 @@ retrieval**, not as having no vector computation anywhere.
 ## Repository layout
 
 ```text
-src/treequest/                 modular controller and CLI
+src/TreeRAG/                 modular controller and CLI
 scripts/                       query and tree-build launchers
 data/multihop_rag_demo/        committed public demonstration tree
 experiments/multihop_rag/      frozen sample, runners, evaluator, public outputs
@@ -262,23 +251,23 @@ tests/                         synthetic unit and controller tests
 
 ## Data, privacy, and licensing
 
-MultiHop-RAG is licensed under ODC-BY. TreeQuest source is GPL-3.0-or-later. See
+MultiHop-RAG is licensed under ODC-BY. TreeRAG source is GPL-3.0-or-later. See
 [DATA_POLICY.md](DATA_POLICY.md) and [SECURITY.md](SECURITY.md).
 
 Never commit private corpora, trees, questions, answers, traces, credentials,
-endpoints, or result files. For confidential collections, run both TreeQuest and
+endpoints, or result files. For confidential collections, run both TreeRAG and
 the open-weight model inside the approved organizational compute boundary.
 
 ## Next steps
 
 Next steps can consider running the remaining public controls and evaluating
 other systems like Psi-RAG as a separate external baseline. They would broaden
-public-benchmark coverage and help position TreeQuest against a recent
+public-benchmark coverage and help position TreeRAG against a recent
 vector-assisted retrieval system.
 
 ## Acknowledgements
 
-TreeQuest grew from the TreeRAG project in Genome Informatics at the Ontario
+TreeRAG grew from the TreeRAG project in Genome Informatics at the Ontario
 Institute for Cancer Research, with work by Arjun Sharma, Jochen Weile, Kayla
 Marsh, and Melanie Courtot. The project was supported by the University of
 Toronto Data Sciences Institute and the Government of Ontario.
