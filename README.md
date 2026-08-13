@@ -119,7 +119,9 @@ export TREEQUEST_MODEL=gpt-oss:120b
 
 Use `tmux` or the cluster scheduler for long jobs. No laptop-hosted Ollama port
 or production SSH forward is required. See
-[OICR cluster deployment](docs/OICR_CLUSTER.md).
+[OICR cluster deployment](docs/OICR_CLUSTER.md). The private runbook includes
+copy-paste commands and a personal-computer agent prompt for both supported
+demos: rebuilding the public MultiHop-RAG tree and querying the committed tree.
 
 ### Configure the model endpoint
 
