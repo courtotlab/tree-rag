@@ -166,17 +166,6 @@ uv run ./scripts/query_demo.sh \
   | tee "$RUN_ROOT/query.json"
 ```
 
-Equivalent direct invocation:
-
-```bash
-uv run treequest \
-  --tree data/multihop_rag_demo/corpus_tree.json \
-  --ollama-url "$TREEQUEST_OLLAMA_URL" \
-  --model "$TREEQUEST_MODEL" \
-  --mode thorough \
-  "Your question"
-```
-
 The JSON response contains the answer, source identifiers, elapsed time, model calls,
 and operating mode. The thorough query used to validate this workflow completed with
 26 model calls in 124.36 seconds.
