@@ -1,4 +1,4 @@
-# TreeRAG: Agentic Hierarchical Retrieval for Governed Document Collections
+# TreeRAG: agentic hierarchical retrieval for genomics quality-management documents
 
 <div align="center">
 
