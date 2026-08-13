@@ -1157,14 +1157,24 @@ def _warm(model: str):
 def fill_leaves(leaf_jobs: List[Dict], progress: Progress, workers: Optional[int] = None):
     if not leaf_jobs:
         return
-    with cf.ThreadPoolExecutor(max_workers=workers or NUM_WORKERS) as ex:
-        futs = [ex.submit(_summarise_leaf, j) for j in leaf_jobs]
+    ex = cf.ThreadPoolExecutor(max_workers=workers or NUM_WORKERS)
+    futs = [ex.submit(_summarise_leaf, j) for j in leaf_jobs]
+    try:
         for fut in cf.as_completed(futs):
             try:
                 _status, dt, label, summary = fut.result()
             except Exception as e:
                 _status, dt, label, summary = "err", 0.0, f"worker crashed: {e}", f"(worker crashed: {e})"
             progress.step(label, dt, summary)
+    except KeyboardInterrupt:
+        for fut in futs:
+            fut.cancel()
+        ex.shutdown(wait=True, cancel_futures=True)
+        progress.close()
+        print("\nBuild interrupted; completed parse and node caches were preserved.")
+        raise SystemExit(130)
+    else:
+        ex.shutdown(wait=True)
 
 
 # ---- bottom-up combine build (leaves are already cached) ------------------

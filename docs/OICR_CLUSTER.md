@@ -7,7 +7,7 @@ repository, caches, and TreeQuest process remain local.
 ## Prerequisites
 
 - Connect the workstation to the OICR VPN.
-- Keep the private key at `~/.ssh/id_ed25519_oicr` with mode `600`.
+- Keep the private key at `~/.ssh/id_ed25519` with mode `600`.
 - Install this repository and Python 3.11 or 3.12 on the workstation.
 - Do not copy credentials, private corpora, or private trees to the server.
 
@@ -21,9 +21,9 @@ ssh -NT \
   -o ServerAliveInterval=60 \
   -o ServerAliveCountMax=3 \
   -o IdentitiesOnly=yes \
-  -i "$HOME/.ssh/id_ed25519_oicr" \
-  -L 127.0.0.1:11528:127.0.0.1:11434 \
-  asharma@10.30.134.39
+  -i "$HOME/.ssh/id_ed25519" \
+  -L 127.0.0.1:11528:172.17.0.1:11434 \
+  asharma@ollama.res.oicr.on.ca
 ```
 
 A successful tunnel prints nothing and keeps the terminal occupied. Stop it with
@@ -116,8 +116,8 @@ lsof -nP -iTCP:11528 -sTCP:LISTEN
 If the tunnel exits immediately, confirm the VPN is connected and test SSH directly:
 
 ```bash
-ssh -o IdentitiesOnly=yes -i "$HOME/.ssh/id_ed25519_oicr" asharma@10.30.134.39
+ssh -o IdentitiesOnly=yes -i "$HOME/.ssh/id_ed25519" asharma@ollama.res.oicr.on.ca
 ```
 
 If the tunnel is running but the API check fails, verify that the remote Ollama service
-is listening on server loopback port `11434`; do not expose that port directly.
+is reachable from the SSH host at `172.17.0.1:11434`; do not expose that port directly.

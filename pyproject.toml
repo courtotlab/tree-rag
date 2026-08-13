@@ -23,6 +23,7 @@ dependencies = [
 [project.optional-dependencies]
 build = [
   "numpy>=2.0",
+  "openpyxl>=3.1",
   "pandas>=2.0",
   "pymupdf>=1.26",
   "pymupdf4llm>=0.0.27",

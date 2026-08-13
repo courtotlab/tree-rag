@@ -11,9 +11,9 @@ ssh -NT \
   -o ServerAliveInterval=60 \
   -o ServerAliveCountMax=3 \
   -o IdentitiesOnly=yes \
-  -i "$HOME/.ssh/id_ed25519_oicr" \
-  -L 127.0.0.1:11528:127.0.0.1:11434 \
-  asharma@10.30.134.39
+  -i "$HOME/.ssh/id_ed25519" \
+  -L 127.0.0.1:11528:172.17.0.1:11434 \
+  asharma@ollama.res.oicr.on.ca
 ```
 
 Use it from a second local terminal:

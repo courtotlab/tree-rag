@@ -87,11 +87,9 @@ find and retain the most relevant passages for a question.
 ```bash
 git clone git@github.com:courtotlab/tree-rag.git
 cd tree-rag
-python3 -m venv .venv
+uv venv .venv --python 3.12
 source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -e '.[build,test]'
-pytest -q
+uv pip install --python .venv/bin/python -e '.[build,test]'
 ```
 
 ### Open the OICR Ollama tunnel
@@ -108,9 +106,9 @@ ssh -NT \
   -o ServerAliveInterval=60 \
   -o ServerAliveCountMax=3 \
   -o IdentitiesOnly=yes \
-  -i "$HOME/.ssh/id_ed25519_oicr" \
-  -L 127.0.0.1:11528:127.0.0.1:11434 \
-  asharma@10.30.134.39
+  -i "$HOME/.ssh/id_ed25519" \
+  -L 127.0.0.1:11528:172.17.0.1:11434 \
+  asharma@ollama.res.oicr.on.ca
 ```
 
 The command is silent after connecting. In a second terminal, configure and verify
@@ -120,6 +118,7 @@ the tunneled endpoint:
 export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11528
 export TREEQUEST_MODEL=gpt-oss:120b
 curl -fsS "$TREEQUEST_OLLAMA_URL/api/version"
+curl -fsS "$TREEQUEST_OLLAMA_URL/api/tags"
 ```
 
 Do not run Ollama locally or bind the forward to a non-loopback address. See the
@@ -127,10 +126,19 @@ Do not run Ollama locally or bind the forward to a non-loopback address. See the
 
 ### Query the existing MultiHop-RAG tree
 
-Querying the committed tree exercises retrieval without rebuilding the index:
+Querying the committed tree exercises retrieval without rebuilding the index. Keep
+the tunnel terminal open, then run in a second terminal:
 
 ```bash
-./scripts/query_demo.sh "Which developments are compared across multiple reports?"
+source .venv/bin/activate
+export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11528
+export TREEQUEST_MODEL=gpt-oss:120b
+export TREEQUEST_MODE=thorough
+RUN_ROOT="$HOME/treequest-runs/query-$(date +%Y%m%d_%H%M%S)"
+mkdir -p "$RUN_ROOT"
+./scripts/query_demo.sh \
+  "Which developments are compared across multiple reports?" \
+  2>&1 | tee "$RUN_ROOT/query.log"
 ```
 
 Equivalent direct invocation:
@@ -147,27 +155,32 @@ treequest \
 The JSON response contains the answer, source identifiers, elapsed time, model
 calls, and operating mode.
 
-### Build a new MultiHop-RAG tree
+### Smoke-test MultiHop-RAG tree construction
 
-The build workflow writes to a fresh cache path and never overwrites the committed
-tree:
+The demonstration starts a new build only long enough to verify parsing, model calls,
+the progress bar, and ETA. It writes to a versioned cache and never overwrites the
+committed tree:
 
 ```bash
+source .venv/bin/activate
+export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11528
+export TREEQUEST_MODEL=gpt-oss:120b
+export TREEQUEST_BUILD_WORKERS=4
+RUN_ROOT="$HOME/treequest-runs/build-smoke-$(date +%Y%m%d_%H%M%S)"
+mkdir -p "$RUN_ROOT"
+export TREEQUEST_CACHE_DIR="$RUN_ROOT/tree_cache"
 ./scripts/build_multihop_demo.sh
 ```
 
-Query the new tree:
+The script first materializes and parses 609 public documents. Wait until
+`2/3 text [gpt-oss:120b]` reports completed calls and an ETA, then press `Ctrl-C`
+once. Pending work is cancelled and completed parse/node caches are preserved.
+MultiHop-RAG is text-only, so the frozen builder correctly reports
+`gemma3:27b ... describe=False` and makes no vision calls.
 
-```bash
-treequest \
-  --tree experiments/multihop_rag/tree_cache/corpus_tree.json \
-  --mode thorough \
-  "Your question"
-```
-
-Tree construction is resumable through parse and node caches. Use `tmux` or a
-cluster scheduler so laptop sleep or a network disconnect cannot interrupt a
-remote run. See [Remote compute](docs/REMOTE_COMPUTE.md).
+This workflow was exercised on August 13, 2026 with Ollama 0.30.10. The smoke test
+planned 19,971 calls and displayed a live ETA; the thorough query completed with 26
+model calls in 124.36 seconds. Timing varies with shared-server load.
 
 ## How TreeQuest retrieves evidence
 
@@ -215,7 +228,7 @@ See [REPRODUCIBILITY.md](REPRODUCIBILITY.md) for the artifact checklist.
 ### Runtime configuration
 
 ```bash
-export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11434
+export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11528
 export TREEQUEST_MODEL=gpt-oss:120b
 treequest --help
 ```
