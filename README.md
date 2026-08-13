@@ -87,9 +87,7 @@ find and retain the most relevant passages for a question.
 ```bash
 git clone git@github.com:courtotlab/tree-rag.git
 cd tree-rag
-uv venv .venv --python 3.12
-source .venv/bin/activate
-uv pip install --python .venv/bin/python -e '.[build,test]'
+uv sync
 ```
 
 ### Open the OICR Ollama tunnel
@@ -130,21 +128,20 @@ Querying the committed tree exercises retrieval without rebuilding the index. Ke
 the tunnel terminal open, then run in a second terminal:
 
 ```bash
-source .venv/bin/activate
 export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11528
 export TREEQUEST_MODEL=gpt-oss:120b
 export TREEQUEST_MODE=thorough
 RUN_ROOT="$HOME/treequest-runs/query-$(date +%Y%m%d_%H%M%S)"
 mkdir -p "$RUN_ROOT"
-./scripts/query_demo.sh \
+uv run ./scripts/query_demo.sh \
   "Which developments are compared across multiple reports?" \
-  2>&1 | tee "$RUN_ROOT/query.log"
+  | tee "$RUN_ROOT/query.json"
 ```
 
 Equivalent direct invocation:
 
 ```bash
-treequest \
+uv run treequest \
   --tree data/multihop_rag_demo/corpus_tree.json \
   --ollama-url "$TREEQUEST_OLLAMA_URL" \
   --model "$TREEQUEST_MODEL" \
@@ -162,14 +159,13 @@ the progress bar, and ETA. It writes to a versioned cache and never overwrites t
 committed tree:
 
 ```bash
-source .venv/bin/activate
 export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11528
 export TREEQUEST_MODEL=gpt-oss:120b
 export TREEQUEST_BUILD_WORKERS=4
 RUN_ROOT="$HOME/treequest-runs/build-smoke-$(date +%Y%m%d_%H%M%S)"
 mkdir -p "$RUN_ROOT"
 export TREEQUEST_CACHE_DIR="$RUN_ROOT/tree_cache"
-./scripts/build_multihop_demo.sh
+uv run ./scripts/build_multihop_demo.sh
 ```
 
 The script first materializes and parses 609 public documents. Wait until
@@ -205,7 +201,7 @@ evaluator:
 
 ```bash
 cd experiments/multihop_rag
-python official_multihop_eval.py --help
+uv run python official_multihop_eval.py --help
 ```
 
 The exact executed runner is preserved at
@@ -230,7 +226,7 @@ See [REPRODUCIBILITY.md](REPRODUCIBILITY.md) for the artifact checklist.
 ```bash
 export TREEQUEST_OLLAMA_URL=http://127.0.0.1:11528
 export TREEQUEST_MODEL=gpt-oss:120b
-treequest --help
+uv run treequest --help
 ```
 
 Do not edit a frozen result file in place. Use a new output path for every run so

@@ -33,6 +33,22 @@ build = [
 ]
 test = ["pytest>=8.0"]
 
+[dependency-groups]
+demo = [
+  "numpy>=2.0",
+  "openpyxl>=3.1",
+  "pandas>=2.0",
+  "pymupdf>=1.26",
+  "pymupdf4llm>=0.0.27",
+  "python-docx>=1.2",
+  "rank-bm25>=0.2.2",
+  "tqdm>=4.67",
+]
+test = ["pytest>=8.0"]
+
+[tool.uv]
+default-groups = ["demo", "test"]
+
 [project.scripts]
 treequest = "treequest.cli:main"
 
