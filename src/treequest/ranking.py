@@ -28,6 +28,7 @@ import math
 import re
 from collections import Counter
 from collections.abc import Callable, Iterator
+from typing import TypeAlias
 
 from treequest.context import SearchContext
 from treequest.state import FrontierItem
@@ -44,7 +45,7 @@ from treequest.text import (
 from treequest.types import TreeNode
 
 #: One scored candidate: the node, its score, and the ranker's reasoning sentence.
-type ScoredChild = tuple[TreeNode, float, str]
+ScoredChild: TypeAlias = tuple[TreeNode, float, str]
 
 _SCORES_REGION_RE = re.compile(r'"scores"\s*:\s*\{(.*)', flags=re.S)
 _SCORE_PAIR_RE = re.compile(r'"(\d+)"\s*:\s*(0?\.\d+|[01](?:\.0+)?)')
