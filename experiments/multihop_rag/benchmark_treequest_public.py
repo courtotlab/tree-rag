@@ -45,7 +45,7 @@ CACHE_DIR   = Path(os.environ.get("TREEQUEST_CACHE_DIR", "tree_cache")); TREE_FI
 QUESTIONS_FILE = os.environ.get("TREEQUEST_QUESTIONS_FILE", "questions_public.json")
 QMS_ANSWERS_FILE = os.environ.get("TREEQUEST_BASELINE_ANSWERS", "qms_answers_public.json")
 REPORT_FILE = __import__("os").environ.get("IMPROVE_REPORT_PATH") or "results/treequest_report.json"
-DOSSIER_FILE = "results/treequest_failure_dossiers.json"
+DOSSIER_FILE = os.environ.get("TREEQUEST_DOSSIER_PATH", "results/treequest_failure_dossiers.json")
                                                # outperforms treerag: traversal event sequence with scores,
                                                # warnings, timings, lengths — no LLM diagnosis (the in-loop
                                                # diagnoser confabulated mechanisms), no document names, no
